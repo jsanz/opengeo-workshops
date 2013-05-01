@@ -1,0 +1,61 @@
+.. _gsadv.crs.limitcrs:
+
+Limiting advertised CRS
+=======================
+
+The WMS capabilities document publishes a list of all supported CRSs. This list is quite long, and can make the capabilities document quite large.
+
+However, a GeoServer instance typically only uses a small fraction of that list. So it is sometimes a good idea to limit the number of advertised CRSs that appear in the capabilities documents.
+
+View the following WMS capabilities document::
+
+  http://suite.opengeo.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities
+
+.. figure:: img/limit_fullcaps.png
+
+   Capabilities document with full list of CRSs
+
+Note all of the <CRS> tags. They comprised the vast majority of the document.
+
+Limiting the CRS list is done through the web admin interface.
+
+.. warning:: NEED TO USE LOCAL GEOSERVER FOR THIS.
+
+#. Log in to the GeoServer admin account.
+
+#. Click :guilabel:`WMS` under :guilabel:`Services`.
+
+   .. figure:: img/limit_wmslink.png
+
+      Click to view  WMS options
+
+#. Find the section titled :guilabel:`Limited SRS list`. Enter a list of comma-separated values, such as the following::
+
+     2001, 2046, 3700
+
+   .. figure:: img/limit_srslist.png
+
+      List of SRSs to advertise
+
+#. Scroll to the bottom of the page and click :guilabel:`Submit`.
+
+#. Now view the capabilities document again and note the changed list of CRSs.
+
+   .. figure:: img/limit_limitedcaps.png
+
+      List of SRSs to advertise
+
+If you want to output the bounding box for each CRS on every layer, make sure to check the :guilabel:`Output bounding box for every supported CRS` box.
+
+.. warning:: WHY WOULD YOU DO THIS?
+
+Note that EPSG:4326 (latitiude/longitude coordinates) will always be available.
+
+Also note that other CRSs will still be available to be manually requested, as in the following WMS reflector request:
+
+http://SOMEWHERE/geoserver/wms/reflect?layers=usa:states&srs=EPSG:2200
+http://SOMEWHERE/geoserver/wms/reflect?layers=usa:states&srs=EPSG:2900
+
+.. warning:: SO WHAT'S THE POINT?
+
+
