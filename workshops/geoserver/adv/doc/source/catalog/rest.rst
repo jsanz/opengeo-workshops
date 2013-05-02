@@ -3,411 +3,296 @@
 REST configuration
 ==================
 
-REST'ful Configuration (this is where data is set up)
+GeoServer includes a RESTful API for interacting with the catalog without the need to go through the web-based interface.
+
+.. warning:: WHERE IS THE DATA?
 
 What is REST?
 -------------
 
-- I understand REST pretty much through a visualization of it's namesake:
-- REpresentational State Transfer ... Which I take to mean
-- the transfer (to and from a server) of representations (of an object's) State
-- GeoServer has a REST API to and from which you can send and receive (respectively) state representations of GeoServers resource types ...
+REST stands for **REpresentational State Transfer**. You can take this to mean the transfer (to and from a server) of representations of an object's state. GeoServer has a RESTful API to and from which you can send and receive (respectively) state representations of GeoServers resource types.
 
-The capabilities of the REST API are basically a cross-product of
+.. warning:: REST VS RESTful
 
-> the configurable resources in GeoServer, and 
-> the VERBS or actions we can use to make HTTP requests.
+The capabilities of the REST API are basically a cross-product of:
 
-So, for each of the resources in GeoServer (eg Workspaces, Data-Stores, Layers, Styles, Groups etc.)
+* The configurable resources in GeoServer
+* The actions (verbs) we can use to make HTTP requests.
 
-We can:
+So, for each of the resources in GeoServer (workspaces, stores, layers, styles, layer groups, etc.) we can perform the following operations:
 
--- GET something and read it (GET)
--- POST something to add it anew (POST)
--- PUT to update something that exists (PUT), and
--- DELETE something to remove it (DELETE)
+* **GET** to read an existing resource
+* **POST** to add a new resource
+* **PUT** to update an existing resource
+* **DELETE** to remove a resource
 
-Mike note: The online URL has changed, and is much better. Removed the link to the local docs.
+.. figure:: img/rest_theory.png
 
-The full capacity of GeoServer's REST capabilities are described here
+   Diagram of the RESTful interface
 
-    http://docs.geoserver.org/stable/en/user/rest/api.html
+.. note:: The full capacity of GeoServer's REST capabilities are described at http://docs.geoserver.org/stable/en/user/rest/api.html
 
-and here
-
-    http://localhost:8080/opengeo-docs/geoserver/rest/api.html
-
-> Describe / Explain.
-
-These definitions are followed-up up by examples and tutorials for a variety of tasks, some of which I'll demonstrate now.
 
 REST endpoints
 --------------
 
-REST'fully it all starts here ...
+The top of the REST hierarchy starts here::
 
-http://localhost:8080/geoserver/rest/
+  http://GEOSERVER/rest/
 
-Notice the links? They're clickable ...
+GRAPHIC
 
-Without coincidence, these match GeoServer's resource hierarchy.
+When navigating to this endpoint through your browser, you see a number of links that match GeoServer's resource hierarchy.
 
-> General navigation through the REST structure ...
+Click on the following links to traverse the hierarchy::
 
-    http://localhost:8080/geoserver/rest/workspaces
-    http://localhost:8080/geoserver/rest/workspaces/earth.html
-    http://localhost:8080/geoserver/rest/workspaces/earth/datastores/earth.html
-    http://localhost:8080/geoserver/rest/workspaces/earth/datastores/earth/featuretypes/cities.html
+  ``/rest/workspaces``
+  ``/rest/workspaces/earth.html``
+  ``/rest/workspaces/earth/datastores/earth.html``
+  ``/rest/workspaces/earth/datastores/earth/featuretypes/cities.html``
 
-What do we notice about the format? ...
+SHOW OUTPUT?
 
-It's HTML ...
+Every time we click on one of these links, we are making a GET request. Notice the format for the content we are receiving is HTML. Unless otherwise specified this is the default format for GET requests.
 
-Unless otherwise specified this is the default format for GET requests ...
+GET requests are intended for navigation and discovery. However, when looking at the HTML output, few details are shown. More details can be retrieved by requesting information in a format other than HTML, such as JSON or XML. These can be specified by appending the appropriate extension to the request:
 
-Nice, but it's lacking details (intended more for ~navigation/discovery~)
+JSON by appending ".JSON"::
 
+    /rest/workspaces/earth/datastores/earth/featuretypes/cities.json
 
+XML by appending ".XML"::
 
-For any given resource in the GeoServer REST hierarchy ...
+    /rest/workspaces/earth/datastores/earth/featuretypes/cities.xml
 
-I can request the details of it's state, by specifying a format ...
+SHOW OUTPUT
 
-JSON for example by appending ".JSON" ...
+Both JSON and XML output show more detailed information about the given resource, such as attribute names values. XML will be used in the upcoming examples.
 
-    http://localhost:8080/geoserver/rest/workspaces/earth/datastores/earth/featuretypes/cities.json
+Now navigate back up to the XML hierarchy to the root endpoint::
 
-
-(Partially recognizable, but hard to read)
-
-XML for example by appending ".XML"
-
-    http://localhost:8080/geoserver/rest/workspaces/earth/datastores/earth/featuretypes/cities.xml
-
-
-(I think the XML is better formatted and slightly easier to read and work with, especially in the upcoming ~manual~ examples)
-
-(However; other approaches (scripted) and mindsets (more programmery) might disagree)
-
-You can use these representations to navigate too ... Sort of ...
-
-They're not clickable, but they're very descriptive ...
-
-Contain online resources to their child elements that you can grab and go to ... 
-
-For fun, and because electrons are mostly free ...
-
-Walk back up the tree in XML ...
-
-    http://localhost:8080/geoserver/rest/workspaces/earth/datastores/earth/featuretypes.xml
-    http://localhost:8080/geoserver/rest/workspaces/earth/datastores/cities.xml
-    http://localhost:8080/geoserver/rest/workspaces/earth/datastores.xml
-    http://localhost:8080/geoserver/rest/workspaces/earth.xml
-    http://localhost:8080/geoserver/rest/workspaces.xml
-    http://localhost:8080/geoserver/rest(.html)
+  http://localhost:8080/geoserver/rest/workspaces/earth/datastores/earth/featuretypes.xml
+  http://localhost:8080/geoserver/rest/workspaces/earth/datastores/cities.xml
+  http://localhost:8080/geoserver/rest/workspaces/earth/datastores.xml
+  http://localhost:8080/geoserver/rest/workspaces/earth.xml
+  http://localhost:8080/geoserver/rest/workspaces.xml
+  http://localhost:8080/geoserver/rest
 
 
-You've probably noticed, that thus far, these have all been "GETs" ...
+These GET requests are "read-only", so to leverage the bi-directional nature of REST, we can use other actions:
 
-We can do more than just ~READ-ONLY~ GET requests through REST ...
+We can transfer new state representations to a collection using POST, update existing state representations to an object using PUT, or send DELETE requests to an object to remove it.
 
-The transfer part of representational state transfer is bi-directional ...
+Examples
+--------
 
-We can also ...
+We will be using the `cURL <curl.haxx.se>`_ utility in this section for POST/PUT/DELETE requests, though there are other utilities that will work just as well.
 
-    Transfer state representations to a collection using POST to add things
+Create a new workspace
+~~~~~~~~~~~~~~~~~~~~~~
 
-    Transfer state representations to an object using PUT to update things
+First, let's create a new workspace called "advanced". We want to POST the following resource information:
 
-    Send DELETE requests to an object to remove it
+.. code-block:: xml
 
-CREATE A NEW WORKSPACE
+   <workspace>
+     <name>advanced</name>
+   </workspace>
 
-For example, Let's do a POST request to create a new workspace ...
+to the ``/rest/workspaces`` endpoint. The cURL command to do this is (wrapped over multiple lines)::
 
-    curl -u admin:geoserver -v -X POST -H 'Content-Type:text/xml' \
-    -d '<workspace><name>advanced</name></workspace>' \
+  curl -u admin:geoserver -v -X POST -H 'Content-Type:text/xml'
+    -d '<workspace><name>advanced</name></workspace>'
     http://localhost:8080/geoserver/rest/workspaces
 
+Execute this command.
 
-cURL ... (and other tools)
+While a deep discussion of cURL is beyond the scope of this workshop, some of the details of this request will be helpful. The command line flags are as follows::
 
-Break down the request ...
+  -u/--user[:password]
+  -v/--verbose
+  -X/--request (the action to use)
+  -H/--header <header> parameters
 
-    -u/--user[:password]
+SHOW OUTPUT
 
-    -v/--verbose
+Check the REST response. Looks good! You can also check the response through the GeoServer UI.
 
-    -X/--request (command to use)
+UI OUTPUT
 
-    -H/--header <header> parameters
+Add a new store
+~~~~~~~~~~~~~~~
 
+Now that we've created a workspace, let's add a store. This will be a connection to a local PostGIS store. We'll do it in the same way as before, with a POST request done through cURL. This time, though, we're going to embed the XML payload in a file. Here is the content:
 
-Re: verbose …
+.. code-block:: xml
 
-This is a canned example and things ~just~ work
+   <dataStore>
+     <name>advanced</name>
+     <connectionParameters>
+       <host>localhost</host>
+       <port>54321</port>
+       <database>advanced</database>
+       <user>postgres</user>
+       <password>postgres</password>
+       <dbtype>postgis</dbtype>
+     </connectionParameters>
+   </dataStore>
 
-But there was still a learning curve … Despite really good documentation and even better mentors
+Save this as the file datastore_advanced.xml. Now execute the following command::
 
-I learned that I had to pay attention to the signs! (verbose output)
+  curl -v -u admin:geoserver -X POST \
+    -H 'content-type:text/xml' \
+    -T datastore.advanced.xml \
+    http://localhost:8080/geoserver/rest/workspaces/advanced/datastores
 
-Execute.
+Note the use of ``-T`` here, which specifies a file. This was used instead of the ``-d`` flag from the previous example, which specifies that content will be contained in the command. This is advantageous when the size of the payload is large. It also allows for reusable content.
 
-Check REST response. Looks good!
+Add layers
+~~~~~~~~~~
 
-Check UI. Even better than the real thing.
+Now that a store has been created, From a store, the next logical step is to add a layer.
 
+.. note::
 
-ADD A NEW DATASTORE
+   To find out what tables (layers) live in the store, you can execute the following command using psql, the command-line PostgreSQL utility::
 
+     psql --tuples-only -c "select f_table_name from geometry_columns" advanced
 
-Now, what goes in workspaces?
+   NEED TO VERIFY THIS
 
-Data-stores! (and also)
+In this case, we have five layers: parks, rails, roads, urban, temps
 
-> coverage-stores [[[]]]
+Let's add them explicitly. The payload for this request is::
 
-> wms-stores [[[]]]
+  <featureType>
+    <name>name_of_layer</name>
+  </featureType>
 
-Let's do another POST request to add a data-store to our new workspace ...
+So the cURL request will be::
 
-curl -v -u admin:geoserver -X POST \
--H 'content-type:text/xml' \
--T datastore.advanced.xml \
-http://localhost:8080/geoserver/rest/workspaces/advanced/datastores
+  curl -v -u admin:geoserver -X POST -H "Content-type: text/xml"
+    -d "<featureType><name>parks</name></featureType>" 
+    http://localhost:8080/geoserver/rest/workspaces/advanced/datastores/advanced/featuretypes
 
-<dataStore>
+Repeat this process.
 
-<name>advanced</name>
+USE A SCRIPT?
 
-<connectionParameters>
+Note REST responses. Now not only can we view the catalog information about the layer, if all went well we can now preview the layer itself. We'll use the WMS Reflector for simplicity:
 
-  <host>localhost</host>
-
-  <port>54321</port>
-
-  <database>advanced</database>
-
-  <user>postgres</user>
-
-  <password>postgres</password>
-
-  <dbtype>postgis</dbtype>
-
-</connectionParameters>
-
-</dataStore>
-
-Note the use of -T here ...
-
--T lets us (transfer) / -d (data) … We had an external file on-hand for this … Often easier when size and complexity of your payload increases
-
-** For manual "hits" you simply have the option of editing a longer schema/string in a better tool than the command line
-
-** For automated stuff it lets you work off of a template / saved configuration, if that's what you want to do ... You can build dynamically in response to your data (and business rules, etc.) if needed.
-
-** If not on-hand we could have GET’ed this from an existing resource and edited it, but ... That's a little murky ...
-
-
-ADD FEATURETYPE/LAYERS
-
-
-What comes from datastores? (Specifically PostGIS data-stores?)
-
-Tables / FeatureTypes / Layers
-
-But which tables / feature types live in the store?
-
-There are at least two ways to get this ...
-
-a) Know your data …
-
-> In this case I have:
-
-> parks, rails, roads, urban, temps
-
-> and add them explicitly ... 
-
-curl -v -u admin:geoserver -X POST -H 'Content-type: text/xml' \
-
--d '<featureType><name>parks</name></featureType>' \
-http://localhost:8080/geoserver/rest/workspaces/advanced/datastores/advanced/featuretypes
-
-parks
-
-rails
-
-roads
-
-states
-
-urban
-
-globe
-
-b) Learn from your data …
-
-> psql --tuples-only -c "select f_table_name from geometry_columns" advanced
-
-    > Then do something with that knowledge …
-
-I don't want to prescribe your approaches too much ... Those are just two of many
-
-- One more interactive, maybe if I didn't want to add all my layers carte blanche?
-
-- One tends towards automation, but might over-add things?
-
-- Script foo is your friend ... Find your zen.
-
-Fire off the command(s) ...
-
-Note REST response(s) ...
-
-Preview in UI …
+OUTPUT, UI OUTPUT
 
 http://localhost:8080/geoserver/wms/reflect?layers=advanced:parks
 
-<etc...>
+Upload styles
+~~~~~~~~~~~~~
 
-These layers are "Up There on the server", but generally they're un-styled, and lonely …
+The layers have been uploaded, but they are being served using a default style. The next step is to alter the style.
 
-... I wonder what our next example will do?
+The cURL command for uploading a style with filename of :file:`stylefile.sld` is::
 
+  curl -u admin:geoserver -X POST -H "Content-type: application/vnd.ogc.sld+xml"
+    -d @stylefile.sld http://localhost:8080/geoserver/rest/styles
 
+WHY -d AND NOT -T?
 
-UPLOAD STYLES
+We could repeat this for each style (just like we added each layer), but the advantages to the REST interface lie in the ability to script operations, so let's do that now.
 
-Upload styles …
+BATCH EXAMPLE AS WELL
 
-Generally the command is:
 
-curl -u admin:geoserver -X POST -H 'Content-type: application/vnd.ogc.sld+xml' -d @<stylefile>.sld http://localhost:8080/geoserver/rest/styles
+::
 
-We could repeat this for each style (just like we added each layer), but at this point we’re starting to see the same ~one-by-one~ limitations/headaches of the UI, in the command line calls to the REST API …
+  for f in *sld; do
 
-We’re not really programming to the application programming interface, we're just hitting it with less clicking and more typing.
+  curl -v -u admin:geoserver -X POST -H "Content-Type:application/vnd.ogc.sld+xml"
+    -d @$f
+    http://localhost:8080/geoserver/rest/styles;
 
-So, how about doing some of them there iterations … ???
+  echo "All good? ..."; read;
 
-for f in *sld; do
+  done
 
-curl -v -u admin:geoserver -X POST -H 'Content-Type:application/vnd.ogc.sld+xml' -d @$f http://localhost:8080/geoserver/rest/styles;
+READ!?
 
-echo "All good? ..."; read;
+.. note:: The echo/read commands are just  there to poll our response status.
 
-done
+SHOW OUTPUT
 
-Mmmm ... that's good bash foo.
+Add layers to a layer group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Note: echo/read are just in there to pole our response status
+Now let's put our layers together in a layer group. More accurately, we we alter (think PUT instead of POST) an existing layer group called "earth". The payload is:
 
-Now we've got style(s) ... 
+WILL THIS LAYERGROUP EXIST?
 
+-d or -T?
 
+.. code-block:: xml
 
-ADD LAYERS TO LAYER GROUP
+   <layerGroup>
+     <name>earth</name>
+     <layers>
+       <!-- existing -->
+       <layer>shadedrelief</layer>
+       <layer>ocean</layer>
+       <layer>countries</layer>
+       <layer>coastline</layer>
+       <layer>rivers</layer>
+       <layer>cities</layer>
+       <!-- new -->
+       <layer>urban</layer>
+       <layer>parks</layer>
+       <layer>rails</layer>
+       <layer>roads</layer>
+       <layer>states</layer>
+       <layer>globe</layer>
+     </layers>
+     <styles>
+       <!-- existing -->
+       <style>Raster</style>
+       <style>Ocean</style>
+       <style>Countries</style>
+       <style>Coastline</style>
+       <style>Rivers</style>
+       <style>Cities</style>
+       <!-- new -->
+       <style>Urban</style>
+       <style>Parks</style>
+       <style>Rails</style>
+       <style>Roads</style>
+       <style>States</style>
+       <style>Globe</style>
+     </styles>
+   </layerGroup>
 
-We have added styles to make our layers look pretty, but they're still a bit lonely …
 
-Add layers to a layer group …
+And the command is:
 
-(Or more aptly modify the our existing earth layergroup to include the new layers and the associated the styling information with them).
+::
 
-curl -v -u admin:geoserver -X PUT -H 'Content-type: text/xml' -d @layergroup.earth.xml http://localhost:8080/geoserver/rest/layergroups/earth
+  curl -v -u admin:geoserver -X PUT -H "Content-type: text/xml"
+    -d @layergroup.earth.xml
+    http://localhost:8080/geoserver/rest/layergroups/earth
 
-<layerGroup>
+SHOW OUTPUT, PREVIEW
 
- <name>earth</name>
 
- <layers>
+Deleting a resource
+~~~~~~~~~~~~~~~~~~~
 
-   <!-- existing -->
+We've created new resources and updated existing resources, so now let's DELETE a resource. Let's create a nonsensical workspace object::
 
-   <layer>shadedrelief</layer>
+  curl -v -u admin:geoserver -X POST -H "content-type:text/xml"
+    -d "<workspace><name>WhoompThereItIs</name></workspace>"
+    http://localhost:8080/geoserver/rest/workspaces
 
-   <layer>ocean</layer>
+SHOW OUTPUT
 
-   <layer>countries</layer>
+Indeed. We can delete it with a DELETE action directly to the resource's endpoint::
 
-   <layer>coastline</layer>
+  curl -v -u admin:geoserver -X DELETE
+    http://localhost:8080/geoserver/rest/workspaces/WhoompThereItIs.xml
 
-   <layer>rivers</layer>
-
-   <layer>cities</layer>
-
-   <!-- new -->
-
-   <layer>urban</layer>
-
-   <layer>parks</layer>
-
-   <layer>rails</layer>
-
-   <layer>roads</layer>
-
-   <layer>states</layer>
-
-   <layer>globe</layer>
-
- </layers>
-
- <styles>
-
-   <!-- existing -->
-
-   <style>Raster</style>
-
-   <style>Ocean</style>
-
-   <style>Countries</style>
-
-   <style>Coastline</style>
-
-   <style>Rivers</style>
-
-   <style>Cities</style>
-
-   <!-- new -->
-
-   <style>Urban</style>
-
-   <style>Parks</style>
-
-   <style>Rails</style>
-
-   <style>Roads</style>
-
-   <style>States</style>
-
-   <style>Globe</style>
-
- </styles>
-
-</layerGroup>
-
-
-
-REST DELETE
-
-One last trick …
-
-For the sake of example, lets add a nonsensical workspace object ...
-
-curl -v -u admin:geoserver -X POST -H 'content-type:text/xml' \
--d '<workspace><name>WhoompThereItIs</name></workspace>' \
-http://localhost:8080/geoserver/rest/workspaces
-
-Preview ...
-
-Indeed, "Whoomp! There it is."
-
-No one deserves to live with a workspace named after the mid-90s Miami bass duo "Tag Team"?
-
-… So we can delete it with something like
-
-curl -v -u admin:geoserver -X DELETE \
-http://localhost:8080/geoserver/rest/workspaces/WhoompThereItIs.xml
-
-Basher Beware ...
-
-There was no confirmation dialog in this ... no nothin' ... Just gone ... 
+Beware, though, that there was **no confirmation dialog** in this process. The resource was immediately deleted.
