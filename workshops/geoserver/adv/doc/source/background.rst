@@ -3,10 +3,12 @@
 Background
 ==========
 
-Background / Quick Review  (review can be thinned)
+Before we get started with topics, let's review what we know about GeoServer.
 
 Web mapping Servers
 -------------------
+
+.. warning:: WHAT TO DO WITH THIS SECTION?
 
 In a nutshell ...
 
@@ -38,25 +40,15 @@ Responses ... Are similarly structured so something like a computer can understa
 GeoServer 101
 -------------
 
-It should go without saying that GeoServer, the focus of today's workshop, is a web-mapping server.
+You should be familiar with GeoServer, but as a quick refresher:
 
-And ... As a web-mapping server ...
+GeoServer is a web-mapping server. As such, it operates as middleware between geospatial data formats and web services.
 
-GeoServer hosts content in the form of the data types it can read, of which there are many.
+GeoServer can read many different data formats, both vector and raster, proprietary and open.
 
-These formats are both proprietary (SHP, Oracle, SQL Server, etc.) and open (GML), but that doesn't really matter ...
+What's perhaps most important is that GeoServer acts as a **format-agnostic gateway** to spatial information. It standardizes its responses to the conventions of the OGC service specifications. While there are many services, the most frequently accessed are the Web Map Service (for map images) and Web Feature Service (for map data).
 
-GeoServer acts as a format-agnostic gateway to spatial information ...
+Each of these service types has it's own endpoint in GeoServer and we retrieve data in the formats prescribed by those services by making requests to those endpoints.
 
-It standardizes it's responses to the conventions of the OGC service specifications for WMS, WFS (and WCS, and WPS)
+.. warning:: [[[]]] benefits of standardization
 
-Each of these service types has it's own endpoint in GeoServer
-
-and we get data in the formats prescribed by those services, by making requests to those endpoints using the same standards ...
-
-[[[]]] benefits of standardization
-
-WMS/WFS
--------
-
-.. note:: Lots of details about WMS/WFS, but might be too basic here.
