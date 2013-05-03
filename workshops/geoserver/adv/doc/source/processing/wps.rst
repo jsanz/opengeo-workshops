@@ -3,228 +3,152 @@
 Web Processing Service (WPS)
 ============================
 
+In this section, we'll introduce the OGC Web Processing Service.
+
 What is WPS?
 ------------
 
-“[WPS] provides rules for standardizing how inputs and outputs (requests and responses) for geospatial processing services ...  The standard also defines how a client can request the execution of a process, and how the output from the process is handled.”
+Here is the official definition of WPS from the specification:
 
-Here is the OGC definition.
+*WPS defines a standardized interface that facilitates the publishing of geospatial processes, and the discovery of and binding to those processes by clients. "Processes" include any algorithm, calculation or model that operates on spatially referenced data. "Publishing" means making available machine-readable binding information as well as humanreadable
+metadata that allows service discovery and use.*
 
-Like all OGC content, it is long and slightly unwieldy.
+As its name suggests, a Web Processing Service is a service that allows you to perform **analytical processes over the web**. The processes/analyses are run on the server, but the calls to the processes (and sometimes the inputs) are made over the web.
 
-I love the OGC, but I would also love the many hours back that I've spent deciphering the WMS, WFS, and SLD specs.
+Processes are run on data, and since we're talking about GeoServer. we're typically (but not always) talking about spatial data.
 
-Short form ...
+Geoprocessing and spatial analysis aren't new topics, but what WPS is doing differently is taking these processes off of desktops using potentially unmanaged versions of data and putting them onto centralized servers with canonical copies of data.
 
-As it's name suggests, a Web Processing Service is a service that allows you to do analytical processes over the web.
-
-( Well ... Actually the processes/analyses are run on the server, but the calls to the processes are made over the web )
-
-Processes are run on data, and naturally since we're talking about GeoServer ... a web mapping server ... we're mostly (but not necessarily) talking about spatial data.
-
-Geo-Processing and Spatial-Analysis really aren't new topics
-
-(GIS analysts have been doing them for decades)
-
-What WPS is doing differently is:
-
-    Taking these processes off of disparate desktops in silo'ed departments using potentially unmanaged versions of data
-
-
-    And putting them onto centralized servers with canonical copies of data.
-
-
-The aim of this approach is that it shouldn't be a matter of:
-
-- Getting the GIS group to ~make me a map~ of that ...
-
-- (and eventually getting it back)
-
-
-It should be a matter (with the proper processes / data / etc. in place) of:
-
-- Using a web call (through a UI or Service) yourself to perform your analyses, and
-
-- Just getting it done ... NOW!
-
-If you've seen our ~Spatial IT~ talk at various conferences or follow our blogs etc., you'll recognize OpenGeo's push for more web / less desktop throughout our domain.
-
+This approach of centralizing data on a web server enables anyone to perform analysis on the same source at any time. A given user need not have specific access to the data, and yet can manipulate it through processing.
 
 How does it work?
 -----------------
 
-
-At a high level WPS works just like our other client/server offerings
-
-When we talk about processes, just think of them as some sort of function, or aggregate of functions.
+WPS works just like other OGC services like WMS and WFS. The only difference is the extra notion of a "process." A process is just some sort of function, or chain of functions. These definitions are usually defined on the server and accessed as part of a request. It can take inputs from a client (or from the server itself)
 
 The definition of the process exists on a server, and it can take inputs from a client, which is then operated on by the server, and then output in some way.
 
+Like WMS and WFS, there is the same idea of the capabilities document (through a GetCapabilities request), which lists all of the processes known to the server. Like WFS DescribeFeatureType, the DescribeProcess operation will detail the inputs and outputs of a given process. And just like GetMap or GetFeature, ExecuteProcess will perform the operation.
 
-If you are familiar with OGC services, than the spirit of WPS should also be familiar, as it is structured in much the same way.
-
-For example, there is the same idea of the capabilities document (through a GetCapabilities request), which lists all of the processes known to the server.
-
-DescribeProcess will detail the inputs and outputs of a given process (not unlike WFS DescribeFeatureType).
-
-And, just like GetMap or GetFeature ... ExecuteProcess will perform the operation.
-
-
-The data to be operated on can be POST'ed as part of the request, but that can be ugly and unwieldy.
-
-It makes much more sense to store the data on the server, and then operate on it there.
-
-I sort of take that back ... Among your instructions/inputs to the process, you can include feature sets if it's reasonable.
-
-Very often your client will send data to a WPS, but in discrete manageable units ...
-
-For example,
-
-> No one is going to POST a 3GB raster file in order to clip it against another polygon.
-
-> But a ~handful~ of features as the extents of a clip / overlay / etc. process will be just fine.
+The data to be operated on can be POST'ed as part of the request, but that can be unwieldy if the data is large or the bandwidth small. It makes much more sense to store the data on the server, and then operate on it there. The exception to this is smaller data, such as a bounding box or simple shape, that is used to operate on larger datasets stored on the server (say with a clipping operation).
 
 GeoServer and WPS
 -----------------
 
-GeoServer has had WPS support in various forms for over a year now.
+NEED IMAGES
 
-It is currently available as an extension in the community version; however it is integrated into the core of the OpenGeo Suite GeoServer.
+GeoServer has full support for WPS. It is currently available as an extension in the community version. In the OpenGeo Suite version of GeoServer, though, it is integrated into the core without any additional work required. The functionality of either implementation is identical.
 
-The functionality of either implementation is the same. If you've got it, you've got it all.
+It should be noted that there is a difference between WPS as a *standard* and WPS as it is *implemented*.  WPS as a standard is very generic, and doesn't specify any more than a framework for what is possible. It is in the implementation of WPS (and especialyl what processes are available) that determine how useful and powerful it can be. So while the discussion here will be on GeoServer's implementation of WPS, other products such as 52-North or Deegree may have very different implementations, while still calling it WPS.
 
-I should note that there is a difference between WPS as a standard, and WPS as it is implemented.  While WPS as an idea is neat, it’s the implementation that really allows it to become useful.  So today I’m speaking solely of GeoServer’s implementation of WPS, but there are other implementations, such as 52-North or Deegree.
-
-
-WPS, like other OGC services, uses XML like we all breathe air.
-
-We all know how much fun it is to write complex XML by hand ...
-
-Thankfully, GeoServer includes a GUI request builder to perform basic tasks, and to learn or prototype syntax.
-
-Even nicer is that when you build a process or task through the GUI, it can also generate the actual XML instructions for the process for you, so you can hold on to it for later use.
-
-Way simpler than drawing it all out by hand.
+WPS, like other OGC services, uses XML like we all breathe air. With all of the inputs and output (and especially when chained processes are invoked) this can get even more unwieldy than usual for XML. Thankfully, GeoServer includes a **WPS request builder** to perform basic tasks, and to learn/prototype syntax. As a bonus, when building a process or task through the interface, it also generates the actual XML instructions, allowing you to hold on to the process for later use.
 
 WPS example
 -----------
 
-The buffer.
+NEED IMAGES
 
-This is the absolute most simplest least useful in anything other than a pedagogical way possible type of demo
+The buffer process is the simplest, most common process, and so it makes sense to start with it here. We're going to buffer a point centered on the origin to a radius of 2. (The units are only important if specified, which we won't do here.)
 
-It’s sort of the "Hello World" of processing, so I feel compelled to do it.
+#. Load the WPS request builder. This is accessed by clicking on :guilabel:`Demos` and then selecting :guilabel:`WPS request builder`.
 
-DETAILS
+#. Select the :guilabel:`JTS:buffer` process in the :guilabel:`Choose process` field.
 
-POINT(0 0)
+#. Enter the following fields:
 
+   .. list-table::
+      :header-rows: 1
 
-This is the XML that is POST'ed to the server in order to execute the process.
+      * - Field
+        - Value
+      * - Input geometry
+        - TEXT, application/wkt, POINT(0 0)
+      * - distance
+        - 2
+      * - quadrantSegments
+        - 10
+      * - capStyle
+        - Round
+      * - result
+        - Generate application/wkt
 
-And here is the result.  
+#. If you click :guilabel:`Generate XML from process inputs/outputs`, you'll see the XML that is POSTed to the server in order to execute the process. It is reproduced below:
 
-POLYGON ((2 0, 1.9753766811902755 -0.3128689300804617, 1.902113032590307 -0.6180339887498948, 1.7820130483767358 -0.9079809994790935, 1.618033988749895 -1.1755705045849463, 1.4142135623730951 -1.414213562373095, 1.1755705045849463 -1.618033988749895, 0.9079809994790937 -1.7820130483767356, 0.6180339887498949 -1.902113032590307, 0.3128689300804618 -1.9753766811902755, 0.0000000000000001 -2, -0.3128689300804616 -1.9753766811902755, -0.6180339887498947 -1.9021130325903073, -0.9079809994790935 -1.7820130483767358, -1.175570504584946 -1.618033988749895, -1.414213562373095 -1.4142135623730951, -1.6180339887498947 -1.1755705045849465, -1.7820130483767356 -0.9079809994790937, -1.902113032590307 -0.618033988749895, -1.9753766811902753 -0.312868930080462, -2 -0.0000000000000002, -1.9753766811902755 0.3128689300804615, -1.9021130325903073 0.6180339887498946, -1.7820130483767358 0.9079809994790934, -1.618033988749895 1.175570504584946, -1.4142135623730954 1.414213562373095, -1.1755705045849465 1.6180339887498947, -0.9079809994790938 1.7820130483767356, -0.6180339887498951 1.902113032590307, -0.3128689300804621 1.9753766811902753, -0.0000000000000004 2, 0.3128689300804614 1.9753766811902755, 0.6180339887498945 1.9021130325903073, 0.9079809994790933 1.782013048376736, 1.1755705045849458 1.6180339887498951, 1.4142135623730947 1.4142135623730954, 1.6180339887498947 1.1755705045849467, 1.7820130483767356 0.9079809994790939, 1.902113032590307 0.6180339887498952, 1.9753766811902753 0.3128689300804622, 2 0))
+   .. code-block:: xml
 
+      <?xml version="1.0" encoding="UTF-8"?><wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd">
+        <ows:Identifier>JTS:buffer</ows:Identifier>
+        <wps:DataInputs>
+          <wps:Input>
+            <ows:Identifier>distance</ows:Identifier>
+            <wps:Data>
+              <wps:LiteralData>2</wps:LiteralData>
+            </wps:Data>
+          </wps:Input>
+          <wps:Input>
+            <ows:Identifier>quadrantSegments</ows:Identifier>
+            <wps:Data>
+              <wps:LiteralData>10</wps:LiteralData>
+            </wps:Data>
+          </wps:Input>
+          <wps:Input>
+            <ows:Identifier>capStyle</ows:Identifier>
+            <wps:Data>
+              <wps:LiteralData>Round</wps:LiteralData>
+            </wps:Data>
+          </wps:Input>
+        </wps:DataInputs>
+        <wps:ResponseForm>
+          <wps:RawDataOutput mimeType="application/wkt">
+            <ows:Identifier>result</ows:Identifier>
+          </wps:RawDataOutput>
+        </wps:ResponseForm>
+      </wps:Execute>
+
+   Take a look at this request, and see how all of the input parameters (including the input geometry) have been encoded into the XML request.
+
+#. Click :guilabel:`Execute request`. Here is the result::
+
+     POLYGON ((2 0, 1.9753766811902755 -0.3128689300804617, 1.902113032590307 -0.6180339887498948, 1.7820130483767358 -0.9079809994790935, 1.618033988749895 -1.1755705045849463, 1.4142135623730951 -1.414213562373095, 1.1755705045849463 -1.618033988749895, 0.9079809994790937 -1.7820130483767356, 0.6180339887498949 -1.902113032590307, 0.3128689300804618 -1.9753766811902755, 0.0000000000000001 -2, -0.3128689300804616 -1.9753766811902755, -0.6180339887498947 -1.9021130325903073, -0.9079809994790935 -1.7820130483767358, -1.175570504584946 -1.618033988749895, -1.414213562373095 -1.4142135623730951, -1.6180339887498947 -1.1755705045849465, -1.7820130483767356 -0.9079809994790937, -1.902113032590307 -0.618033988749895, -1.9753766811902753 -0.312868930080462, -2 -0.0000000000000002, -1.9753766811902755 0.3128689300804615, -1.9021130325903073 0.6180339887498946, -1.7820130483767358 0.9079809994790934, -1.618033988749895 1.175570504584946, -1.4142135623730954 1.414213562373095, -1.1755705045849465 1.6180339887498947, -0.9079809994790938 1.7820130483767356, -0.6180339887498951 1.902113032590307, -0.3128689300804621 1.9753766811902753, -0.0000000000000004 2, 0.3128689300804614 1.9753766811902755, 0.6180339887498945 1.9021130325903073, 0.9079809994790933 1.782013048376736, 1.1755705045849458 1.6180339887498951, 1.4142135623730947 1.4142135623730954, 1.6180339887498947 1.1755705045849467, 1.7820130483767356 0.9079809994790939, 1.902113032590307 0.6180339887498952, 1.9753766811902753 0.3128689300804622, 2 0))
+
+IMAGE
 
 Chaining processes
 ------------------
 
-WPS is not a one trick pony
+NEED IMAGES
 
-We can chain existing processes together so the output of one becomes the inputs to another.
+WPS has the ability to chain multiple process together, so that the output of one becomes the input to another. This is where the power of WPS really shows.
 
-And so forth and so on.
+Here are some examples of some applications of chaining:
 
-EXAMPLES
+* Chaining a viewshed with a simplification and then a smoothing process on the resulting polygon.
+* Overlaying a land use polygon coverage against a county coverage, then unioning all the resultant polygons of a certain type.
+* Taking cell towers, buffering them by a radius depending on their signal strength and elevation, then unioning all the buffer polygons to determine a total area of coverage. 
 
-How about chaining a viewshed with a simplification and then a smoothing process on the resulting polygon?
-
-Or overlay a land use polygon coverage against a county coverage, then union all the resultant polygons of a certain type.
-
-Or how about take cell towers, buffer them by a radius depending on their signal strength and elevation, then union all the buffer polygons to determine a total area of coverage. 
+SHOW ANOTHER EXAMPLE?
 
 Types of processes
 ------------------
 
-     JTS Topology Suite
+There are two categories of processes in GeoServer's implementation of WPS:
 
-        Buffer, centroid, contains, touches, etc.
+* JTS Topology Suite (Primarily *geometry* operations such as buffer, centroid, contains, and touches)
+* Internal GeoTools/GeoServer processes (primarily *feature* operations such as bounds, clip, reproject, and import)
 
-
-    Internal GeoTools/GeoServer processes
-
-        Bounds, Clip, Snap, Import, Query, Reproject, etc.
-
-
-( Rendering Transforms - Nudge, nudge ... )
-
-    And user-defined …
-
-What processes will GeoServer perform through WPS?
-
-The short answer is that processes can be anything ...
-
-The WPS spec defines:
-
-> How server-side processes exist 
-
-> What a process' inputs need to look like
-
-> Or should look like (optional and/or defaulted)
-
-> What the response is going to look like
-
-> (And in what formats ...)
-
-Importantly, the WPS spec does not define what processes any vendor needs to include in it's offerings ...
-
-By default, GeoServer ships with two sets of processes.
-
-There was a list in that Demo UI ... But I glossed over where that list came from ...
-
-    The JTS Topology Suite operations...
-
-        The great list of standard processes
-
-        Authored by Martin Davis
-
-        (previously my colleague at OpenGeo)
-
-    As well as a set of processes that are internal to GeoServer / GeoTools
-
-
-The benefit to these GeoServer-specific processes is that the data can already be on the server.
-
-In this way we can be set things up such that
-
-> The large things are on the server, and 
-
-> The inputs and outputs passed to/from the client can be very small
+The benefit to these GeoServer-specific processes is that the data can already be on the server. In this way thigns can be set up such that the large data sets are stored on the server, and only the inputs and output are passed to and from the client. In fact, the output (which can itself be quite large) doesn't even need to be passed back to the client, as the output of a process can be stored on the server itself as a new layer (via the gs:Import process). So in most cases, large bandwidth is not requred for large-scale processing.
 
 Build your own process
 ----------------------
 
-What if the built-in processes alone or even chained together aren't sufficient?
+NEEDS IMAGES
 
-Recall, WPS is just a framework for processes, not a definitive list of processes that your server must or can offer.
+There is also the ability to define your own processes. The types of processes that are possible are virtually unlimited. The WPS spec only discusses the need for a process to have inputs and outputs, but doesn't specify what they are or how many of them (or what type) they are.
 
-Within the bounds of the framework you can define whatever processes you want ...
+There are a few options through which you can build your own processes. If you're a Java developer, you're in luck, as you can build your classes right into GeoServer. If not, you can use something like GeoScript.
 
-There are a few options through which you can build your own processes to operate on whatever and however you need ...
-
-Option One ...
-
-If you’re a Java developer, you’re in luck, as you can build your classes right into GeoServer
-
-I'm not a Java developer ... 
-
-Another option is to use something like GeoScript!
-
-GeoScript allows you to interact with GeoTools and all of its rich Java goodness within the context of your preferred scripting language.
+GeoScript allows you to interact with GeoTools and all of its rich Java goodness within the context of your preferred scripting language, such as Python or JavaScript.
 
 You can think of GeoScript as an interpretation layer to GeoServer:Java.
 
-GeoScript is another topic entirely ...
-
-... but it should be enough to point out that if you’re comfortable in Python, JavaScript (and I think Groovy and Scala), you can use GeoScript comfortably.
+GeoScript is beyond the scope of this workshop, but note that if you're comfortable in Python, JavaScript, you should be able to use GeoScript comfortably.
