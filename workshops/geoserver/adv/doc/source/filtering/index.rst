@@ -3,58 +3,31 @@
 Data filtering
 ==============
 
-Data filtering (subsetting, doesn’t change the data) (needs an intro)
+Filtering is used to **limit data from a data source**. These limits can be based on criteria like:
 
+* Prescribed relevancy to the map or data context. For example, displaying only certain results from a layer.
+* Dynamic, user-expressed interest. For example, in a given layer, a user only wants to display features with a certain criteria.
+* Scale. For example, to only show certain features at certain zoom levels.
+* Cartographic design. For example, flters in SLD are what drive cartographic classifications.
 
+The advantages of filtering are that it:
 
-Filtering in GeoServer (like other data-based applications), is used to limit data from a data-source
+* Allows you to separate data into multiple representations from a given source
+* Reduces/eliminates the management headache of separating data at source, such as loading, preparing, and maintaining more files and tables than necessary.
 
-These limits can be based on things like:
+In short, filtering allows you to separate data into multiple representations *from* the source, not *at* the source.
 
-    Prescribed relevancy to the map or data context
+GeoServer supports two main filtering languages:
 
-        From a map layer of factories in the USA
+* OGC Filter encoding
+* CQL/ECQL filter expressions
 
-        Of these US factories, I only want to display cheese producers
+While not specifically filters, there are other ways to separate data from source with GeoServer:
 
-    Dynamic, user-expressed interest, or
+* SQL Views
+* Time/Elevation dimensions on WMS requests
 
-        In my cheese producers map,
-
-        My user only wants to display for producers in Wisconsin
-
-    Scale (~Environmental~ as far as your application is concerned)
-
-        Only show these data at this zoom level
-
-    Cartographic Design
-
-        Filters in SLD are what drive cartographic classifications etc
-
-
-These are only some examples ...
-
-Many other filtering scenarios, all of which can be applied simultaneously
-
-For me, the overarching advantage to filtering is that it ...
-
-    Allows us to separate data into multiple representations from source (where that source is single/fewer), and
-
-
-    Saves us the management headaches of separating data at source. (I.e. Loading, preparing and maintaining more files/tables than we need to)
-
-
-    Used to limit data from a data-source
-
-    Interest, Relevancy, Scale, Cartography
-
-    Applied in combinations
-
-
-    Filtering's BIG WIN ...
-
-
-Allows us to separate data into multiple representations from source, not at source.
+All of these will be discussed in upcoming sections.
 
 
 .. toctree::
