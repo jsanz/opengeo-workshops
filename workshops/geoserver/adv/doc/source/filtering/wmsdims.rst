@@ -3,247 +3,141 @@
 WMS dimensions
 ==============
 
-What is WMS dimensions?
------------------------
+NEED A BETTER INTRO HERE
 
-Built-in Filters for Time / Elevation
 
-    Dimensions introduced in WMS 1.1.0
+Time is a perfect candidtte for special handling, as the strings themselves are quite complex, and there are so many different representations of time to manage. The filters that would need to be created to manage these diffreent representations would be quite cumbersome.
 
-    Data natively time and elevation "aware"
-
-    Previously achieved with complex filters
-
+Elevation, while less complicated to work with than time, is neverthess a fundamental concept in geographical work, and one that complements the often 2D nature of data.
 
 &TIME=1974-05-01T10:06:21.000Z
 
 &ELEVATION=42
 
-Up and down over time
+Version 1.1.0 of the WMS spec introduced the notion of time and elevation dimensions to WMS. Spatial data had always had time/date fields and attributes that represented feature elevations, but WMS lacked a decent mechanism for realizing that information.
 
-Version 1.1.0 of the OGC WMS spec introduced the notion of time and elevation dimensions to WMS ...
+.. note:: Times are expressed in compliance with the `ISO 8601 <http://www.w3.org/TR/NOTE-datetime>`_ standard.
 
-Spatial data had long-had ...
+Enabling WMS dimensions on a layer
+----------------------------------
 
-> time/date fields (marking the occurrence of a geographic event) or 
+GeoServer lets us access this feature of the WMS specification by allowing us to specify time and elevation dimensions on a given layer that has a suitable attribute types. For example, to enable time, one attribute must be of type "timestamp", while to enable elevation, an attribute need only to be a numeric field.
 
-> attributes that represented feature elevations (or Zs on the features themselves)
+This enabling of dimensions is done on a per-layer basis. Enabling either time, elevation, or both is allowed.
 
-But WMS lacked a decent mechanism for realizing that information ...
+.. note:: As the requirements for elevation are so lenient, it is possible to utilize the benefits of the elevation paramter on an attribute that has nothing to do with elevation. However, the parameter's name cannot be cahnged from ``elevation=``.
 
-I mention this here since these dimensions can act like built-in filters on WMS GetMap requests for data that are made aware that these dimensions exist on them as attributes ...
+PRE-LOADED DATA.
 
-We could have accomplished this using ~normal~ filters on the attributes' literal values, but ...
+Let's take a look at the layer we'll be working with:
 
-> As we've learned, those are vendor parameters, so we might feel some some pricklyness from OGC purists
+#. In the Layer list (not Layer Preview) select the :guilabel:`SOMETHING:globe` layer for configuration editing.
 
-> (And rightly so, if there's a good mechanism, standardized mechanism for doing this)
+#. There are four tabs across the top of the screen. Click the tab that says :guilabel:`Dimensions`.
 
-> And I do think this is a good mechanism ...
+#. Because our data has a timestamp field we have the option to enable the Time dimension. Likewise we need a numeric field to enable the elevation dimension. (If we didn't have a field with a date/time format, this option would have been disabled. Most but not all tables will have a numeric field, so elevation is typically enabled, but not always.)
 
-> I'm not a developer, so there are probably smart ways to do this, but 
+#. Set the Base attribute and End Attributes (TO WHAT?)
 
-> In my experience, standardizing timestamp as strings is as much fun as sticking straight-pins under your fingernails
+IS THIS ANOTHER EXAMPLE?
 
+For the globe_temp_dailies layer:
 
-Enabling dimensions on a layer
-------------------------------
+#. Enable the Time dimension
 
-GeoServer lets us access this feature of the WMS specification by allowing us to specify time and elevation dimensions on layers with suitable attribute types ...
+#. Select the ``measured_at`` field as the :guilabel:`Attribute`.
 
-You simply enable either (or both) dimensions on a layer that has timestamp (for date) and/or a numeric fields (for elevations) ...
+#. Leave the :guilabel:`End Attribute` blank.
 
-Naturally, one of these (ie the timestamps) is more stringently ~policed~ than the other ...
+#. Set the :guilabel:`Presentation Type` to :guilabel:`List.
 
-You could realistically enable the elevation dimension to dynamically filter anything numeric, provided you could live with the misnomer in your GetMap's ELEVATION= parameter
+#. Save the layer.
 
-(I've pre-loaded data ... Included in the workshop package as a PostGIS dump file [along with instructions for loading])
-
-Have a look at the layer we'll be working with ...
-
-> In GeoServer > Data > Layers > select the globe layer
-
-> Notice in the layers editor that you now have a DIMENSION tab
-
-> Because our data have a timestamp field we have the option to enable the time dimension
-
-> (If we didn't have a field with a date/time format, this option would have been disabled)
-
-> Likewise we need a numeric field to enable the elevation dimension, 
-
-> (Most [but not all] tables will have a numeric field, so elevation is typically always enabled)
-
-    Base attribute (the field that contains the time/elevation observations)
-
-    End attribute (optional "width" of our date ranges)
-
-    [[[]]] Presentation
-
-
-> For our globe_temp_dailies layer ...
-
-* Enable the time dimension
-
-* Select the measured_at field as our Attribute
-
-* No End Attribute
-
-* List as our Presentation Type
-
-* Save the layer
-
+THEN WHAT?
 
 Query string formats
 --------------------
 
-    At single point in time
+Now that the layer has a properly enabled Time dimension, it is possible to make queries against that value.
 
-        &time=
-        2010-12-30T08:00:00.000Z
+At single point in time::
 
+  &time=2010-12-30T08:00:00.000Z
 
-    Between time-stamps
+Between a range of times::
 
-        &time=
-        2010-12-25T00:00:00Z/2010-12-28T00:00:00Z
+  &time=2010-12-25T00:00:00Z/2010-12-28T00:00:00Z
 
+Discrete time periods::
 
-    Multiple time periods
+  &time=2010-12-30T08:00:00Z,2010-12-25T08:00:00Z
 
-        &time=2010-12-30T08:00:00Z,
-        2010-12-25T08:00:00Z/2010-12-28T08:00:00Z
+Multiple time periods::
 
+  &time=2010-12-30T08:00:00Z,2010-12-25T08:00:00Z/2010-12-28T08:00:00Z
 
-Do a layer preview on the time-enabled globe daily temperatures layer ...
+Open a layer preview on the time-enabled globe daily temperatures layer::
 
-http://localhost:8080/geoserver/wms/reflect?layers=globe&format=application/openlayers
+  http://localhost:8080/geoserver/wms/reflect?layers=globe&format=application/openlayers
 
-Identify some points ...
+Click on some points to identify them. Notice anything strange?
 
-Do we notice anything strange?
+The data covers an entire year, but you're only seeing points at each station for a few dates. The reason for this is that a GetMap request that omits the time dimension parameter shows *only the maximum value* for tha layer. In this case, the most recent time value.
 
-> The data covers an entire year, but I'm only getting points at each station for a few dates ... 
+In this data set, the features span a given time period (2010), are measured daily, and always at local solar noon. So we know the interval and resolution of the data.
 
-> What's the deal with that?
+With that in mind, a specific time value can be specified::
 
-By default (and ordained by the WMS spec) GetMap requests on dimensioned layers that omit the dimension parameter, show the maximum value (AKA the current value) for the layer
+  http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=2010-12-01
 
-> Knowing my data, I know that
+Now click on a few point to confirm that this request filtered points by that given day.
 
-    They span a given time period (01 Jan 2010 to 31 Dec 2010)
+Similarly, this request will show all features within this range of dates::
 
-    The intervals they're measured at (daily), and
+  http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=2010-12-25T00:00:00Z/2010-12-28T00:00:00Z
 
-    Their ~resolution~ (the observations are at local solar noon)
+Or discontinuous periods::
 
-
-> That's good enough for me to specify an actual time like ...
-
-http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=2010-12-01
-
-And (by identifying my points) confirm that I am indeed able to filter my points by
-
-A given day ...
-
-> (as above)
-
-Or period ...
-
-> time=[[[]]]/[[[]]]
-
-http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=2010-12-25T00:00:00Z/2010-12-28T00:00:00Z
-
-Or periods ...
-
-> time=[[[]]],[[[]]]/[[[]]]
-
-http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=2010-12-30T08:00:00Z,2010-12-25T08:00:00Z/2010-12-28T08:00:00Z
+  http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=2010-12-30T08:00:00Z,2010-12-25T08:00:00Z/2010-12-28T08:00:00Z
 
 
-Dimensioned capabilities
-------------------------
+Capabilities document with dimensions enabled
+---------------------------------------------
 
-If I don't know my data (and that's fine under many conditions [huge, ETL/live, etc] the WMS capabilities document now expresses the possible values for dimensioned layers ...
+When dimensions are enabled (either time or elevation), the WMS capabilities document will expresses the possible values for dimensioned layers.
 
-> Have a look at the 1.3.0 Capabilities document 
+#. Open the WMS 1.3.0 capabilities document::
 
-> Find the globe temps layer ... 
+     http://localhost:8080/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities
 
-> Assess the dimensions node ... Note
+#. Find the globe temps layer and assess the ``<Dimensions>`` tag. 
 
-> name - time (we assumed that)
+   LOOK AT XML
 
-> default - default is current/maximum (we looked at that)
-
-> units ... 
-
-It's worth noting that times are expressed in compliance with the ISO8601 standard
-
-(Our previous examples put them in this format ...)
-
-> 2010-12-28T00:00:00Z
-
-> YYYY-MM-DDTHH:MM:SS[.mmm]Z
-
-This refers to times both ...
-
-- FROM the WMS
-
--- Regardless of what the format looks like underneath ...  
-
-- And TO the WMS
-
--- Error if not
-
--- java.text.ParseException: Invalid date: sammy
-
-http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=sammy
-
-http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=2010-12-30T
-
-
-Dimension precision
+Precision of values
 -------------------
 
-    Precise ...
+A parameter that is fully precise::
 
-&TIME=1945-05-07T02:42:00.000Z
+  &time=1945-05-07T02:42:00.000Z
 
-(returns only the observations at this time)
+will return features that contain a timestamp at this exact value only.
 
-    Imprecise ...
+A parameter that is imprecise::
 
-&TIME=1980-12-08
+  &time=1980-12-08
 
-(returns all of the observations that match this date) (regardless of time)
+will return all of the feature whose timestamp match that date, regardless of time.
 
+Both values, and many others of varying precision, are all ISO 8601 compliant and are thus valid for use in requests.
 
+Validity checking
+-----------------
 
+Values that are not ISO 8601 compliant, when used in requests,. will cause errors.
 
-A precise ISO8601 date value would be something like
+For example, try these two requests::
 
-    1945-05-07T02:42:00.000Z
+  http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=2010-12-30T
 
-
-A GetMap request specifying a date like this, would only return the observations in the underlying store that match that exact time ...
-
-Naturally, your data would have to have the precision to match
-
-An imprecise date value would be something like
-
-    1980-12-08
-
-
-This is thin (date the date component only), but it's still IS08601-compliant
-
-The story goes that the WMS server should return all values that match the level of precision specified ...
-
-So from a data-set resolved down to time, we should get all of the values that occur on the 8th of December 1980, regardless of their hour/minute/second/millisecond values ...
-
-This is not the case in the current released version of GeoServer ...
-
-But it does work that way in the latest / trunk version ... Coming soon with the release of Suite 3.0
-
-(Patched JARs back-ported to GeoServer 2.1.x are available)
-
-
+  http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,globe&format=application/openlayers&time=sammy
