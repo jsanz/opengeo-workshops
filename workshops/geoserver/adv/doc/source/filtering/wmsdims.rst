@@ -49,7 +49,7 @@ For the globe_temp_dailies layer:
 
 #. Leave the :guilabel:`End Attribute` blank.
 
-#. Set the :guilabel:`Presentation Type` to :guilabel:`List.
+#. Set the :guilabel:`Presentation Type` to :guilabel:`List`.
 
 #. Save the layer.
 
