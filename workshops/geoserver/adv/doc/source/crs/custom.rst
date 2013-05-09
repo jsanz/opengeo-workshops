@@ -7,7 +7,7 @@ Adding a custom projection
 
 While there are a great many projections natively served by GeoServer, there will be occasions where you will encounter data that is in a CRS that is not in the EPSG database. In this case, you will need to add a custom projection to GeoServer.
 
-We'll add EPSG:34003, with the following WKT definition::
+Let's add EPSG:34003, a Danish CRS. It has the following definition in WKT::
 
   PROJCS["Danish System 34 Jylland-Fyn", 
     GEOGCS["ED50", 
@@ -30,11 +30,11 @@ We'll add EPSG:34003, with the following WKT definition::
     AXIS["y", NORTH], 
     AUTHORITY["EPSG","34003"]]
 
-To do this, we'll need to edit a file in the GeoServer catalog. This file is called :file:`epsg.properties` and it is found in :file:`user_projections/`.
+To add this CRS to be available in GeoServer, we'll need to edit a file in the GeoServer catalog. This file is called :file:`epsg.properties` and it is found in :file:`user_projections/` in the GeoServer data directory.
 
 #. Open the :file:`epsg.properties` file in a text editor.
 
-#. Paste the following code at the very end of the file. (This is the above code with indenting removed and prefixed with ``34003=``.) It is not necessary for the EPSG codes to be in numerical order, though you can do that if you'd like::
+#. Paste the following code at the very end of the file. (This is the above code with spacing removed and prefixed with ``34003=``.) It is not necessary for the EPSG codes to be sorted in numerical order::
 
      34003=PROJCS["Danish System 34 Jylland-Fyn",GEOGCS["ED50",DATUM["European_Datum_1950",SPHEROID["International - 1924",6378388,297.0000000000601,AUTHORITY["EPSG","7022"]],AUTHORITY["EPSG","6230"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433],AUTHORITY["EPSG","4230"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridian",9],PARAMETER["scale_factor",0.9996],PARAMETER["false_easting",500000],PARAMETER["false_northing",9.999999999999999e-099],UNIT["METER",1]]
 

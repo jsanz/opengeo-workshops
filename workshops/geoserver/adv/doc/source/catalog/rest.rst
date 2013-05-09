@@ -219,6 +219,8 @@ Repeat this process for each layer name. Again, look for the ``201`` in the resp
 
 Now, for verification purposes, not only can we view the catalog information about the layer, we should now be able to preview the layer itself. You can use the Layer Preview for this, or the WMS Reflector for simplicity::
 
+.. note:: For more information on the WMS reflector, please see the `GeoServer documentation <http://docs.geoserver.org/stable/en/user/tutorials/wmsreflector.html>`_.
+
   http://localhost:8080/geoserver/wms/reflect?layers=advanced:urban
 
 .. figure:: img/rest_addlayerpreview.png
