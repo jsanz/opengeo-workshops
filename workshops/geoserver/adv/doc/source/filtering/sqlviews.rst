@@ -5,125 +5,221 @@ SQL views
 
 This next section discusses SQL views. Not to be confused with CQL filters, SQL views allow custom SQL queries to be saved as views.
 
-IS THIS TRUE?
-
-A traditional way to access database data is to configure layers against either tables or database views.
-
-There may be some data preparation into tables, and database views will often include joins across tables and functions to change a data's state, but as far as GeoServer sees these results as somewhat static.
-
 SQL views in GeoServer
 ----------------------
 
-In GeoServer, layers can be defined by SQL views. SQL views allow execution of custom SQL queries each time GeoServer requests the layer, so data access need not be static at all.
+A traditional way to access database data is to configure layers against either tables or database views. There may be some data preparation into tables, and database views will often include joins across tables and functions to change a data's state, but as far as GeoServer is concerned these results as somewhat static. 
 
-This is similar to filters, but CQL and OGC filters comprise only the WHERE part of a SQL expression. They apply to one layer / feature class at a time, ar esomewhat limited in their set of functions / predicates, and there is an ambiguous and possibly sub-optimal execution plan.
+SQL views change this. In GeoServer, layers can be defined by SQL code. This allows for execution of custom SQL queries each time GeoServer requests the layer, so data access need not be static at all.
 
-NEED MORE INFO ABOUT THE EXECUTION PLAN
+This is similar to filters, but CQL and OGC filters comprise only the WHERE portion of a SQL expression. They apply to one layer / feature class at a time, are somewhat limited in their set of functions / predicates, and there is an ambiguous and possibly sub-optimal execution plan.
 
-SQL Views don't suffer from any of these limitations.
+.. warning:: NEED MORE INFO ABOUT THE EXECUTION PLAN
+
+SQL views don't suffer from any of these limitations.
 
 Perhaps most usefully, as well as being arbitrary SQL executed in the database using native database functions, SQL Views can be parameterized via string substitution.
 
-Here are some examples of SQL views::
+Here are some examples of SQL views. Each one of these can be used to generate a GeoServer layer::
 
   SELECT * FROM cities
-  SELECT * FROM cities WHERE name='%param_name%' (default @ 'Tokyo')
-  SELECT geom, name, %param_valfield% AS values FROM cities WHERE country='%param_country%' (defaults @ 'pop2000' and 'Japan')
 
-SQL Views have tremendous power and flexibility. And they are always executed in the database so performance is optimized. You also have access to all functions, stored procedures, and even joins across tables.
+  SELECT * FROM cities WHERE name='%param_name%'
 
-Regarding parameters is SQL Views:
+  SELECT geom, name, %param_valfield% AS values FROM cities WHERE country='%param_country%'
+
+SQL Views have tremendous power and flexibility. And they are always executed in the database so performance is optimized. You also have access to all database functions, stored procedures, and even joins across tables.
+
+Regarding the use of parameters in SQL views:
 
 * Parameter values can be supplied in both WMS and WFS requests
 * Default values can be supplied for parameters
 * Input values can be validated by regular expressions to eliminate the risk of SQL injection attacks
 
-.. note:: SQL Views are read-only, and so cannot be updated by WFS-T transactions.
+.. note:: SQL Views are read-only, and so cannot be updated by WFS transactions.
 
 
 Adding a SQL view as a new layer
 --------------------------------
 
-Lets start by setting up a basic SQL View. At first, there will be no parameters in the SQL statement, so it will behave like a standard layer at first.
+We will start by setting up a basic SQL View. At first, we will create one with no parameters in the SQL statement, so it will behave like a standard layer at first. We will then create other views with parameters to make the queries more expressive.
+
+SQL views are built against a database, so our first task is to set up a SQL view layer against our "earth" database
 
 To create a SQL view:
 
-#. Click :guilabel:`HERE`
+#. From the web admin interface, click :guilabel:`Layers` then click :guilabel:`Add a new resource`
 
-#. Click :guilabel:`HERE`
+#. Select :guilabel:`earth:earth` from the box.
 
-#. In the :guilabel:`Name` field, enter :guilabel:`cities_thin`.
+   .. figure:: img/sqlviews_newviewlink.png
 
-#. For the :guilabel:`SQL Statement`, enter ``select name, geom from cities``.
+      Click to configure a new SQL view
+
+A list of the published and unpublished layers in the database will be displayed. In addition, a few new options will be shown above the table. Click the link that says :guilabel:`Configure new SQL view...`.
+
+#. In the :guilabel:`View Name` field, enter :guilabel:`cities_thin`.
+
+#. For the :guilabel:`SQL statement`, enter ``SELECT name, geom FROM cities``.
 
    .. note:: There is no semi-colon after the end of the SQL expression.
 
-#. Set the bounding boxes, publishing options (and other layers settings) to the defaults, and then save the layer.
+#. Check the box for :guilabel:`Guess geometry type and srid` and click the :guilabel:`Refresh` link.
 
-#. Preview your work at::
+   .. figure:: img/sqlviews_thinsql.png
 
-     http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,cities_thin&format=application/openlayers
+      SQL definition of the cities_thin layer
+
+#. Click :guilabel:`Save` to continue.
+
+#. You will be taken to the standard layer configuration page. Set the bounding box and CRS (if necessary).
+
+#. Click the :guilabel:`Publishing` tab and select the :guilabel:`cities` style in :guilabel:`Default style` in order to associate that style with this layer.
+
+#. Click :guilabel:`Save`.
+
+#. Preview the layer::
+
+     http://localhost:8080/geoserver/wms/reflect?layers=earth:cities_thin&format=application/openlayers
+
+   .. figure:: img/sqlviews_thinpreview.png
+
+      Preview of cities_thin layer
+
+.. warning:: REQUEST ASKED FOR SHADEDRELIEF BUT IT WASN'T LOADED! REMOVED FROM ALL URLS
+
+Click on a point to see the attribute table. Notice that the only fields available are the name and the feature id.
 
 Parameterized SQL view
 ----------------------
 
 Now we'll create a SQL view that takes a variable string parameter and applies it to an attribute comparator. Specifically, we'll query the first letter of the city.
 
-#. ``cities_like``
+#. Create a new SQL view layer as above.
 
-#. ``select geom, name from cities where name ilike '%param1%%'``
+#. In the :guilabel:`View Name` field, enter :guilabel:`cities_like`.
 
-#. ``Default to 't'``
+#. For the :guilabel:`SQL statement`, enter ``SELECT geom, name FROM cities WHERE name ILIKE '%param1%%'``.
 
-#. Preview this layer::
+#. Click :guilabel:`Guess parameters from SQL`. A field titled "param1" should appear. In the :guilabel:`Default value` box, enter :guilabel:`t`.
 
-     http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,cities_like&format=application/openlayers&viewparams=
+#. Check the box for :guilabel:`Guess geometry type and srid` and click the :guilabel:`Refresh` link.
 
-#. Specifiy the parameter value to alter the output::
+   .. figure:: img/sqlviews_likesql.png
+
+      SQL definition of the cities_like layer
+
+#. Click :guilabel:`Save` to continue.
+
+#. You will be taken to the standard layer configuration page. Set the bounding box and CRS (if necessary).
+
+#. Click the :guilabel:`Publishing` tab and select the :guilabel:`cities` style in :guilabel:`Default style` in order to associate that style with this layer.
+
+#. Click :guilabel:`Save`.
+
+#. Preview this layer. Note that the only cities that display start with the letter T::
+
+     http://localhost:8080/geoserver/wms/reflect?layers=earth:cities_like&format=application/openlayers
+
+   .. figure:: img/sqlviews_likepreview.png
+
+      Preview of cities_like layer
+
+#. Now specify the parameter value by appending the request with ``&viewparams=param1:s``. This will display only those cities that begin with S::
 
      http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,cities_like&format=application/openlayers&viewparams=param1:s
+
+   .. figure:: img/sqlviews_likepreview2.png
+
+      Preview of cities_like layer with param1=s
+
+#. Now try ``&viewparams=param1:san`` to narrow down the list of cities even further::
+
      http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,cities_like&format=application/openlayers&viewparams=param1:san
-     http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,cities_like&format=application/openlayers&viewparams=param1:san+d
+
+   .. figure:: img/sqlviews_likepreview3.png
+
+      Preview of cities_like layer with param1=san
 
 Spatial function SQL view
 -------------------------
 
-In this example, we'll create a SQL View that incorporates PostGIS Spatial Functions.
+.. warning:: THIS DIDN'T WORK
 
-#. ``cities_buffer``
+In this example, we'll create a SQL view that incorporates spatial functions.
 
-#. ``select name, st_buffer(geom, %param2%) from cities where name ilike '%param1%%'``
+#. Create a new SQL view layer as above.
+
+#. In the :guilabel:`View Name` field, enter :guilabel:`cities_buffer`.
+
+#. For the :guilabel:`SQL statement`, enter ``SELECT name, ST_Buffer(geom, %param2%) FROM cities WHERE name ILIKE '%param1%%'``.
+
+#. Click :guilabel:`Guess parameters from SQL`. Two fields, ``param1`` and ``param2`` should appear. In the :guilabel:`Default value` box, enter ``t`` and ``1``, respectively.
+
+#. Check the box for :guilabel:`Guess geometry type and srid` and click the :guilabel:`Refresh` link.
+
+   .. figure:: img/sqlviews_buffersql.png
+
+      SQL definition of the cities_buffer layer
+
+#. Click :guilabel:`Save` to continue.
+
+#. You will be taken to the standard layer configuration page. Set the bounding box and CRS (if necessary) and click :guilabel:`Save`. (Don't worry about associating the :guilabel:`cities` layer since this view will generate polygons not points.)
 
 #. Preview the layer::
 
-     http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,cities_buffer&format=application/openlayers&viewparams=
+     http://localhost:8080/geoserver/wms/reflect?layers=cities_buffer&format=application/openlayers
 
-#. With parameter values::
+#. Now add some parameter values. ``param1`` referes to the first string to match to the first characters of the city name. ``param2`` refers to the buffer size. Here are some other requests::
 
      http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,cities_buffer&format=application/openlayers&viewparams=param1:s
+
      http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,cities_buffer&format=application/openlayers&viewparams=param1:s;param2:4
+
      http://localhost:8080/geoserver/wms/reflect?layers=shadedrelief,cities_buffer&format=application/openlayers&viewparams=param1:s;param2:8
 
 Cross layer SQL view
 --------------------
 
-This next example uses spatial joins. Because we can do cross-table joins in the database, we can do cross-layer analyses in SQL Views.
+This next example uses spatial joins. Because we can do cross-table joins in the database, we can do cross-layer analyses with SQL views.
 
-#. ``cities_within``
+#. Create a new SQL view layer as above.
 
-#. ``select c.name, c.geom from cities as c inner join (select geom from rivers where name = '%param1%') as r on st_dwithin(c.geom, r.geom, %param2%)``
+#. In the :guilabel:`View Name` field, enter :guilabel:`cities_within`.
 
-#. :guilabel:`Default` ``Seine 1``
+#. For the :guilabel:`SQL statement`, enter ``SELECT c.name, c.geom FROM cities AS c INNER JOIN (SELECT geom FROM rivers WHERE name = '%param1%') AS r ON st_dwithin(c.geom, r.geom, %param2%)``.
 
-#. Preview the layer::
+#. Click :guilabel:`Guess parameters from SQL`. Two fields, ``param1`` and ``param2`` should appear. In the :guilabel:`Default value` box, enter ``Seine`` and ``1``, respectively.
 
-     http://localhost:8080/geoserver/wms/reflect?format=application/openlayers&layers=shadedrelief,rivers,cities_within&viewparams=
+#. Check the box for :guilabel:`Guess geometry type and srid` and click the :guilabel:`Refresh` link.
 
-#. With parameter values::
+   .. figure:: img/sqlviews_withinsql.png
 
-     http://localhost:8080/geoserver/wms/reflect?&format=application/openlayers&layers=shadedrelief,rivers,cities_within&viewparams=param1:Thames
-     http://localhost:8080/geoserver/wms/reflect?&format=application/openlayers&layers=shadedrelief,rivers,cities_within&viewparams=param1:Danube
-     http://localhost:8080/geoserver/wms/reflect?&format=application/openlayers&layers=shadedrelief,rivers,cities_within&viewparams=param1:Danube;param2:5
+      SQL definition of the cities_within layer
+
+#. Click :guilabel:`Save` to continue.
+
+#. You will be taken to the standard layer configuration page. Set the bounding box and CRS (if necessary).
+
+#. Click the :guilabel:`Publishing` tab and select the :guilabel:`cities` style in :guilabel:`Default style` in order to associate that style with this layer.
+
+#. Click :guilabel:`Save`.
+
+#. Preview the layer. Note the only city that is returned::
+
+     http://localhost:8080/geoserver/wms/reflect?format=application/openlayers&layers=earth:rivers,earth:cities_within
+
+   .. figure:: img/sqlviews_withinpreview.png
+
+      Preview of cities_within layer
+
+#. Now try some other parameter values. ``param1`` refers to the name of the city, while ``param2`` refers to the distance to check for cities (in units of the source layer, in this case degrees)::
+
+     http://localhost:8080/geoserver/wms/reflect?&format=application/openlayers&layers=earth:rivers,earth:cities_within&viewparams=param1:Thames
+
+     http://localhost:8080/geoserver/wms/reflect?&format=application/openlayers&layers=earth:rivers,earth:cities_within&viewparams=param1:Danube
+
+     http://localhost:8080/geoserver/wms/reflect?&format=application/openlayers&layers=earth:rivers,earth:cities_within&viewparams=param1:Danube;param2:5
 
 Sample application
 ------------------
