@@ -12,8 +12,6 @@ What is REST?
 
 REST stands for **REpresentational State Transfer**. You can take this to mean the transfer (to and from a server) of representations of an object's state. GeoServer has a RESTful API to and from which you can send and receive (respectively) state representations of GeoServers resource types.
 
-.. warning:: REST VS RESTful
-
 The capabilities of the REST API consist of the actions (verbs) we can use to make HTTP requests combined with the configurable resources in GeoServer.
 
 So, for each of the resources in GeoServer (workspaces, stores, layers, styles, layer groups, etc.) we can perform the following operations:
@@ -189,7 +187,7 @@ The output should look like::
   roads
   urban
 
-.. warning:: WHERE IS TEMPS?
+.. todo:: The dem layer isn't used, but may be at a later date.
 
 Let's add these layers. The payload for this request is:
 
@@ -215,8 +213,6 @@ So one of the cURL requests would look like::
 
 Repeat this process for each layer name. Again, look for the ``201`` in the response.
 
-.. warning:: DOES ANY VERIFICATION OCCUR?
-
 Now, for verification purposes, not only can we view the catalog information about the layer, we should now be able to preview the layer itself. You can use the Layer Preview for this, or the WMS Reflector for simplicity::
 
 .. note:: For more information on the WMS reflector, please see the `GeoServer documentation <http://docs.geoserver.org/stable/en/user/tutorials/wmsreflector.html>`_.
@@ -230,16 +226,14 @@ Now, for verification purposes, not only can we view the catalog information abo
 Upload styles
 ~~~~~~~~~~~~~
 
-The layers have been published, but they are all being served using GeoServer's default styles. The next step is to alter the style for each layer. The directory that contains the styles that we want to load is in :file:`styles/advanced`.
-
-.. warning:: NO DEM STYLE, NO GLOBE STYLE, STATES STYLE, WHY?
+The layers have been published, but they are all being served using GeoServer's default styles. The next step is to alter the style for each layer. The directory that contains the styles  we want to load is :file:`styles/advanced`.
 
 The cURL command for uploading a style with filename of :file:`stylefile.sld` is::
 
   curl -v -u admin:geoserver -X POST -H "Content-type: application/vnd.ogc.sld+xml"
     -d @stylefile.sld http://localhost:8080/geoserver/rest/styles
 
-.. warning:: WHY -d AND NOT -T?
+.. note:: When using the ``-d`` flag and referencing a file that contains the payload, prefis the file name with ``@``.
 
 We could repeat this for each style (just like we did when we loaded the layers), but the big advantage to the REST interface lies in its ability to script operations, so let's do that now. Here is a bash script for use on OS X or any UNIX-style system.
 
@@ -255,9 +249,9 @@ We could repeat this for each style (just like we did when we loaded the layers)
 
   done
 
-.. warning:: INCLUDE THIS SCRIPT IN THE WORKSHOP MATERIALS?
+.. warning:: INCLUDE THIS SCRIPT IN THE WORKSHOP MATERIALS
 
-.. warning:: WOULD BE NICE TO HAVE A BATCH EXAMPLE TOO
+.. warning:: CREATE BATCH EXAMPLE TOO
 
 .. note:: The ``echo`` and ``read`` commands are just there to poll our response status.
 
@@ -273,7 +267,7 @@ or the UI:
 
    New styles added to the catalog
 
-.. warning:: NO ASSOCIATION WITH LAYERS, INTENTIONAL?
+.. note:: We have loaded tyles in this step, but have not associated them with any layers. This will be accomplished in a later step.
 
 Add layers to a layer group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
