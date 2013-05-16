@@ -46,12 +46,20 @@ The Mercator projection may be the best known projection outside of professional
 
    Mercator projection
 
-.. note:: Technically, the Earth's surface is not a sphere, but a spheroid, but such distinctions are beyond the scope of this discussion.
+.. note:: Technically, the Earth's surface is not a sphere, but a spheroid (actually an oblate spheroid). Such distinctions are beyond the scope of this workshop.
 
 Datums
 ------
 
-.. warning:: Content needed.
+There is much more to the discussion than just porjecting a sphere onto a plane.
+
+The Earth's is not even a regular oblate spheroid at all. It has deviations (pits and hills) that need to be taken into account when calculating how to project the surface on to the flat plane.
+
+While necessarily an approximation, this is the role of the *datum*. A datum is the definition of how to model the deviations of the ideal surface.
+
+For example, one common datum in use is `WGS84 <https://en.wikipedia.org/wiki/World_Geodetic_System>`_ used in GPS systems, while two others are `NAD27/NAD83 <https://en.wikipedia.org/wiki/North_American_Datum>`_. The numbers refer to the year in which the standard was published. All datums are approximations that are more accurate for different purposes.
+
+All CRSs are associated with a datum.
 
 GeoServer and projections
 -------------------------
@@ -86,6 +94,33 @@ Click :guilabel:`3578`. You will see details about this CRS, including its Well 
 
    SRS description
 
+::
+
+  PROJCS["NAD83 / Yukon Albers", 
+    GEOGCS["NAD83", 
+      DATUM["North American Datum 1983", 
+        SPHEROID["GRS 1980", 6378137.0, 298.257222101, AUTHORITY["EPSG","7019"]], 
+        TOWGS84[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 
+        AUTHORITY["EPSG","6269"]], 
+      PRIMEM["Greenwich", 0.0, AUTHORITY["EPSG","8901"]], 
+      UNIT["degree", 0.017453292519943295], 
+      AXIS["Geodetic longitude", EAST], 
+      AXIS["Geodetic latitude", NORTH], 
+      AUTHORITY["EPSG","4269"]], 
+    PROJECTION["Albers_Conic_Equal_Area", AUTHORITY["EPSG","9822"]], 
+    PARAMETER["central_meridian", -132.5], 
+    PARAMETER["latitude_of_origin", 59.0], 
+    PARAMETER["standard_parallel_1", 61.66666666666667], 
+    PARAMETER["false_easting", 500000.0], 
+    PARAMETER["false_northing", 500000.0], 
+    PARAMETER["standard_parallel_2", 68.0], 
+    UNIT["m", 1.0], 
+    AXIS["Easting", EAST], 
+    AXIS["Northing", NORTH], 
+    AUTHORITY["EPSG","3578"]]
+
+Notice that it references the NAD83 datum.
+
 GeoServer and reprojection
 --------------------------
 
@@ -113,13 +148,13 @@ This returns the same data but in EPSG:3700, or "Wisconsin South (ftUS)".
 
    The usa:states layer in EPSG:3700
 
-GeoServer has dynamically reprojected the data during the request execution. No data was or is ever stored in EPSG:3700.
+GeoServer has dynamically reprojected the data during the request execution. No data was or is ever stored in EPSG:3700. Note that the farther away from the target area, the more "warped" the display becomes. This is a visual representation of the trade-off between accuracy and large-scale. This would certianly not be a good CRS to use when looking at Asia!
 
 Try other EPSG codes to see how the output changes. Should you get a blank image, it just means that the CRS is not valid for that area.
 
 Dynamic reprojection allows for a great deal of flexibility, as the same data need not be stored in multiple CRSs. However, there is a cost involved in reprojection, in that it requires extra processing time. With small data sets this is negligible, but for larger, more complex situations, the processing time can be prohibitive.
 
-For this reason, we recommended that you **store your data in the CRS in which it will be accessed most frequently**. If you need to transform your data to this CRS, use a spatial database function such as ST_Transform in PostGIS. 
+For this reason, we recommended that you **store your data in the CRS in which it will be accessed most frequently**. If you need to transform your data to this CRS, use a spatial database function such as `ST_Transform <http://www.postgis.org/docs/ST_Transform.html>`_ in PostGIS. 
 
 .. note:: Utilizing tile caching is one option that shifts the processing time away from when the tiles are requested, but the actual rendering of tiles will still be slower than in the native CRS.
 

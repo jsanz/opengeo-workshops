@@ -36,7 +36,7 @@ GeoServer and WPS
 
 GeoServer has full support for WPS. It is currently available as an extension in the community version. In the OpenGeo Suite version of GeoServer, though, it is integrated into the core without any additional work required. The functionality of both implementations are identical.
 
-It should be noted that there is a difference between WPS as a *standard* and WPS as it is *implemented*.  WPS as a standard is very generic, and doesn't specify any more than a framework for what is possible. It is in the implementation of WPS (and especialyl what processes are available) that determine how useful and powerful it can be. So while the discussion here will be on GeoServer's implementation of WPS, other products such as 52-North or Deegree may have very different implementations.
+It should be noted that there is a difference between WPS as a *standard* and WPS as it is *implemented*.  WPS as a standard is very generic, and doesn't specify any more than a framework for what is possible. It is in the implementation of WPS (and especially what processes are available) that determine how useful and powerful it can be. So while the discussion here will be on GeoServer's implementation of WPS, other products such as 52-North or Deegree may have very different implementations.
 
 WPS, like other OGC services, uses XML for its inputs and outputs. With multiple inputs and outputs (and especially when chained processes are invoked) this can get extremely unwieldy. Thankfully, GeoServer includes a **WPS Request Builder** to perform basic tasks, and to learn/prototype syntax. As a bonus, when building a process or task through the interface, it also generates the actual XML instructions, allowing you to hold on to the process for later use.
 
@@ -133,17 +133,17 @@ Here are some examples of some applications of chaining:
 * Overlaying a land use polygon coverage against a county coverage, then unioning all the resultant polygons of a certain type.
 * Taking cell towers, buffering them by a radius depending on their signal strength and elevation, then unioning all the buffer polygons to determine a total area of coverage. 
 
-.. warning:: NEEDS AN EXAMPLE
+.. todo:: This section needs a chained example.
 
 Types of processes
 ------------------
 
 There are two categories of processes in GeoServer's implementation of WPS:
 
-* JTS Topology Suite (primarily *geometry* operations such as buffer, centroid, contains, and touches)
-* Internal GeoTools/GeoServer processes (primarily *feature* operations such as bounds, clip, reproject, and import)
+#. JTS Topology Suite (primarily *geometry* operations such as buffer, centroid, contains, and touches)
+#. Internal GeoTools/GeoServer processes (primarily *feature* operations such as bounds, clip, reproject, and import)
 
-The benefit to the GeoServer-specific processes is that the data can already be on the server. In this way things can be set up such that the large data sets are stored on the server, and only the inputs and output are passed to and from the client. In fact, the output (which can itself be quite large) doesn't even need to be passed back to the client, as the output of a process can be stored on the server as a new layer (via the gs:Import process). So in most cases, large bandwidth is not requred for large-scale processing.
+The benefit to the GeoServer-specific processes is that the data can already be on the server. In this way things can be set up such that the large data sets are stored on the server, and only the inputs and output are passed to and from the client. In fact, the output (which can itself be quite large) doesn't even need to be passed back to the client, as the output of a process can be stored on the server as a new layer (via the gs:Import process). So in most cases, large bandwidth is not required for large-scale processing.
 
 Build your own process
 ----------------------

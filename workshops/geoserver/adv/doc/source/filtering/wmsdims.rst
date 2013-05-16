@@ -23,13 +23,15 @@ Version 1.1.0 of the WMS spec introduced the notion of time and elevation dimens
 Enabling WMS dimensions on a layer
 ----------------------------------
 
+.. todo:: This section requires converting the globe layer to have a proper time attribute.
+
 GeoServer lets us access this feature of the WMS specification by allowing us to enable time and elevation dimensions on a given layer that has suitable attribute types. For example, to enable time on a layer, one attribute must be of type *timestamp*, while to enable elevation, an attribute need only to be a *numeric* field.
 
 This enabling of dimensions is done on a per-layer basis. Enabling either time, elevation, or both is allowed.
 
 .. note:: As the requirements for elevation are so lenient, it is possible to utilize the benefits of the elevation parameter on an attribute that has nothing to do with elevation. However, the parameter's name cannot be changed from ``elevation=``.
 
-Let's enable the time dimension on one of our layers. We'll do this through the web interface. Elevation works much the same way, but is a much simpler case.
+Let's enable the time dimension on one of our layers. We'll use the ``advanced:globe`` layer for this.
 
 #. In the Layer list (not Layer Preview) select the :guilabel:`advanced:globe` layer for configuration editing.
 
@@ -37,9 +39,7 @@ Let's enable the time dimension on one of our layers. We'll do this through the 
 
 #. Because our data has a timestamp field we have the option to enable the Time dimension. Likewise we need a numeric field to enable the elevation dimension. (If we didn't have a field with a date/time format, this option would have been disabled. Most but not all tables will have a numeric field, so elevation is typically enabled, but not always.)
 
-   .. warning:: DATA DOESN'T HAVE TIMESTAMP AS PER LOADING INSTRUCTIONS
-
-#. Check the box to enable the Time dimension
+#. Check the box to enable the Time dimension.
 
 #. Select the ``measured_at`` field as the :guilabel:`Attribute` that contains our timestamps.
 
@@ -70,22 +70,17 @@ Or multiple time periods::
 
   &time=2010-12-30T08:00:00Z,2010-12-25T08:00:00Z/2010-12-28T08:00:00Z
 
-To test this, open a layer preview on the time-enabled globe daily temperatures layer
-
-.. warning:: WHERE IS THE GLOBE DAILY TEMPERATURES LAYER
+To test this, open a layer preview on the time-enabled globe layer
 
 ::
 
-  http://localhost:8080/geoserver/wms/reflect?layers=globe&format=application/openlayers
+  http://localhost:8080/geoserver/wms/reflect?layers=advanced:globe&format=application/openlayers
 
 Click on some points to identify them. Notice anything strange?
 
 The data covers an entire year, but you're only seeing points at each station for a few dates. The reason for this is that a GetMap request that omits the time dimension parameter shows *only the maximum value* for that layer. In this case, the most recent time value.
 
 In this data set, the features span a given time period (2010), are measured daily, and always at local solar noon. So we know the interval and resolution of the data.
-
-
-.. warning:: REMOVED REFERENCES TO SHADEDRELIEF AS IT WASN'T INCLUDED
 
 With that in mind, a specific time value can be specified::
 
@@ -100,7 +95,6 @@ Similarly, this request will show all features within this range of dates::
 Or discontinuous periods::
 
   http://localhost:8080/geoserver/wms/reflect?layers=globe&format=application/openlayers&time=2010-12-30T08:00:00Z,2010-12-25T08:00:00Z/2010-12-28T08:00:00Z
-
 
 Capabilities documents with dimensions enabled
 ----------------------------------------------

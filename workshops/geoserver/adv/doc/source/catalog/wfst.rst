@@ -180,9 +180,11 @@ The result you should see will look like this:
 
 You can view the result here::
 
-  http://localhost:8080/geoserver/wms/reflect?layers=earth&format=application/openlayers
+  http://localhost:8080/geoserver/wms/reflect?layers=earth:cities&format=application/openlayers
 
-.. warning:: TRANSACTION WORKS, LAYER GROUP DOESN'T
+.. figure:: img/wfst_deletepreview.png
+
+   Preview of layer with feature removed
 
 Update
 ~~~~~~
@@ -210,9 +212,11 @@ The result you should see should look identical to the above response.
 
 Preview the change here::
 
-  http://localhost:8080/geoserver/wms/reflect?layers=earth&format=application/openlayers
+  http://localhost:8080/geoserver/wms/reflect?layers=earth:cities&format=application/openlayers
 
-.. warning:: TRANSACTION WORKS, LAYER GROUP DOESN'T
+.. figure:: img/wfst_updatepreview.png
+
+   Preview of layer with feature updated
 
 Insert
 ~~~~~~
@@ -248,11 +252,11 @@ We can insert new features into layers via WFS-T. Let's add a new river to our r
      </wfs:Insert>
    </wfs:Transaction>
 
-.. warning:: DOESN'T WORK, ENDLESS 
+.. todo:: This request did not work. Demo request got stuck in an endless loop.
 
 View a preview of this unlikely river here::
 
-  http://localhost:8080/geoserver/wms/reflect?layers=earth&format=application/openlayers
+  http://localhost:8080/geoserver/wms/reflect?layers=earth:rivers&format=application/openlayers
 
 
 Multiple transactions
@@ -271,7 +275,21 @@ We can execute multiple transactions in a single transaction request. So let's u
     xsi:schemaLocation="http://www.opengis.net/wfs
                         http://schemas.opengis.net/wfs/1.0.0/WFS-transaction.xsd">
  
-     <!-- LUXEMBOURG, MEH -->
+     <!-- BRING TORONTO BACK -->
+     <wfs:Insert>
+       <earth:cities>
+       <earth:geom>
+         <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+           <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+             -79.496,43.676
+           </gml:coordinates>        
+         </gml:Point>
+       </earth:geom>
+       <earth:name>T'rana</earth:name>
+       </earth:cities>
+     </wfs:Insert>
+
+     <!-- LUXEMBOURG IS JUST OKAY -->
      <wfs:Update typeName="earth:cities">
        <wfs:Property>
          <wfs:Name>name</wfs:Name>
@@ -292,25 +310,8 @@ We can execute multiple transactions in a single transaction request. So let's u
        </ogc:Filter>
      </wfs:Delete>
 
-     <!-- BRING TORONTO BACK -->
-     <wfs:Insert>
-       <earth:cities>
-       <earth:geom>
-         <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
-           <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
-             -79.496,43.676
-           </gml:coordinates>        
-         </gml:Point>
-       </earth:geom>
-       <earth:name>T'rana</earth:name>
-       </earth:cities>
-     </wfs:Insert>
-
    </wfs:Transaction>
 
-.. warning:: FAIL (Error performing insert: Source was null in trying to create a reprojected feature collection!)
+Preview everything here::
 
-View a preview to see everything back to normal here::
-
-  http://localhost:8080/geoserver/wms/reflect?layers=earth&format=application/openlayers
- 
+  http://localhost:8080/geoserver/wms/reflect?layers=earth:cities&format=application/openlayers

@@ -15,3 +15,5 @@ GeoServer is a web-mapping server. As such, it operates as middleware between ge
 GeoServer can read many different data formats, both vector and raster, proprietary and open.
 
 What's perhaps most important is that GeoServer acts as a **format-agnostic gateway** to spatial information. It standardizes its responses to the conventions of the OGC service specifications. While there are many services, the most frequently accessed are the Web Map Service (for map images) and Web Feature Service (for map data).
+
+.. todo:: Some images here would be nice.

@@ -157,7 +157,9 @@ Save this as the file :file:`datastore.advanced.xml`. (This file is also availab
     -T datastore.advanced.xml 
     http://localhost:8080/geoserver/rest/workspaces/advanced/datastores
 
-Note the use of ``-T`` here, which specifies that the content will be containes inside a file. This was used instead of the ``-d`` flag from the previous example, which specifies that content will be contained in the command itself. This is advantageous when the size of the content is large. It also allows for reusable content.
+Note the use of ``-T`` here, which specifies that the content will be contained inside a file. This was used instead of the ``-d`` flag from the previous example, which specifies that content will be contained in the command itself. Having the content in a seaprate file can be useful for large requests or for reusable content.
+
+.. note:: It is also possible to use ``-d`` with ``@file.xml`` to accomplish much the same thing.
 
 Verify the request was successful by looking at the GeoServer UI.  Click on :guilabel:`Stores` and you should see :guilabel:`advanced` in the list.
 
@@ -215,9 +217,9 @@ Repeat this process for each layer name. Again, look for the ``201`` in the resp
 
 Now, for verification purposes, not only can we view the catalog information about the layer, we should now be able to preview the layer itself. You can use the Layer Preview for this, or the WMS Reflector for simplicity::
 
-.. note:: For more information on the WMS reflector, please see the `GeoServer documentation <http://docs.geoserver.org/stable/en/user/tutorials/wmsreflector.html>`_.
-
   http://localhost:8080/geoserver/wms/reflect?layers=advanced:urban
+
+.. note:: For more information on the WMS reflector, please see the `GeoServer documentation <http://docs.geoserver.org/stable/en/user/tutorials/wmsreflector.html>`_.
 
 .. figure:: img/rest_addlayerpreview.png
 
@@ -226,14 +228,14 @@ Now, for verification purposes, not only can we view the catalog information abo
 Upload styles
 ~~~~~~~~~~~~~
 
-The layers have been published, but they are all being served using GeoServer's default styles. The next step is to alter the style for each layer. The directory that contains the styles  we want to load is :file:`styles/advanced`.
+The layers have been published, but they are all being served using GeoServer's default styles. The next step is load styles to be used for for each layer.
 
-The cURL command for uploading a style with filename of :file:`stylefile.sld` is::
+.. note:: We will load styles in this step, but not yet associate them with any layers. This will be accomplished in a later step.
+
+The directory that contains the styles we want to load is :file:`styles/advanced`. The command for uploading a style with filename of :file:`stylefile.sld` is::
 
   curl -v -u admin:geoserver -X POST -H "Content-type: application/vnd.ogc.sld+xml"
     -d @stylefile.sld http://localhost:8080/geoserver/rest/styles
-
-.. note:: When using the ``-d`` flag and referencing a file that contains the payload, prefis the file name with ``@``.
 
 We could repeat this for each style (just like we did when we loaded the layers), but the big advantage to the REST interface lies in its ability to script operations, so let's do that now. Here is a bash script for use on OS X or any UNIX-style system.
 
@@ -249,13 +251,13 @@ We could repeat this for each style (just like we did when we loaded the layers)
 
   done
 
-.. warning:: INCLUDE THIS SCRIPT IN THE WORKSHOP MATERIALS
+.. todo:: Include this script in the workshop materials
 
-.. warning:: CREATE BATCH EXAMPLE TOO
+.. todo:: Include a batch example too
 
-.. note:: The ``echo`` and ``read`` commands are just there to poll our response status.
+.. note:: The ``echo`` and ``read`` commands are just there to pause and poll our response status.
 
-Save this file and execute it. Verify that the script worked as promised by navigating either to the appropriate REST endpoint:
+Save this script and execute it. Verify that the script worked as promised by navigating either to the appropriate REST endpoint:
 
 .. figure:: img/rest_addstyles.png
 
@@ -267,14 +269,10 @@ or the UI:
 
    New styles added to the catalog
 
-.. note:: We have loaded tyles in this step, but have not associated them with any layers. This will be accomplished in a later step.
-
 Add layers to a layer group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now let's put our layers together in a layer group. More accurately, we want to alter (think PUT instead of POST) an existing layer group called "earth". The payload is:
-
-.. warning:: -d OR -T?
 
 .. code-block:: xml
 
@@ -293,7 +291,6 @@ Now let's put our layers together in a layer group. More accurately, we want to 
        <layer>parks</layer>
        <layer>rails</layer>
        <layer>roads</layer>
-       <layer>states</layer>
        <layer>globe</layer>
      </layers>
      <styles>
@@ -309,7 +306,6 @@ Now let's put our layers together in a layer group. More accurately, we want to 
        <style>Parks</style>
        <style>Rails</style>
        <style>Roads</style>
-       <style>States</style>
        <style>Globe</style>
      </styles>
    </layerGroup>
@@ -320,9 +316,7 @@ Save this as the file :file:`layergroup.earth.xml`. (This file is also available
     -d @layergroup.earth.xml
     http://localhost:8080/geoserver/rest/layergroups/earth
 
-.. warning:: SHOW OUTPUT, PREVIEW
-
-.. warning:: THIS DOESN'T WORK
+.. todo:: Is this supposed to be a layer group with 11 layers, or is this supposed to be replacing one set of layers for another? There are issues with this as it is written right now.
 
 Deleting a resource
 ~~~~~~~~~~~~~~~~~~~

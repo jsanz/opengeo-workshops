@@ -27,13 +27,17 @@ These filters are used by GeoServer for *easier* filtering in:
 * WFS GetFeature requests, using the ``cql_filter=`` parameter
 * SLD rules, using dynamic symbolizers
 
-.. warning:: TALK ABOUT THE DIFFERENCE BETWEEN FILTERS AND CQL FILTERS
-
-.. note:: Both ``filter=`` and ``cql_filter`` are *vendor parameters*. This means that they are implementations specific to GeoServer, and are not part of any specification.
-
 .. note:: While we tend to say CQL, the filters are actually implemented as Extended CQL (ECQL), which allows the expression the full range of filters that OGC Filter 1.1 can encode.
 
-.. warning:: MORE DETAILS?
+CQL versus OGC
+--------------
+
+As will be shown in this section, both OGC filters and CQL filters do much of the same thing. There are a few reasons to choose one over the other:
+
+* **CQL is simpler.** The CQL filters do not require any complex formatting and are much more succinct than OGC filters.
+* **OGC is a standard.** The OGC filters conform to the OGC Filter specification. CQL does not correspond to any spec.
+
+.. note:: Both ``filter=`` and ``cql_filter`` are *vendor parameters*. This means that they are implementations specific to GeoServer, and are not part of any specification.
 
 CQL filter example
 ------------------
@@ -56,7 +60,7 @@ Let's start out with a CQL example. We'll use the ``usa:states`` layer and perfo
 
    .. figure:: img/cqlogc_california.png
 
-      Feature filtered
+      Features filtered
 
 CQL filter options
 ------------------
@@ -84,11 +88,9 @@ Try some of these examples. Any of these will work with the ``usa:states`` layer
   PERSONS BETWEEN 1000000 AND 3000000
   STATE_NAME LIKE '%C%'
   STATE_NAME IN ('New York', 'California', 'Montana', 'Texas')
-  STATE_NAME LIKE 'C%' and PERSONS > 15000000
+  STATE_NAME LIKE 'C%' AND PERSONS > 15000000
 
-.. note:: Replace the ``%`` with ``%25`` for proper URL encoding.
-
-If manually editing the ``cql_filter=`` parameter, all strings must be URL encoded, so that the parameter ``STATE_NAME LIKE '%C%'`` should be typed as ``STATE_NAME LIKE '%25C%25'``.
+.. note:: If manually editing the ``cql_filter=`` parameter, all strings must be URL encoded, so that the parameter ``STATE_NAME LIKE 'C%' AND PERSONS > 15000000`` should be typed as ``&cql_filter=STATE_NAME+LIKE+'C%25'+AND+PERSONS+>+15000000``.
 
 Also available are expressions with multiple attributes (``male > female``) and simple math operations (``male / female < 1``)
 
@@ -113,52 +115,62 @@ For example, to display only the states that intersect a given area (a bounding 
 
   BBOX(the_geom, -90, 40, -60, 45)
 
+  &cql_filter=BBOX(the_geom,-90,40,-60,45)
+
+.. figure:: img/cqlogc_bboxfilter.png
+
+   Bounding box filter
+
 The reverse is also valid, filtering the states that do not intersect with a given area (this time using a polygon instead of a bounding box)::
 
   DISJOINT(the_geom, POLYGON((-90 40, -90 45, -60 45, -60 40, -90 40)))
 
-.. warning:: SCREENSHOTS?
+  &cql_filter=DISJOINT(the_geom, POLYGON((-90 40, -90 45, -60 45, -60 40, -90 40)))
 
-.. warning:: REMOVED DISCUSSION OF EXECUTION PLAN as it did not make sense to me. We can add it back in later.
+.. figure:: img/cqlogc_disjointfilter.png
 
-OGC filter functions
---------------------
+   Disjoint polygon filter
+
+Using OGC filter functions in CQL filters
+-----------------------------------------
+
+.. warning:: This is not to be confused with OGC *filters*. This is a discussion of OGC *filter functions*, that can be used in CQL filters. The similarity in naming is unfortunate.
 
 The OGC Filter Encoding specification provides a generic concept of a filter function. A filter function is a named function with any number of arguments, which can be used in a filter expression to perform specific calculations.
 
-This greatly increases the power of CQL expressions.
-
-For example, suppose we want to find all states whose name contains an "k", regardless of letter case.
+This greatly increases the power of CQL expressions. For example, suppose we want to find all states whose name contains an "k", regardless of letter case.
 
 With straight CQL filters, we could create the following expression::
 
   STATE_NAME LIKE '%k%' OR STATE_NAME LIKE '%K%'
 
-Or we could use the ``strToLowerCase()`` function to convert all values to lowercase first, and then use a single like comparison::
+Or we could use the ``strToLowerCase()`` filter function to convert all values to lowercase first, and then use a single like comparison::
 
   strToLowerCase(STATE_NAME) like '%k%'
 
+Both expressions generate the exact same output.
+
 GeoServer provides many different kinds of filter functions covering a wide range of usage including mathematics, string formatting, and geometric operations. A complete list is provided in the `Filter Function Reference <http://docs.geoserver.org/stable/en/user/filter/function_reference.html>`_
 
-.. warning:: SCREENSHOTS?
+OGC filter examples
+-------------------
 
-Simple evaluations in OGC
--------------------------
-
-.. warning:: NEED TO DISCUSS WHY XML HERE AND NOT ABOVE
-
-There are the same kinds of OGC filter encodings as there were with CQL, such as comparators, operators and other logic::
+Now let's move on to OGC filters. There are the same kinds of OGC filter encodings as there were with CQL, such as comparators, operators and other logic::
 
     <PropertyIsEqualTo>
       <PropertyName>STATE_NAME</PropertyName>
       <Literal>California</Literal>
     </PropertyIsEqualTo>
 
+::
+
     <PropertyIsBetween>
       <PropertyName>persons</PropertyName>
       <Literal>1000000</Literal>
       <Literal>3000000</Literal>
     </PropertyIsBetween>
+
+::
 
     <Or>
       <PropertyIsEqualTo>
@@ -171,10 +183,7 @@ There are the same kinds of OGC filter encodings as there were with CQL, such as
       </PropertyIsEqualTo>
     </Or>
 
-These XML-based filters would be URL encoded in GET requests.
-
-Geometric filters in OGC
-------------------------
+.. note:: If used in GET requests, these requests would be URL-encoded, though that would be unwieldy.
 
 There are also the full complement of geometric filters with OGC encoding::
 
@@ -196,10 +205,10 @@ There are also the full complement of geometric filters with OGC encoding::
     </Literal>
   </Intersects>
 
-.. warning:: THESE DON'T WORK
+.. todo:: These two examples don't work.
 
-WFS filtering
--------------
+WFS filtering using OGC
+-----------------------
 
 The previous examples have been WMS GetMap requests, but recall that we can apply both CQL and OGC filters to WFS requests as well.
 
@@ -210,7 +219,6 @@ Load the Demo Request Builder. In the :guilabel:`Request` box, select :guilabel:
   http://localhost:8080/geoserver/wfs?request=GetFeature&
     version=1.0.0&typeName=advanced:states&outputFormat=GML2&
     FILTER=%3CFilter%20xmlns=%22http://www.opengis.net/ogc%22%20xmlns:gml=%22http://www.opengis.net/gml%22%3E%3CIntersects%3E%3CPropertyName%3Egeom%3C/PropertyName%3E%3Cgml:Point%20srsName=%22EPSG:4326%22%3E%3Cgml:coordinates%3E-74.817265,40.5296504%3C/gml:coordinates%3E%3C/gml:Point%3E%3C/Intersects%3E%3C/Filter%3E
-
 
 While this is hard to read, it is an OGC Intersects filter on the states layer on a given point (-74.817265,40.5296504)
 
@@ -310,7 +318,7 @@ The full set of filtering capabilities is actually part of the WFS spec. This is
 Filtering in SLD rules
 ----------------------
 
-Sometimes, instead of filtering data for the sake of excluding records from the whole set, we would want to filter certain features for the sake of cartographic classification. You've likely encountered this before in any basic work with SLD.
+Sometimes, instead of filtering data for the sake of excluding records from the whole set, we would want to filter certain features for the sake of cartographic classification. You've likely encountered this before with SLD.
 
 Given the following familiar image:
 
@@ -344,7 +352,7 @@ This rule, and the others like it, has a filter (to drive the classification) an
 CQL in SLD dynamic symbolizers
 ------------------------------
 
-CQL filters also have a place in SLD, but not (strangely) for filtering. It can be evaluated as an expression in-line in order to *return values*.
+CQL filters coupled with OGC filter functions also have a place in SLD, but not (strangely) for filtering. They can be evaluated as an expression in-line in order to *return values*.
 
 Take a look at the following SLD:
 
