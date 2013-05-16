@@ -150,7 +150,7 @@ Now that we've created a workspace, let's add a store. This will be a connection
      </connectionParameters>
    </dataStore>
 
-Save this as the file :file:`datastore.advanced.xml`. (This file is also available in your workshop materials.) Now execute the following command::
+Save this as the file :file:`datastore.advanced.xml`. Now execute the following command::
 
   curl -v -u admin:geoserver -X POST 
     -H "content-type:text/xml" 
@@ -310,7 +310,7 @@ Now let's put our layers together in a layer group. More accurately, we want to 
      </styles>
    </layerGroup>
 
-Save this as the file :file:`layergroup.earth.xml`. (This file is also available in your workshop materials.) Now execute the following command::
+Save this as the file :file:`layergroup.earth.xml`. Now execute the following command::
 
   curl -v -u admin:geoserver -X PUT -H "Content-type: text/xml"
     -d @layergroup.earth.xml
