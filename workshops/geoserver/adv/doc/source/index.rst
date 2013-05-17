@@ -5,6 +5,8 @@ Advanced GeoServer Configuration
 Welcome!
 --------
 
+.. image:: geoserver.png
+
 In this course, you will learn about many different features that GeoServer has to offer beyond simply loading and publishing data. From catalog operations to data filters, you will be exposed to many different aspects of GeoServer configuration.
 
 This workshop will assume that you are familiar with basic GeoServer concepts and interaction, such as how to load and publish a shapefile.
@@ -18,7 +20,7 @@ The following material will be covered in this workshop:
   Basic refresher of GeoServer interaction
 
 :ref:`gsadv.catalog`
-  Learn about catalog operations such as the REST interface, Transactional WFS, as well as layer configuration.
+  Learn about catalog operations such as the REST interface and Transactional WFS.
 
 :ref:`gsadv.crs`
   Learn how to manage coordinate reference systems (projections).
@@ -38,14 +40,11 @@ The following directories will be found inside of the workshop bundle:
 :file:`doc`
   The workshop documentation in HTML format.
 
-:file:`software`
-  The software to be installed during the workshop.
-
 :file:`data`
   Geospatial data to be used throughout the workshop.
 
 :file:`styles`
-  Style files to be used throughout the workshop, including associated graphics.
+  Style files to be used throughout the workshop.
 
 These directories should be placed on your desktop.
 
