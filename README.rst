@@ -1,49 +1,19 @@
-OpenGeo Workshops Repository
-============================
+Girona Summer School 2013 workshops
+=========================================
 
-This repository is for all workshop materials created and/or hosted by OpenGeo.
+This repository is a fork of the official `OpenGeo workshops repo <https://github.com/opengeo/workshops>`_, adapted for the `Girona GIS Summer School 2013 <http://www.sigte.udg.edu/summerschool2013/>`_.
 
-Directory structure
--------------------
+On this repo there is just the GeoServer, OpenLayers and GeoExt workshops. Check the OpenGeo repo for the other awesome training materials.
 
-workshops
+Authors:
 
-- The actual workshops. 
-- Do not create copies of workshops in this repo.
-- Clone the git repository, do your work, merge back any updates to 
-  the master workshop.
+- Alberto Romeu
 
-themes
+  - `@alrocar <http://twitter.com/alrocar>`_
+  - aromeu [at] prodevelop [dot] es
 
-- Sphinx themes, referenced in conf.py:
+- Jorge Sanz
 
-  - html_theme_path should relatively reference this directory
-  - html_theme selects which theme to use
+  - `@xurxosanz <http://twitter.com/xurxosanz>`_
+  - jsanz [at] prodevelop [dot] es
 
-Resources
----------
-
-A workshop may depend on external data and/or software:
-
-- SOFTWARE
-
-  - Your workshop should note the versions required
-  - Your workshop should include a URL to download the software
-  - Don't check software into the repository
-
-- DATA
-
-  - Your workshop should include a URL to download a zip file of the data
-  - Workshop data should be stored at http://files.opengeo.org/workshopmaterials
-  - You should name your zip file with a date or version number to allow 
-    old versions of the workshop to have a longer lifespan
-
-Updating workshops.opengeo.org
-------------------------------
-
-Just pushing to the repository will not update http://workshops.opengeo.org. You
-will need to update the site manually:
-
-- SSH to workshops.opengeo.org
-- cd /var/www/workshops.opengeo.org/
-- sudo perl build_html_common_git.pl
