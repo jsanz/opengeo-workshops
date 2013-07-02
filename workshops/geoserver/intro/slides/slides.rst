@@ -5,55 +5,34 @@ Intro to GeoServer
 
 .. image:: ../doc/source/geoserver.png
 
-OpenGeo
--------
+OpenGeo - Prodevelop
+-------------------------------
 
-.. date:: date
-
-April 2, 2013
+July - 2013
 
 Presenter notes
----------------
+------------------
 
 This is where you can write notes to yourself and only you will be able to see them.
 
 
 --------------------------------------------------
 
-Housekeeping
-============
-
-* We're recording this
-
-* Please mute yourself
-
-* Ask questions in the chat
-
-* Workshop materials available at:
-  http://workshops.opengeo.org
-
-Presenter notes
----------------
-
-Link not clickable
-
---------------------------------------------------
-
 Your instructors
 ================
 
-Mike Pumphrey
+Alberto Romeu
+----------------
+
+GIS Developer, Prodevelop
+
+Jorge Sanz
 -------------
 
-User Advocate, OpenGeo
-
-Sam Smith
----------
-
-Global Support Manager, OpenGeo
+GIS Analyst, Prodevelop
 
 Presenter notes
----------------
+----------------
 
 [Self-promote]
 
@@ -62,12 +41,13 @@ Presenter notes
 Outline
 =======
 
+#. GIS Server Software
+#. What is GeoServer?
 #. Installing GeoServer
 #. GeoServer web interface
 #. Overview
 #. Working with data
 #. Styling
-#. Google Earth
 
 Presenter notes
 ---------------
@@ -78,6 +58,14 @@ Presenter notes
 * Working with data—Load and manage data in GeoServer.
 * Styling—Introduction to Styled Layer Descriptor (SLD) and a tour of GeoExplorer, a map browser with graphical style editing capabilities.
 * Google Earth—Integrating GeoServer with Google Earth using the GeoServer built-in KML output.
+
+--------------------------------------------------
+
+GIS Server Software
+========================
+
+- **TO DO**
+
 
 --------------------------------------------------
 
@@ -103,27 +91,21 @@ GeoServer is the reference implementation of the Open Geospatial Consortium (OGC
 Section 1: Installing
 =====================
 
-.. image:: ../doc/source/geoserver.png
-   :width: 50%
+- **TO DO**
 
-...is a core component of...
-
-.. image:: ../doc/source/install/img/suitelogo.png
-   :width: 50%
 
 Presenter notes
 ---------------
 
-In this section, we will install GeoServer. For the purposes of this workshop, we will be using the OpenGeo Suite—of which GeoServer is a primary component—in order to facilitate setup and configuration.
 
-The OpenGeo Suite is free and open source, and is available for download from OpenGeo.
 
 --------------------------------------------------
 
-OpenGeo Suite?
-==============
+What about OpenGeo Suite?
+==============================
 
-.. image:: ../doc/source/install/img/stack_all.png
+.. image:: ../doc/source/install.opengeosuite/img/stack_all.png
+   :width: 300px
 
 Presenter notes
 ---------------
@@ -139,74 +121,6 @@ GeoExplorer is based on the GeoExt framework and contains code from OpenLayers.
 
 --------------------------------------------------
 
-Installation
-============
-
-.. image:: ../doc/source/install/img/welcome.png
-
-Presenter notes
----------------
-
-In this section you will install the OpenGeo Suite on your system. This will provide everything necessary to get started with GeoServer (and more!).
-
-GeoServer, being a Java servlet, typically requires a Java Runtime Environment (JRE) as well as a servlet container in order to function. Both a JRE and a servlet container are included with the OpenGeo Suite installation packages, so separate installations of these components are not needed here.
-
-There are many cases where you might want to install the components separately; we'll discuss those a little later on.
-
---------------------------------------------------
-
-Installation
-============
-
-.. image:: ../doc/source/install/img/install.png
-
-Presenter notes
----------------
-
-The OpenGeo Suite installation packages are available for Windows, OS X, various distributions of Linux, and Solaris UNIX. We're using the Windows installers here, but the premise acros the board is pretty much the same, and pretty simple: Run the installer, follow the bouncing ball, choose options, ~done.
-
---------------------------------------------------
-
-Dashboard
-=========
-
-Desktop/web app for managing applications.
-
-.. image:: ../doc/source/install/img/dashboard.png
-   :width: 75%
-
-Presenter notes
----------------
-
-The OpenGeo Suite comes with a Dashboard. The Dashboard is launched (semi-)automatically when installation is complete, and otherwise from your Windows, Start menu, (or Spotlight etc. on OS X), (or Task Launcher etc. on Ubuntu).
-
-The Dashboard provides a single interface that allows you to access all components of the OpenGeo Suite, including: links to common tasks, configuration, management, and application logs. The dashboard also provides links to a library of documentation - user guides/manuals from each of the  contributing projects, as well as some OpenGeo-Specific templates, recipies and suggestions for Getting-Started.
-
-The Dashboard runs on the host machine as both a standalone application and in a browser. While both incarnations boast the same set of features, the desktop version might feel a bit more capable, since it can launch external system processes (Start/Shutdown) and applications (PGADMIN). [Note greyed out options].
-
---------------------------------------------------
-
-Preferences
-===========
-
-.. image:: ../doc/source/install/img/dashboard_prefs.png
-
-Presenter notes
----------------
-
-You can configure the OpenGeo Suite through the Preferences page.
-
-Warning: You must stop and start the OpenGeo Suite for any changes to take effect.
-
-The OpenGeo Suite runs a web server on your host machine that responds on a specific port (the default is 8080). You can alter this by changing the Port value. Click Save when done. Restart the OpenGeo Suite for the change to take effect.
-
-GeoServer data and configuration is stored in what is known as the data directory. You can point the OpenGeo Suite to a different GeoServer data directory if you'd like by changing the value of Data Directory. Click Save when done. Restart the OpenGeo Suite for the change to take effect.
-
-Most GeoServer administrative tasks require authentication. The default username and password for the GeoServer that is contained in the OpenGeo Suite is admin / geoserver. To change these credentials, enter new values in the Username and Password fields. You will need to type the password again in the Confirm field. Click Save when done. Restart the OpenGeo Suite for the change to take effect.
-
-The Dashboard is also available in your browser at http://localhost:8080/dashboard when the OpenGeo Suite is running. Preferences and start/stop functionality are disabled in the web-based Dashboard, but all other functionality is available.
-
---------------------------------------------------
 
 Section 2: GeoServer web interface
 ==================================
@@ -333,7 +247,7 @@ The following information can all be gleaned through the GeoServer web admin int
 --------------------------------------------------
 
 Loading your first data set
-===========================
+===============================
 
 .. image:: ../doc/source/webadmin/img/quickload_importerpage.png
 
@@ -349,7 +263,7 @@ The Layer Importer is currently only available as part of the OpenGeo Suite.
 --------------------------------------------------
 
 Loading your first data set
-===========================
+==============================
 
 .. image:: ../doc/source/webadmin/img/quickload_fileselect.png
 
@@ -367,7 +281,7 @@ Click Next. Leave all other fields as they are for now.
 --------------------------------------------------
 
 Loading your first data set
-===========================
+================================
 
 .. image:: ../doc/source/webadmin/img/quickload_importerpage2.png
 
@@ -379,7 +293,7 @@ On the next page, click Import.
 --------------------------------------------------
 
 Loading your first data set
-===========================
+===============================
 
 .. image:: ../doc/source/webadmin/img/quickload_importerdone.png
 
@@ -391,7 +305,7 @@ After some processing, you should see a note that says Import completed successf
 --------------------------------------------------
 
 Loading your first data set
-===========================
+=============================
 
 .. image:: ../doc/source/webadmin/img/quickload_layerpreview.png
 
@@ -409,7 +323,7 @@ Use the pan and zoom tools to study the map further. Click on map features to ge
 --------------------------------------------------
 
 Loading your first data set
-========================
+============================
 
 .. image:: ../doc/source/webadmin/img/quickload_layerpreviewdetail.png
 
@@ -422,7 +336,7 @@ Presenter notes
 
 [ Look at preview URL / Drop into Layers Listing (?) / Drop into Capabilities Doc (?) ]
 
-[[[]]] - Above might be a bit premature 
+[[[]]] - Above might be a bit premature
 
 [[[]]] - I think it's important that we try to get people jazzed about our easy-publishing story. Even if it's note really that easy, or powerful.
 
@@ -1572,7 +1486,7 @@ Why doesn't the ocean layer display?
 Presenter notes
 ---------------
 
-BOOM! 
+BOOM!
 
 At this point, the earth:ocean layer won't display properly. Let's look at the SLD and see if we can figure out why not? The next section will explain.
 
@@ -1652,7 +1566,7 @@ GeoExplorer includes a graphical styling editor.
 Presenter notes
 ---------------
 
-Creating SLD files by hand can be a difficult and time-consuming process. 
+Creating SLD files by hand can be a difficult and time-consuming process.
 
 The SLDs we looked at previously were quite simple, but complexity (and length)can increase quite quickly when we start working with complex rules and/or compound symbolizers.
 
@@ -1672,7 +1586,7 @@ Presenter notes
 
 Launch GeoExplorer. By default, GeoExplorer is located at http://localhost:8080/geoexplorer.
 
-By default, the only layer that displays is a MapQuest OpenStreetMap layer. 
+By default, the only layer that displays is a MapQuest OpenStreetMap layer.
 
 Click the Add layers button (the green circle with the white plus) towards the top left of the screen and then select Add layers.
 
@@ -1700,7 +1614,7 @@ GeoExplorer
 Presenter notes
 ---------------
 
-When you have added all of your layers, click Done to return to the main map. 
+When you have added all of your layers, click Done to return to the main map.
 
 The check-boxes control, or toggle, which layers are visible (not unlike other applications, checked = visible / unchecked = not displayed)
 
@@ -1754,9 +1668,9 @@ Editing an existing style
 Presenter notes
 ---------------
 
-Once you're logged in, the style editor, among other tools, will be enabled. 
+Once you're logged in, the style editor, among other tools, will be enabled.
 
-Select the countries layer by single clicking on it in the layer list. Then 
+Select the countries layer by single clicking on it in the layer list. Then
 click on the Change Styles (palette) icon right above the layer list to Edit Styles.
 
 Note: If the icon is disabled, make sure that you have logged in successfully and that you have selected the correct layer.
@@ -1820,304 +1734,7 @@ Presenter notes
 Answer1: GetFeatureInfo
 Answer2:
 - Limit by Condition (and a suitable set of operators and comparators)
-- Limit by Scale ... 
-
---------------------------------------------------
-
-Section 6: Google Earth
-=======================
-
-Google Earth is a powerful 3D map viewer. GeoServer integrates with Google Earth by providing native KML output, allowing any layer served by GeoServer to be loaded into Google Earth.
-
-Presenter notes
----------------
-
-Google Earth is a powerful 3D map viewer. GeoServer integrates with Google Earth by providing native KML output, allowing any layer served by GeoServer to be loaded into Google Earth. In addition, there are additional visualization features that are made possible through Google Earth, such as legends, filters, and extrudes.
-
-In this section, you will see how Google Earth can be used as a client for viewing and interacting with GeoServer.
-
---------------------------------------------------
-
-Viewing layers
-==============
-
-.. image:: ../doc/source/googleearth/img/view_preview.png
-
-Presenter notes
----------------
-
-GeoServer natively outputs data in KML format. This is the markup language that is used by Google Maps and Google Earth. In this way, it is easy to convert shapefiles or any geospatial data to a format that Google services understand.
-
-There are two ways to view data in Google Earth. The first is by statically loading a KML file. The second is by using a Network Link and connecting to a KML stream. We will show both.
-
-    Navigate to the Layer Preview .
-
-    Find the earth:countries layer and select Google Earth in its View menu. Click Go.
-
---------------------------------------------------
-
-Viewing layers
-==============
-
-.. image:: ../doc/source/googleearth/img/view_layer.png
-
-Presenter notes
----------------
-
-You will be asked to download a file. Select Open with Google Earth and click OK.
-
-Note: A KMZ file is a KML file compressed into an archive.
-
-The layer will open in Google Earth.
-
---------------------------------------------------
-
-Viewing layers
-==============
-
-.. image:: ../doc/source/googleearth/img/view_placemark.png
-
-Presenter notes
----------------
-
-Click on one of the layer's points to view its placemark description.
-
-It is possible to customize this placemark description through GeoServer, including adding custom HTML.
-
---------------------------------------------------
-
-Network Link
-============
-
-.. image:: ../doc/source/googleearth/img/view_addnetworklink.png
-
-Presenter notes
----------------
-
-Now we will connect Google Earth to a GeoServer KML stream via a Network Link. This allows for the view in Google Earth to be dynamically updated.
-
-Remove the entry called countries.kmz in the Places list by right-clicking and selecting Delete.
-
-Add a new Network Link by navigating to the Add menu and selecting Network Link.
-
-In the dialog that appears, enter "Countries" in the Name field.
-
-In the Link field, enter the following URL:
-
-http://localhost:8080/geoserver/wms/kml?layers=earth:countries
-
-Note: This is the same target for the Layer Preview Go URL above.
-
-Click OK when done.
-
-The output should be the same as before. The difference is that a Network Link is dynamic, which means that we can alter the stream and refresh the view without having to export a new KML file. We'll put this to use in the next section.
-
---------------------------------------------------
-
-Displaying a legend
-===================
-
-.. image:: ../doc/source/googleearth/img/legend_link.png
-
-Presenter notes
----------------
-
-When viewing data with a thematic style a legend is very helpful. We'll now add a legend to our map of cities.
-
-    Edit the existing Network Link for the Countries by right-clicking on the entry in the Places list and selecting Properties. This will return you to the original dialog where the Network Link was created.
-
-    Append the parameter &legend=true to the end of the Network Link URL.
-
-Click OK when done.
-
---------------------------------------------------
-
-Displaying a legend
-===================
-
-.. image:: ../doc/source/googleearth/img/legend_view.png
-
-.. image:: ../doc/source/googleearth/img/legend_sldtitle.png
-
-Presenter notes
----------------
-
-The legend is generated from the <Title> tags inside the SLD that the layer is using. You can verify this by opening up the cities.sld in a text editor, or from within GeoServer. In this case, the rules in the SLD are based on colors used to better distinguish countries on the map.
-
---------------------------------------------------
-
-Filtering layers
-================
-
-``&cql_filter=POP_EST > '100000000'``
-
-.. image:: ../doc/source/googleearth/img/filter_pop.png
-
-Presenter notes
----------------
-
-Often a layer contains too much information and it is desirable to filter what is displayed. In this section we will filter a KML stream coming from GeoServer using CQL.
-
-The cql_filter parameter is a way to specify a predicate based on attribute values or spatial orientation. Let's single out only countries that have populations of one hundred million or more.
-
-    Edit the Network Link as in the previous section. Append the following parameter to the end of the Network Link:
-
-    &cql_filter=POP_EST > '100000000'
-
-    Click OK when done.
-
-You will see that only the countries that have populations greater than one hundred million are displayed. In the case of South America, only Brazil's feature is shown. All other country features are not shown as part of the layer.
-
-
-
---------------------------------------------------
-
-Bonus: Filtering
-================
-
-* Create a filter that displays only your favorite country. (Hint: Use the ``Name`` attribute)
-* Use a CQL filter to display all of the countries that start with an "S". (Hint: ``%`` is a wildcard)
-
-Presenter notes
----------------
-
-In CQL you can also match strings using the "LIKE" operator. Create a filter that displays only your favorite country. (Hint: Use the "NAME" attribute.)
-When using LIKE in CQL, you have ability to add the "%" as a wildcard to the request. Use a CQL filter to display all of the countries that start with an "S".
-
---------------------------------------------------
-
-Raster and vector display
-=========================
-
-* Also known as "scoring" or "kmscore"
-* Raster or vector determined by how much data is displayed
-
-Presenter notes
----------------
-
-Google Earth's rendering of GeoServer features can take one of two forms: raster or vector output.
-
-Raster output is like a WMS response wrapped over top of the globe. It requires much less throughput to generate the display, but provide much less interactivity. On the other hand, vector output is like a WFS response rendered over the globe. You get the entire feature's geometry, which requires much more bandwidth, but allows for more interactivity.
-
-The determination to display raster or vector data is made by Google Earth depending on the number of features displayed on screen at any given time. You can see this by zooming out very far, waiting a few seconds for the display to update, and then zooming in very close. You will notice subtle differences in the way that the features are rendered.
-
---------------------------------------------------
-
-Raster and vector display
-=========================
-
-Too many features = raster display
-
-.. image:: ../doc/source/googleearth/img/score_zoomoutraster.png
-
-Presenter notes
----------------
-
-The raster-versus-vector determination is called scoring. The score itself is known as the kmscore. The kmscore is a value between 0 and 100, where 0 means "force raster" and 100 means "force vector". The values in between use a abstruse formula, and in general it is perhaps best to try out a few values to see how performant your display is. The default is 50.
-
-Since we have a small number of features here, we want to force vector display. To do this, we are going to set a kmscore of 100.
-
-    Edit the Network Link as in the previous sections.
-
-    Remove the cql_filter parameter and append &kmscore=100 to the end of the request. Click OK when done.
-
---------------------------------------------------
-
-Raster and vector display
-=========================
-
-Forced vector display
-
-.. image:: ../doc/source/googleearth/img/score_zoomoutvector.png
-
-Presenter notes
----------------
-
-Now zoom out very far. Notice that the features remain in vector form. The way to test this is to click on a feature. If the placemark displays, then the feature was drawn as a vector.
-
---------------------------------------------------
-
-Extrudes
-========
-
-* 2.5D display (features with height)
-* Formula for determining height of features saved in data directory
-
-Presenter notes
----------------
-
-Google Earth has the ability to draw extruded features. This is a technical way of saying that it can draw features with "height" such that they appear floating in the air above the globe as opposed to "clamped" to it.
-
-GeoServer can send information to Google Earth on how to draw extrudes based on a template saved in the GeoServer data directory.
-
-Recall from the section on External graphics and the data directory that the GeoServer data directory is where the catalog and settings of GeoServer are stored. We will create a height template and save it in the data directory
-
-Note: These templates are known as Freemark templates, named after the template engine used. See the Freemarker homepage for more information.
-
-
---------------------------------------------------
-
-Extrudes
-========
-
-``${POP_EST.value}``
-
-Save as ``<data_dir>\workspaces\earth\countries\countries\height.ftl``
-
-Presenter notes
----------------
-
-Open up a text editor and type in the following text:
-
-${POP_EST.value}
-
-This will set the height of a feature to be equal to the value of the POP_EST attribute, which is the population of the country.
-
-Save this file as height.ftl and save it in the GeoServer Data Directory at:
-
-<data_dir>\workspaces\earth\countries\countries\height.ftl
-
-This location will associate this template with this particular layer only.
-
-
---------------------------------------------------
-
-Extrudes
-========
-
-``${POP_EST.value}``
-
-.. image:: ../doc/source/googleearth/img/extrude_huge.png
-
-Presenter notes
----------------
-
-Now go back to Google Earth and move the globe around enough so that the view will refresh.
-
-You will see the polygons extruded based on the value of the attribute, so that the countries with larger populations are taller. However, with such extreme values, the globe is a bit hard to interpret. It would be better to scale the polygons down.
-
---------------------------------------------------
-
-Extrudes
-========
-
-``${POP_EST.value?number / 1000}``
-
-.. image:: ../doc/source/googleearth/img/extrude_small.png
-
-Presenter notes
----------------
-
-Open the same text file again. Replace the text with the following:
-
-${POP_EST.value?number / 1000}
-
-This will divide the attribute value by 1,000. The ?number is to force the attribute to be seen as a numerical value.
-
-Now go back to Google Earth again and refresh the view.
-
-The height is much more easy to interact with now.
-
+- Limit by Scale ...
 
 --------------------------------------------------
 
