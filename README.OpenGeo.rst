@@ -8,9 +8,9 @@ Directory structure
 
 workshops
 
-- The actual workshops.
+- The actual workshops. 
 - Do not create copies of workshops in this repo.
-- Clone the git repository, do your work, merge back any updates to
+- Clone the git repository, do your work, merge back any updates to 
   the master workshop.
 
 themes
@@ -35,7 +35,7 @@ A workshop may depend on external data and/or software:
 
   - Your workshop should include a URL to download a zip file of the data
   - Workshop data should be stored at http://files.opengeo.org/workshopmaterials
-  - You should name your zip file with a date or version number to allow
+  - You should name your zip file with a date or version number to allow 
     old versions of the workshop to have a longer lifespan
 
 Updating workshops.opengeo.org
