@@ -16,6 +16,7 @@ List of commands:
     create      Create a new application.
     debug       Run an existing application in debug mode.
     deploy      Deploy an application to a remote OpenGeo Suite instance.
+    package     Creates the war of the application
     
 See '$NAME <command> --help' for more detail on a specific command.
 "
@@ -77,6 +78,13 @@ List of options:
                                 supported containers.
 "
 
+## Usage for create command
+PACKAGE_USAGE="
+Usage: $NAME create <app-path>
+
+Creates the war of an application.  
+"
+
 # find sdk home
 if [ -z "$0" ]; then
     # as a last recourse, use the present working directory
@@ -116,7 +124,7 @@ if [ $# -gt 0 ]; then
 fi
 
 case $COMMAND in
-    create|debug|deploy|version)
+    create|debug|deploy|package|version)
         # PASS
         ;;
     *)
@@ -221,6 +229,22 @@ case $COMMAND in
         fi
         ANT_ARGS="$ANT_ARGS -Dapp.path=\"$APP_PATH\""
         ;;
+    package )
+        if $HELP ; then
+            echo "$PACKAGE_USAGE"
+            exit 0
+        fi
+        APP_PATH=$1
+        if [ $# -ne 1 -o -z "$APP_PATH" ]; then
+            echo "$PACKAGE_USAGE"
+            exit 1
+        fi
+        if [ ! -d "$APP_PATH" ]; then
+            echo "Directory '$APP_PATH' doesn't exist.  Supply the path for an existing app directory."
+            exit 1
+        fi
+        ANT_ARGS="$ANT_ARGS -Dapp.path=\"$APP_PATH\""
+        ;;
 esac
 
 # create log file (in case it doesn't already exist)
@@ -276,11 +300,21 @@ improper credentials (-u and -p) for your remote Suite instance.  Run
 '$NAME deploy --help' for help on the usage.
 "
 
+PACKAGE_START="
+Packaging application (this may take a few moments) ..."
+
+PACKAGE_FAILURE="
+The '$NAME package' command failed.
+
+'$NAME package --help' for help on the usage.
+"
+
 # provide feedback that work is starting
 case $COMMAND in
     create) echo "$CREATE_START";;
     debug) echo "$DEBUG_START";;
     deploy) echo "$DEPLOY_START";;
+    package) echo "$PACKAGE_START";;
 esac
 
 # run the command via ant
@@ -301,6 +335,7 @@ if [ $STATUS -ne 0 ]; then
             fi
             ;;
         deploy) echo "$DEPLOY_FAILURE";;
+        package) echo "$PACKAGE_FAILURE";;
     esac
     echo "See the logfile '$LOG_FILE' for more detail on what went wrong."
     echo
