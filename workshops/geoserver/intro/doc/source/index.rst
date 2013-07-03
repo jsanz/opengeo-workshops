@@ -13,7 +13,7 @@ The workshop is geared toward those with no prior GeoServer experience, but fami
 
 The workshop has been adapted from the official `Open Geo GeoServer workshop <http://workshops.opengeo.org/geoserver-intro/>`_ for the `Open Source Opportunities in GIS Summer School <http://www.sigte.udg.edu/summerschool2013/>`_. This course is coordinated by the `GIS and Remote Sensing Centre <http://www.sigte.udg.edu/sigte_en/>`_ of the University of Girona in collaboration with the `Nottingham Geospatial Institute <http://www.nottingham.ac.uk/ngi/index.aspx>`_ and `Prodevelop <http://www.prodevelop.es>`_.
 
-The instructors of the GeoServer workshops are:
+The instructors of the GeoServer workshop are:
 
 - Alberto Romeu
 
