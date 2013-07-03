@@ -31,9 +31,6 @@ The following material will be covered in this workshop:
 :ref:`geoserver.styling`
   Introduction to Styled Layer Descriptor (SLD) and a tour of GeoExplorer, a map browser with graphical style editing capabilities
 
-:ref:`geoserver.googleearth`
-  Integrating GeoServer with Google Earth using the GeoServer built-in KML output
-
 :ref:`geoserver.moreinfo`
   More information about GeoServer including links and a glossary of terms
 

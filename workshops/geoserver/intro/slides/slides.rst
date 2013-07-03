@@ -61,11 +61,80 @@ Presenter notes
 
 --------------------------------------------------
 
+Section 1: GIS Server Software
+=========================================
+
+What's a server?:
+
+ «A **server** is a system (software and suitable computer
+ hardware) that responds to requests across a
+ computer network to provide, or help to provide,
+ a network service.»
+
+Source: Wikipedia https://en.wikipedia.org/wiki/Server_(computing)
+
+--------------------------------------------------
+
 GIS Server Software
 ========================
 
-- **TO DO**
+A server that provides a service related with geographical information like:
 
+- rendering
+- geoprocessing
+- discovering
+- ...
+
+--------------------------------------------------
+
+GIS Server Software
+========================
+
+Types of Open Source servers by technology:
+
+- C/C++: UMN MapServer, ZOO project, TinyOWS
+- Java: **GeoServer**, deegree, GeoNetwork
+- Python: MapProxy, PyCSW
+
+Most of them ready to use at OSGeo Live!!
+
+--------------------------------------------------
+
+GIS Server Software
+========================
+
+Types of Open Source servers by functionality (1/2):
+
+- Map servers: render images from GIS data (WMS)
+
+- Geometry servers: output vector data (WFS)
+
+- Raster data servers: output raw raster data (WCS)
+
+- Metadata servers: ISO19115 etc through CSW
+
+--------------------------------------------------
+
+GIS Server Software
+========================
+
+Types of Open Source servers by functionality (2/2):
+
+- Gazeteers: place names lookup (WFS-G)
+
+- Geoprocessing servers: perform analysis for the web (WPS)
+
+- Cache servers: speed up slippy maps (ala Google Maps) (WMTS, WMS-C, TMS)
+
+--------------------------------------------------
+
+GIS Server Software
+========================
+
+- Usually Open Source server projects provide several functionality
+- But there are specialized products focused on just one task
+- They usually work besides a web server like Apache HTTPD or Nginx
+- Java servers run inside what is called a *Servlet container* like Apache Tomcat or Jetty.
 
 --------------------------------------------------
 
@@ -88,15 +157,37 @@ GeoServer is the reference implementation of the Open Geospatial Consortium (OGC
 
 --------------------------------------------------
 
-Section 1: Installing
+Section 3: Installing
 =====================
 
-- **TO DO**
+GeoServer can be downloaded in diferent *flavours*:
+
+- Source Code
+- Mac OS X installer
+- Windows installer
+- Binary zip archive
+- Web ARchive
 
 
 Presenter notes
 ---------------
 
+--------------------------------------------------
+
+Installing GeoServer into OSGeo Live
+==========================================
+
+- Locate the zip file
+- Uncompress it at ``/home/user/bin`` folder
+- Open a terminal
+- Stop ``tomcat6`` service
+- Set ``JAVA_HOME`` environment variable
+- Start GeoServer
+- Access GeoServer web interface
+
+
+Presenter notes
+---------------
 
 
 --------------------------------------------------
@@ -122,7 +213,7 @@ GeoExplorer is based on the GeoExt framework and contains code from OpenLayers.
 --------------------------------------------------
 
 
-Section 2: GeoServer web interface
+Section 4: GeoServer web interface
 ==================================
 
 Manage GeoServer graphically.
@@ -343,7 +434,7 @@ Presenter notes
 --------------------------------------------------
 
 
-Section 3: Overview
+Section 4: Overview
 ===================
 
 Basic concepts related to GeoServer and web mapping, including OGC protocols and useful terminology.
@@ -726,7 +817,7 @@ Every layer must be associated with at least one style. GeoServer recognizes sty
 
 --------------------------------------------------
 
-Section 4: Working with Data
+Section 5: Working with Data
 ============================
 
 Load and manage data in GeoServer
@@ -1126,7 +1217,7 @@ Even though the Layer Importer generated unique styles for each layer, this laye
 
 --------------------------------------------------
 
-Section 5: Styling
+Section 6: Styling
 ==================
 
 GeoServer can render geospatial data as images and return them for viewing in a browser. This is the heart of WMS. However, geospatial data has no inherent visualization. Therefore additional information, in the form of a style, needs to be applied to data in order to visualize it.
@@ -1796,5 +1887,5 @@ Thanks!
 Presenter notes
 ---------------
 
---------------------------------------------------
+
 
