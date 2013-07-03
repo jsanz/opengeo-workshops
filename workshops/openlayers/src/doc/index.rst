@@ -3,8 +3,24 @@
 
 Welcome to the **OpenLayers Workshop**. This workshop is designed to
 give you a comprehensive overview of OpenLayers as a web mapping solution.  The
-exercises assume that you have set up a local GeoServer with the workshop 
+exercises assume that you have set up a local GeoServer with the workshop
 data as described in the :doc:`setup` page.
+
+
+The workshop has been adapted from the official `Open Geo OpenLayers workshop <http://workshops.opengeo.org/openlayers-intro/>`_ for the `Open Source Opportunities in GIS Summer School <http://www.sigte.udg.edu/summerschool2013/>`_. This course is coordinated by the `GIS and Remote Sensing Centre <http://www.sigte.udg.edu/sigte_en/>`_ of the University of Girona in collaboration with the `Nottingham Geospatial Institute <http://www.nottingham.ac.uk/ngi/index.aspx>`_ and `Prodevelop <http://www.prodevelop.es>`_.
+
+The instructors of the GeoServer workshops are:
+
+- Alberto Romeu
+
+  - `@alrocar <http://twitter.com/alrocar>`_
+  - aromeu [at] prodevelop [dot] es
+
+- Jorge Sanz
+
+  - `@xurxosanz <http://twitter.com/xurxosanz>`_
+  - jsanz [at] prodevelop [dot] es
+
 
 This workshop is presented as a set of modules. In each module the reader will
 perform a set of tasks designed to achieve a specific goal for that module. Each
@@ -20,11 +36,11 @@ The following modules will be covered in this workshop:
 
 :ref:`openlayers.layers`
   Learn about raster and vector layers.
- 
+
 :ref:`openlayers.controls`
   Learn about using map controls.
 
-    
+
 .. rubric:: Advanced Topics
 
 :ref:`openlayers.vector`
@@ -44,4 +60,3 @@ The following modules will be covered in this workshop:
     vector/index
     integration/index
 
-    

@@ -11,4 +11,4 @@ This section will give a brief overview to the web interface, including loading 
    :maxdepth: 2
 
    tour
-   quickload
+   load

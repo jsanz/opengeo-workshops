@@ -7,9 +7,8 @@ Loading and publishing data is the core of GeoServer. This section will detail h
 
 .. toctree::
    :maxdepth: 2
-    
+
    workspace
    shapefile
    geotiff
-   import
    layergroup

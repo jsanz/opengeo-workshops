@@ -11,6 +11,20 @@ In this workshop, attendees will learn how to load, publish, style, and share ge
 
 The workshop is geared toward those with no prior GeoServer experience, but familiarity with basic GIS concepts is suggested.
 
+The workshop has been adapted from the official `Open Geo GeoServer workshop <http://workshops.opengeo.org/geoserver-intro/>`_ for the `Open Source Opportunities in GIS Summer School <http://www.sigte.udg.edu/summerschool2013/>`_. This course is coordinated by the `GIS and Remote Sensing Centre <http://www.sigte.udg.edu/sigte_en/>`_ of the University of Girona in collaboration with the `Nottingham Geospatial Institute <http://www.nottingham.ac.uk/ngi/index.aspx>`_ and `Prodevelop <http://www.prodevelop.es>`_.
+
+The instructors of the GeoServer workshops are:
+
+- Alberto Romeu
+
+  - `@alrocar <http://twitter.com/alrocar>`_
+  - aromeu [at] prodevelop [dot] es
+
+- Jorge Sanz
+
+  - `@xurxosanz <http://twitter.com/xurxosanz>`_
+  - jsanz [at] prodevelop [dot] es
+
 Topics covered
 --------------
 

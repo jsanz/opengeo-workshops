@@ -230,7 +230,7 @@ This section will give a brief overview to the web interface. Subsequent section
 Tour of the interface
 =====================
 
-``http://localhost:8080/geoserver/``
+``http://localhost:8082/geoserver/``
 
 .. image:: ../doc/source/webadmin/img/tour_welcome.png
 
@@ -275,6 +275,20 @@ Presenter notes
 After logging in, many more options will be displayed.
 
 Use the links on the left side column to manage GeoServer, its services, data, security settings, and more. Also on the main page are direct links to the capabilities documents for each service (WFS, WMS, WCS). We will be using the links on the left under Data—among them Layer Preview, Workspaces, Stores, Layers, Layer Groups, and Styles—very often in this workshop, so it is good to familiarize yourself with their location.
+
+--------------------------------------------------
+
+Security initial configuration
+====================================
+
+- Read the ``masterpw.info`` file and remove it
+- Remove the ``users.properties.old`` file
+- Change the admin password (follow the link)
+- Change the user/group service password encoding type to *Digest*
+
+
+Presenter notes
+---------------
 
 --------------------------------------------------
 
@@ -356,80 +370,8 @@ The Layer Importer is currently only available as part of the OpenGeo Suite.
 Loading your first data set
 ==============================
 
-.. image:: ../doc/source/webadmin/img/quickload_fileselect.png
+** TO DO **
 
-Presenter notes
----------------
-
-In the data/ directory (that ships with this workshop), you will see a file called meteors.zip. It is a shapefile contained inside an archive (ZIP file). If you double click on the archive, you’ll see that it contains the following suite of files: meteors.shp, meteors.shx, meteors.dbf, meteors.prj
-
-Go back to GeoServer, and navigate to the Layer Importer. This is accessible in the GeoServer web interface by clicking on the Import Data link on the left side of the page.
-
-In the box titled Configure the data source, click Browse ..., and navigate to the location of the archive. Click on the file to select it.
-
-Click Next. Leave all other fields as they are for now.
-
---------------------------------------------------
-
-Loading your first data set
-================================
-
-.. image:: ../doc/source/webadmin/img/quickload_importerpage2.png
-
-Presenter notes
----------------
-
-On the next page, click Import.
-
---------------------------------------------------
-
-Loading your first data set
-===============================
-
-.. image:: ../doc/source/webadmin/img/quickload_importerdone.png
-
-Presenter notes
----------------
-
-After some processing, you should see a note that says Import completed successfully. Click Go, next to the box that says Layer Preview.
-
---------------------------------------------------
-
-Loading your first data set
-=============================
-
-.. image:: ../doc/source/webadmin/img/quickload_layerpreview.png
-
-Presenter notes
----------------
-
-View the resulting map ...
-
-Use the pan and zoom tools to study the map further. Click on map features to get attribute information.
-
-[[[]]] (Talk about the interface a bit)
-
-[[[]]] (Could we also do this in GeoExplorer a bit more sexily)?
-
---------------------------------------------------
-
-Loading your first data set
-============================
-
-.. image:: ../doc/source/webadmin/img/quickload_layerpreviewdetail.png
-
-Presenter notes
----------------
-
-[Talk about meteors here]
-
-[Talk about what you've done in terms of making your data available to web clients]
-
-[ Look at preview URL / Drop into Layers Listing (?) / Drop into Capabilities Doc (?) ]
-
-[[[]]] - Above might be a bit premature
-
-[[[]]] - I think it's important that we try to get people jazzed about our easy-publishing story. Even if it's note really that easy, or powerful.
 
 --------------------------------------------------
 
@@ -876,8 +818,8 @@ With our new workspace created and ready to be used, we can now start loading ou
 
 --------------------------------------------------
 
-Publishing a shapefile
-======================
+Publishing a shapefile (revisit)
+======================================
 
 .. image:: ../doc/source/data/img/shp_storespage.png
 
@@ -896,8 +838,8 @@ First, we need to load a shapefile store. In GeoServer terminology, a shapefile 
 
 --------------------------------------------------
 
-Publishing a shapefile
-======================
+Publishing a shapefile (revisit)
+======================================
 
 .. image:: ../doc/source/data/img/shp_newshppage.png
 
@@ -930,8 +872,8 @@ Leave all other fields as their default values.
 
 --------------------------------------------------
 
-Publishing a shapefile
-======================
+Publishing a shapefile (revisit)
+======================================
 
 .. image:: ../doc/source/data/img/shp_layerconfig1.png
 
@@ -946,8 +888,8 @@ We have loaded the shapefile store, but our layer has yet to be published. We'll
 
 --------------------------------------------------
 
-Publishing a shapefile
-======================
+Publishing a shapefile (revisit)
+======================================
 
 .. image:: ../doc/source/data/img/shp_layerconfig2.png
 
@@ -962,8 +904,8 @@ Fill out the form with the following info:
 
 --------------------------------------------------
 
-Publishing a shapefile
-======================
+Publishing a shapefile (revisit)
+======================================
 
 .. image:: ../doc/source/data/img/shp_openlayers.png
 
@@ -1067,67 +1009,6 @@ Presenter notes
 ---------------
 
 Your GeoTIFF is now published in GeoServer. You can now view the layer using the Layer Preview as in previous sections. Clicking on the map will display the RGB values for that particular point.
-
---------------------------------------------------
-
-Loading multiple layers
-=======================
-
-Using the Layer Importer
-
-.. image:: ../doc/source/data/img/importer_directory.png
-
-Presenter notes
----------------
-
-So far we have seen a few different ways to load data into GeoServer. In the Load your first data set section, we used the Layer Importer to load an archive of a shapefile. The Layer Importer can also be used to load multiple layers as well, saving time and configuration.
-
-In this section, we will load the rest of our workshop data by using the Layer Importer to load and configure all shapefiles in our workshop data directory.
-
-Navigate to the Layer Importer. This is accessible in the GeoServer web interface by clicking on the Import Data link on the left side of the page.
-
-On the next page, in the section titled Choose a data source to import from, select Shapefiles if it isn't already selected.
-
-In the section titled Configure the data source, type in the full path to the data, or click the Browse... button to navigate to the directory. The path may look something like:
-
-C:\Users\<username>\Desktop\geoserver_workshop\data\
-
-Be sure to replace <username> with your user name.
-
-In the section titled Specify the target for the import, select earth for the Workspace (if it isn't already selected), and select Create new for the Store.
-
-Click Next to continue.
-
---------------------------------------------------
-
-Loading multiple layers
-=======================
-
-.. image:: ../doc/source/data/img/importer_select.png
-
-Presenter notes
----------------
-
-You will see a list of shapefiles contained in that directory. Make sure to uncheck the ``countries`` and ``shadedrelief`` layers! Failure to do this will cause GeoServer to try to load a layer with the same name as one already loaded ("earth:countries" and earth:shadedrelief). While this won't cause an error, it may cause confusion later on in the workshop.
-
-All layers should say Ready for import. Click Import Data to create/configure a store with each of these shapefiles as layers.
-
-Note: If there are any issues with the shapefiles such as a lack of projection information, they will be displayed here.
-
-
---------------------------------------------------
-
-Loading multiple layers
-=======================
-
-.. image:: ../doc/source/data/img/importer_results.png
-
-Presenter notes
----------------
-
-    To preview these layers, select OpenLayers in the select box next to a layer and click Go. Alternately, you can use the standard Layer Preview. As you view the layers, you'll see that the Layer Importer has generated unique styles for each layer, instead of reusing default GeoServer styles.
-
-All of our layers are now loaded into GeoServer.
 
 --------------------------------------------------
 
@@ -1647,166 +1528,11 @@ If for some reason, the layer group fails to update with the new styles, go back
 
 --------------------------------------------------
 
-GeoExplorer
-===========
+Atlas Styler, an SLD editor
+====================================
 
-Don't create those SLDs by hand!
+** TO DO **
 
-GeoExplorer includes a graphical styling editor.
-
-Presenter notes
----------------
-
-Creating SLD files by hand can be a difficult and time-consuming process.
-
-The SLDs we looked at previously were quite simple, but complexity (and length)can increase quite quickly when we start working with complex rules and/or compound symbolizers.
-
-Fortunately, there is a tool called GeoExplorer which offers a graphical style editor. With GeoExplorer, you can create rules and symbolizers without ever needing to view SLD code.
-
-Note: GeoExplorer currently implements most but not all of the features of the SLD specification.
-
---------------------------------------------------
-
-GeoExplorer
-===========
-
-.. image:: ../doc/source/styling/img/geoexplorer.png
-
-Presenter notes
----------------
-
-Launch GeoExplorer. By default, GeoExplorer is located at http://localhost:8080/geoexplorer.
-
-By default, the only layer that displays is a MapQuest OpenStreetMap layer.
-
-Click the Add layers button (the green circle with the white plus) towards the top left of the screen and then select Add layers.
-
---------------------------------------------------
-
-GeoExplorer
-===========
-
-.. image:: ../doc/source/styling/img/gx_addlayersdialog.png
-
-Presenter notes
----------------
-
-In the resulting Available Layers dialog, select the four layers used in this workshop (not the earthmap layer group) and click Add layers. To select multiple layers at once, hold the CTRL (or CMD) key while clicking on the layer.
-
-Note: Among large lists of layers, it may be easier to find the layers of interest by clicking the ID column header to sort by workspace.
-
---------------------------------------------------
-
-GeoExplorer
-===========
-
-.. image:: ../doc/source/styling/img/gx_layersadded.png
-
-Presenter notes
----------------
-
-When you have added all of your layers, click Done to return to the main map.
-
-The check-boxes control, or toggle, which layers are visible (not unlike other applications, checked = visible / unchecked = not displayed)
-
-The order of the layers determines the rendering order
-
-The layer list also contains an in-line legend for each layer, which is a compilation of all the rules in the styles of the visible layer.
-
-Finally, notably, the bulk of the window is taken up by the map itself.
-
-Note: Layer groups, being a compilation of layers (each with their own style)  cannot be styled with GeoExplorer. You need to access and edit the style on each member layer of the group. When you edit (and SAVE) the style of a layer that is contained in a layer group, the layer group will reflect the change.
-
---------------------------------------------------
-
-GeoExplorer
-===========
-
-.. image:: ../doc/source/styling/img/gx_layersreordered.png
-
-Presenter notes
----------------
-
-When they're added to the map, our earth layers may not be in the correct order. To reorder layers in GeoExplorer, click to select a layer and drag it into its new postition in "the stack". A suitable order for our layers (from top to bottom) would be:
-
-    cities, countries, ocean, shadedrelief
-
-Finally, select None under the Base Maps list. The map should now look identical to the layer group.
-
---------------------------------------------------
-
-Editing an existing style
-=========================
-
-.. image:: ../doc/source/styling/img/gx_loginbutton.png
-
-.. image:: ../doc/source/styling/img/gx_logindialog.png
-
-Presenter notes
----------------
-
-If you edit styles in GeoExplorer, it makes changes directly to the underlying SLD in GeoServer. An SLD file may look very different after being edited by GeoExplorer, so it is always a good idea to make a back-up copy of your SLDs before using GeoExplorer to edit them.
-
- Before we can make any changes to styles, we have to log in to GeoExplorer. (They should currently be disabled ...). Click the login button at the very top right of the window and enter your GeoServer admin credentials: admin / geoserver .
-
---------------------------------------------------
-
-Editing an existing style
-=========================
-
-.. image:: ../doc/source/styling/img/gx_listofrules.png
-
-Presenter notes
----------------
-
-Once you're logged in, the style editor, among other tools, will be enabled.
-
-Select the countries layer by single clicking on it in the layer list. Then
-click on the Change Styles (palette) icon right above the layer list to Edit Styles.
-
-Note: If the icon is disabled, make sure that you have logged in successfully and that you have selected the correct layer.
-
-Click on the first rule and then click Edit.
-
-Note: You can also invoke the Style Editor on a given layer throught the right-click (context) menu.
-
---------------------------------------------------
-
-Editing an existing style
-=========================
-
-.. image:: ../doc/source/styling/img/gx_editrulebefore.png
-
-Presenter notes
----------------
-
-The style rule editor will display.
-
-Make some changes to the rule and see how it updates in real-time. As a suggestion, change the Fill Color by clicking on the color box and selecting a new color.
-
---------------------------------------------------
-
-Editing an existing style
-=========================
-
-.. image:: ../doc/source/styling/img/gx_editruleafter.png
-
-Presenter notes
----------------
-
-Finally, click Save to persist your changes.
-
---------------------------------------------------
-
-Editing an existing style
-=========================
-
-Now take a look at the SLD code that GeoExplorer has created. Navigate back to GeoServer, to the Styles menu, and then to the countries style to view it.
-
-Presenter notes
----------------
-
-.. image:: ../doc/source/styling/img/gx_verify.png
 
 --------------------------------------------------
 

@@ -11,7 +11,7 @@ GeoServer uses the Styled Layer Descriptor (:term:`SLD`) markup language to desc
 
 .. toctree::
    :maxdepth: 2
-    
+
    sld
    styles
-   geoexplorer
+   atlasstyler

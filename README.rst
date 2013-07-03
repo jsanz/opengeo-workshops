@@ -5,9 +5,9 @@ This repository is a fork of the official `OpenGeo workshops repo <https://githu
 
 On this repo there is just the GeoServer, OpenLayers, GeoExt and GXP workshops. Check the OpenGeo repo for the other awesome training materials.
 
-- `GeoServer workshop <https://girona-geoserver-workshop.readthedocs.org/en/latest/index.html>`_
-- `OpenLayers workshop <https://github.com/jsanz/opengeo-workshops/blob/master/workshops/openlayers/OpenLayersWorkshop.pdf?raw=true>`_
-- `GeoExt workshop <https://github.com/jsanz/opengeo-workshops/tree/master/workshops/gxp>`_
+- `GeoServer workshop <https://girona-geoserver-workshop.readthedocs.org/en/latest/>`_
+- `OpenLayers workshop <https://girona-openlayers-workshop.readthedocs.org/en/latest/>`_
+- `GeoExt workshop <https://girona-geoext-workshop.readthedocs.org/en/latest/>`_
 
 Authors:
 
