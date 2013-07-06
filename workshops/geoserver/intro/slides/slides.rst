@@ -1525,11 +1525,185 @@ If for some reason, the layer group fails to update with the new styles, go back
 
 --------------------------------------------------
 
-Atlas Styler, an SLD editor
-====================================
+GeoExplorer
+===========
 
-** TO DO **
+Don't create those SLDs by hand!
 
+GeoExplorer includes a graphical styling editor.
+
+Presenter notes
+---------------
+
+Creating SLD files by hand can be a difficult and time-consuming process.
+
+The SLDs we looked at previously were quite simple, but complexity (and length)can increase quite quickly when we start working with complex rules and/or compound symbolizers.
+
+Fortunately, there is a tool called GeoExplorer which offers a graphical style editor. With GeoExplorer, you can create rules and symbolizers without ever needing to view SLD code.
+
+Note: GeoExplorer currently implements most but not all of the features of the SLD specification.
+
+--------------------------------------------------
+
+GeoExplorer
+===========
+
+.. image:: ../doc/source/styling/img/geoexplorer.png
+
+
+--------------------------------------------------
+
+Install GeoExplorer
+=========================
+
+#. Copy `geoserver.war` into the `webapps` folder of your GeoServer instance
+#. Restart GeoServer
+#. Check `<http://localhost:8080>`_
+
+.. image:: ../doc/source/styling/img/gx_installed.png
+
+--------------------------------------------------
+
+GeoExplorer
+===========
+
+.. image:: ../doc/source/styling/img/geoexplorer.png
+
+Presenter notes
+---------------
+
+Launch GeoExplorer. By default, GeoExplorer is located at http://localhost:8080/geoexplorer.
+
+By default, the only layer that displays is a MapQuest OpenStreetMap layer.
+
+Click the Add layers button (the green circle with the white plus) towards the top left of the screen and then select Add layers.
+
+--------------------------------------------------
+
+GeoExplorer
+===========
+
+.. image:: ../doc/source/styling/img/gx_addlayersdialog.png
+
+Presenter notes
+---------------
+
+In the resulting Available Layers dialog, select the four layers used in this workshop (not the earthmap layer group) and click Add layers. To select multiple layers at once, hold the CTRL (or CMD) key while clicking on the layer.
+
+Note: Among large lists of layers, it may be easier to find the layers of interest by clicking the ID column header to sort by workspace.
+
+--------------------------------------------------
+
+GeoExplorer
+===========
+
+.. image:: ../doc/source/styling/img/gx_layersadded.png
+
+Presenter notes
+---------------
+
+When you have added all of your layers, click Done to return to the main map.
+
+The check-boxes control, or toggle, which layers are visible (not unlike other applications, checked = visible / unchecked = not displayed)
+
+The order of the layers determines the rendering order
+
+The layer list also contains an in-line legend for each layer, which is a compilation of all the rules in the styles of the visible layer.
+
+Finally, notably, the bulk of the window is taken up by the map itself.
+
+Note: Layer groups, being a compilation of layers (each with their own style)  cannot be styled with GeoExplorer. You need to access and edit the style on each member layer of the group. When you edit (and SAVE) the style of a layer that is contained in a layer group, the layer group will reflect the change.
+
+--------------------------------------------------
+
+GeoExplorer
+===========
+
+.. image:: ../doc/source/styling/img/gx_layersreordered.png
+
+Presenter notes
+---------------
+
+When they're added to the map, our earth layers may not be in the correct order. To reorder layers in GeoExplorer, click to select a layer and drag it into its new postition in "the stack". A suitable order for our layers (from top to bottom) would be:
+
+    cities, countries, ocean, shadedrelief
+
+Finally, select None under the Base Maps list. The map should now look identical to the layer group.
+
+--------------------------------------------------
+
+Editing an existing style
+=========================
+
+.. image:: ../doc/source/styling/img/gx_loginbutton.png
+
+.. image:: ../doc/source/styling/img/gx_logindialog.png
+
+Presenter notes
+---------------
+
+If you edit styles in GeoExplorer, it makes changes directly to the underlying SLD in GeoServer. An SLD file may look very different after being edited by GeoExplorer, so it is always a good idea to make a back-up copy of your SLDs before using GeoExplorer to edit them.
+
+ Before we can make any changes to styles, we have to log in to GeoExplorer. (They should currently be disabled ...). Click the login button at the very top right of the window and enter your GeoServer admin credentials: admin / geoserver .
+
+--------------------------------------------------
+
+Editing an existing style
+=========================
+
+.. image:: ../doc/source/styling/img/gx_listofrules.png
+
+Presenter notes
+---------------
+
+Once you're logged in, the style editor, among other tools, will be enabled.
+
+Select the countries layer by single clicking on it in the layer list. Then
+click on the Change Styles (palette) icon right above the layer list to Edit Styles.
+
+Note: If the icon is disabled, make sure that you have logged in successfully and that you have selected the correct layer.
+
+Click on the first rule and then click Edit.
+
+Note: You can also invoke the Style Editor on a given layer throught the right-click (context) menu.
+
+--------------------------------------------------
+
+Editing an existing style
+=========================
+
+.. image:: ../doc/source/styling/img/gx_editrulebefore.png
+
+Presenter notes
+---------------
+
+The style rule editor will display.
+
+Make some changes to the rule and see how it updates in real-time. As a suggestion, change the Fill Color by clicking on the color box and selecting a new color.
+
+--------------------------------------------------
+
+Editing an existing style
+=========================
+
+.. image:: ../doc/source/styling/img/gx_editruleafter.png
+
+Presenter notes
+---------------
+
+Finally, click Save to persist your changes.
+
+--------------------------------------------------
+
+Editing an existing style
+=========================
+
+Now take a look at the SLD code that GeoExplorer has created. Navigate back to GeoServer, to the Styles menu, and then to the countries style to view it.
+
+Presenter notes
+---------------
+
+.. image:: ../doc/source/styling/img/gx_verify.png
 
 --------------------------------------------------
 
@@ -1539,16 +1713,63 @@ Bonus exercises
 * Add a new rule that displays the label of the country. Don't worry about label placement.
 * Hint: The attribute to display is called NAME. But if you didn't know this, how would you find it out?
 
-* How might we go about creating an attribute-based classification to draw features within a layer differently based on those features' properties?
-* Hint: Check out the Advanced tab. What else do we see in there?
 
 Presenter notes
 ---------------
 
 Answer1: GetFeatureInfo
+
+--------------------------------------------------
+
+Bonus exercises
+===============
+
+* How might we go about creating an attribute-based classification to draw features within a layer differently based on those features' properties?
+* For example, colour just the countries with a population estimated between 15 and 50 million inhabitants.
+* Hint: Check out the Advanced tab. What else do we see in there?
+
+Presenter notes
+---------------
+
 Answer2:
 - Limit by Condition (and a suitable set of operators and comparators)
 - Limit by Scale ...
+
+
+--------------------------------------------------
+
+Bonus exercises
+===============
+
+.. image:: ../doc/source/styling/img/gx_bonus.png
+
+
+--------------------------------------------------
+
+Bonus SLD software: Atlas Styler
+=========================================
+
+* Atlas Styler is a Java desktop application to author SLDs
+* `<http://en.geopublishing.org/AtlasStyler>`_
+* It can connect to GeoServer to fetch layers
+* Easiest way to create thematic maps
+* Unfortunately, it's discontinued
+* Available on your `software` folder
+
+--------------------------------------------------
+
+Atlas Styler
+=========================================
+
+.. image:: ../doc/source/styling/img/atlas_styler.png
+
+--------------------------------------------------
+
+Atlas Styler
+=========================================
+
+.. image:: ../doc/source/styling/img/atlas_styler_geoserver.png
+
 
 --------------------------------------------------
 
@@ -1592,12 +1813,24 @@ For more information
 .. image:: ../doc/source/moreinfo/img/opengeo.png
 
 http://opengeo.org
-------------------
+--------------------
 
 Presenter notes
 ---------------
 
 OpenGeo helps to develop GeoServer and funds development through its OpenGeo Suite. Learn more at http://opengeo.org.
+
+--------------------------------------------------
+
+For more information
+====================
+
+.. image:: ../doc/source/moreinfo/img/prodevelop-logo.png
+
+http://prodevelop.es
+------------------------
+
+
 
 --------------------------------------------------
 

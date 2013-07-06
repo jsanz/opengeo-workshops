@@ -9,6 +9,25 @@ Creating SLD files by hand can be a difficult and time-consuming process. Fortun
 
 .. note:: GeoExplorer currently implements most but not all of the features of the SLD specification.
 
+Installing GeoExplorer
+------------------------------
+
+GeoExplorer is an Open Source application available at the OpenGeo suite `source code repository <https://github.com/opengeo/suite>`_. Like GeoServer, it is a Java Enterprise Edition. Building the Web ARchive file of GeoExplorer, even being an easy task for a Java savvy user, is beyond the scope of this workshop.
+
+#. Open a file browser and locate the :file:`software` folder of the workshop materials.
+
+#. Copy the :file:`geoexplorer.war` file into the :file:`/home/user/bin/geoserver-2.3.3/webapps/` folder. That folder is where the servlet container looks for, well, web applications :).
+
+#. Stop your GeoServer instance, remember: :kbd:`Control+C` on the terminal.
+
+#. Start again your GeoServer
+
+#. If you go to `<http://localhost:8080>`_, you should see a link to the GeoExplorer application
+
+   .. figure:: img/gx_installed.png
+
+      Jetty applications list
+
 Using GeoExplorer
 -----------------
 
@@ -56,7 +75,7 @@ Using GeoExplorer
    .. figure:: img/gx_layersreordered.png
 
       Layers in proper order
- 
+
 
 Editing an existing style
 -------------------------
@@ -87,7 +106,7 @@ Editing an existing style
 
       List of style rules.
 
-#. Click on the first rule and then click :guilabel:`Edit`. 
+#. Click on the first rule and then click :guilabel:`Edit`.
 
    .. figure:: img/gx_editrulebutton.png
 
@@ -99,7 +118,7 @@ Editing an existing style
 
       Style rule editor
 
-#. Make some changes to the rule and see how it updates in real time. As a suggestion, change the Fill Color by clicking on the color box and selecting a new color. 
+#. Make some changes to the rule and see how it updates in real time. As a suggestion, change the Fill Color by clicking on the color box and selecting a new color.
 
    .. figure:: img/gx_colorpicker.png
 
@@ -121,4 +140,34 @@ Editing an existing style
 Bonus
 ~~~~~
 
-Add a new rule that displays the label of the country. Don't worry about label placement. Hint: The attribute to display is called NAME. But if you didn't know this, how would you find it out?
+- Add a new rule that displays the label of the country. Don't worry about label placement. Hint: The attribute to display is called NAME. But if you didn't know this, how would you find it out?
+
+- How might we go about creating an attribute-based classification to draw features within a layer differently based on those features' properties? For example, colour just the countries with a population estimated between 15 and 50 million inhabitants.
+
+.. figure:: img/gx_bonus.png
+
+   Try to map and label the countries with 15 to 50 million inhabitants.
+
+
+Bonus software
+~~~~~~~~~~~~~~~~~~~~~~
+
+`Atlas Styler <http://en.geopublishing.org/AtlasStyler>`_ is a desktop application to author SLDs. Unfortunately it's discontinued but still useful. Using it is quite straight forward now that you know how to load SLDs into GeoServer:
+
+- Start Atlas Styler
+- Connect it to your GeoServer instance
+- Load a layer
+- Edit the style: create a thematic map, apply scale constraints, compose symbols, etc
+
+  .. figure:: img/atlas_styler.png
+
+     Advanced classification with Atlas Styler
+
+- Copy the SLD to the clipboard
+- Paste it in a new GeoServer style
+- Assignt it to a layer
+
+.. figure:: img/atlas_styler_geoserver.png
+
+   Style applied to the GeoServer layer
+

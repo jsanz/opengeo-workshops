@@ -34,3 +34,8 @@ OpenGeo
 -------
 
 OpenGeo helps to develop GeoServer and funds development through its OpenGeo Suite.  Learn more at `<http://opengeo.org>`_.
+
+Prodevelop
+-------------
+
+Prodevelop does consultancy and integrates free software for geomatics like GeoServer. It's also an official OpenGeo partner in Spain. Learn more at `<http://wwww.prodevelop.es/en>`_.

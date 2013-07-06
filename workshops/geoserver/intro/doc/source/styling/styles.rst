@@ -174,7 +174,7 @@ If you look at the :file:`ocean.sld` file, you will see that an image is referen
 
       SLD style showing a reference to an external graphic
 
-#. The :file:`styles` directory of the workshop materials contains a file, :file:`oceantile.png`. We want to copy this file to the GeoServer styles repository, contained in the GeoServer data directory. In the OpenGeo Suite, the easiest way to get to the GeoServer Data Directory is go to the Start Menu and navigate to :menuselection:`Start --> Programs --> OpenGeo Suite --> GeoServer Data Directory`.
+#. The :file:`styles` directory of the workshop materials contains a file, :file:`oceantile.png`. We want to copy this file to the GeoServer styles repository, contained in the GeoServer data directory. In our OSGeo Live custom instace of GeoServer you will find the GeoServer data dir at :file:`/home/user/bin/geoserver-2.3.3/data_dir`.
 
    .. note:: You can find the full path to the data directory by clicking :guilabel:`Server Status` on the left side of any GeoServer page.
 
