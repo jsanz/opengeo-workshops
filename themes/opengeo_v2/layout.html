@@ -3,7 +3,7 @@
 {%- macro breadcrumbs() %}
 <ul id="breadcrumbs">
   {%- block rootrellink %}
-    {% if pagename != 'index' %} 
+    {% if pagename != 'index' %}
   <li><a href="{{ pathto('index') }}">Home</a>{{ breadcrumbdelim }}</li>
     {%- endif %}
   {%- endblock %}
@@ -66,11 +66,18 @@
         </ul>
         </div>
       {%- endif %}
+      <div class="section">
+        <h3>About OpenGeo</h3>
+        <p>OpenGeo provides <a href="http://opengeo.org/products/">commercial open source software</a> for internet mapping and geospatial application development. We are a <a href="http://opengeo.org/about/">social enterprise</a> dedicated to the growth and support of open source software.</p>
+
+        <h3>About Prodevelop</h3>
+        <p>Offers <a href="http://www.prodevelop.es/en/products">advanced solutions</a> in information and communication technologies to our clients and collaborators, with the aim of facilitating their business processes, bringing a distinguishing character to their value chain, in an atmosphere of joint collaboration where we become their constant and reliable technological partners.</p>
+      </div>
       {%- if customsidebar %}
       {{ rendertemplate(customsidebar) }}
       {%- endif %}
       {%- block sidebarsearch %}{%- endblock %}
-      
+
   </div><!-- /#sidebar -->
   {%- endif %}
 {%- endmacro -%}
@@ -90,7 +97,7 @@
   <title>{{ title|striptags }}{{ titlesuffix }}</title>
   {%- block basecss %}
   <link rel="stylesheet" href="{{ pathto('_static/blueprint/screen.css', 1) }}" type="text/css" media="screen, projection" />
-  <link rel="stylesheet" href="{{ pathto('_static/blueprint/print.css', 1) }}" type="text/css" media="print" /> 
+  <link rel="stylesheet" href="{{ pathto('_static/blueprint/print.css', 1) }}" type="text/css" media="print" />
   <!--[if IE]>
   <link rel="stylesheet" href="{{ pathto('_static/blueprint/ie.css', 1) }}" type="text/css" media="screen, projection" />
   <![endif]-->
@@ -165,7 +172,7 @@
         <li><a href="http://geoserver.org/display/GEOS/Download">Download</a></li>
         <li><a href="{{ pathto('index') }}">Documentation</a></li>
       </ul>
--->     
+-->
       {%- block quicksearch %}
         <form id="quick-search" action="{{ pathto('search') }}" method="get">
           <fieldset>
@@ -216,7 +223,7 @@
     Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   {%- endif %}
   </div><!-- /.wrap> -->
-</div><!-- /#footer --> 
+</div><!-- /#footer -->
 {%- endblock %}
   </body>
 </html>

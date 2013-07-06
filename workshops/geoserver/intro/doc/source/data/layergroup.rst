@@ -3,7 +3,7 @@
 Creating a layer group
 ======================
 
-A layer group, as its name suggests, is a group of layers that acts as a single layer. This is useful when creating a "base map", or other situations when more than one separate layer needs to be requested simultaneously or frequently. Since layers typically contain only a single type of geometry, using a layer group also allows you to combine data types in one single WMS request. 
+A layer group, as its name suggests, is a group of layers that acts as a single layer. This is useful when creating a "base map", or other situations when more than one separate layer needs to be requested simultaneously or frequently. Since layers typically contain only a single type of geometry, using a layer group also allows you to combine data types in one single WMS request.
 
 .. note:: Take care not to get confused between a :term:`workspace`, which is a notional grouping of layers (think "container"), and a :term:`layer group`, which is a group of layers for WMS requests (think "image group"). Refer to the :ref:`geoserver.overview.concepts` section for more information.
 
@@ -30,7 +30,7 @@ In the previous sections, we loaded and published a few layers. Now we'll use a 
    #. Skip the :guilabel:`Bounds` section for now.
 
    #. Now we will add layers to our layer group. Click the :guilabel:`Add Layer...` link.
- 
+
    #. Select each of the following layers so that they appear in this order:
 
       * :guilabel:`earth:shadedrelief`
@@ -64,4 +64,4 @@ In the previous sections, we loaded and published a few layers. Now we'll use a 
 
       Previewing the layer group
 
-Even though the Layer Importer generated unique styles for each layer, this layer group doesn't look very nice. The following section will discuss the next important step of making maps: **styling**.
+This layer group doesn't look very nice. The following section will discuss the next important step of making maps: **styling**.

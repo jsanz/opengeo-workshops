@@ -30,14 +30,17 @@ Topics covered
 
 The following material will be covered in this workshop:
 
+:ref:`geoserver.overview`
+  A brief discussion of geospatial technologies for the web and OGC services
+
 :ref:`geoserver.install`
   Installation of GeoServer and all other related software
 
 :ref:`geoserver.webadmin`
   A tour of the GeoServer Web Administration Interface and how to publish data
 
-:ref:`geoserver.overview`
-  Overview of what GeoServer is, including a brief discussion of OGC services
+:ref:`geoserver.overview.concepts`
+  Overview of the building blocks of GeoServer
 
 :ref:`geoserver.data`
   Load and manage data in GeoServer
@@ -78,10 +81,10 @@ Great!  Head to the first section, :ref:`geoserver.install`.
    :numbered:
    :hidden:
 
+   overview/index
    install/index
    webadmin/index
-   overview/index
+   overview/concepts
    data/index
    styling/index
-   googleearth/index
    moreinfo/index

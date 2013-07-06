@@ -91,7 +91,8 @@ modindex_common_prefix = ['geoext.']
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
-html_theme = 'opengeo_v1'
+# html_theme = 'opengeo_v1'
+html_theme = 'opengeo_v2'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -186,19 +187,19 @@ latex_documents = [
 
 # NOTE!
 #
-# This LaTeX preamble overrides some Sphinx/LaTeX defaults in order to make 
+# This LaTeX preamble overrides some Sphinx/LaTeX defaults in order to make
 # better output.  This comment will try to explain what's going on here.
 # These hacks were perpetrated by Mike and Jeff.
 #
 # 1. Resize images so that they are no wider than 4in.
-#      Accomplished by renewing the \includegraphics command, and creating an 
-#      if/then statement saying to resize to 4in if large than 4in, otherwise 
+#      Accomplished by renewing the \includegraphics command, and creating an
+#      if/then statement saying to resize to 4in if large than 4in, otherwise
 #      leave alone
 # 2. Add drop shadow to images
-#      Accomplished by wrapping the above imcludegraphics commands with a 
+#      Accomplished by wrapping the above imcludegraphics commands with a
 #      \shadowbox.  Default border and spacing are changed in the \setlength
 #      commands
-# 3. Force LaTeX to place the images inline  
+# 3. Force LaTeX to place the images inline
 #      For whatever reason, Sphinx automatically appends the \begin{figure}
 #      command with [htbp], which means "put the figure where ever you feel
 #      like it."  We replaced the command to be appended with [H], which
@@ -248,4 +249,4 @@ latex_use_modindex = False
 
 def setup(app):
      from sphinx.util.texescape import tex_replacements
-     tex_replacements.append((u' ', u'~')) 
+     tex_replacements.append((u' ', u'~'))

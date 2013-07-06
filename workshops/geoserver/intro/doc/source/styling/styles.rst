@@ -3,7 +3,7 @@
 Styles in GeoServer
 ===================
 
-Every layer published in GeoServer must have a style associated with it. When manually loading layers as done in the :ref:`geoserver.data.shapefile` and :ref:`geoserver.data.geotiff` sections, GeoServer will look at the geometry of the data and assign a generic style based on that data type. When using the :ref:`Layer Importer <geoserver.data.import>`, a unique style will be generated for each layer. We will now look at how GeoServer handles styles.
+Every layer published in GeoServer must have a style associated with it. When manually loading layers as done in the :ref:`geoserver.data.shapefile` and :ref:`geoserver.data.geotiff` sections, GeoServer will look at the geometry of the data and assign a generic style based on that data type.
 
 Viewing an existing style
 -------------------------
@@ -70,7 +70,7 @@ It is helpful when learning about SLD to edit existing styles rather than creati
 
 #. Now go back to the browser tab that contains the OpenLayers preview map. Refresh the page (Ctrl/Cmd-F5), and you should see the color change to blue.
 
-   .. note:: GeoServer and your browser will sometimes cache images. If you don't see a change immediately, zoom or pan the map to display a new area. 
+   .. note:: GeoServer and your browser will sometimes cache images. If you don't see a change immediately, zoom or pan the map to display a new area.
 
    .. figure:: img/styles_edited.png
 
@@ -101,7 +101,7 @@ If you have an SLD saved as a text file, it is easy to load it into GeoServer. W
 
       Click to upload the SLD file
 
-#. Select :file:`cities.sld`. 
+#. Select :file:`cities.sld`.
 
    .. note:: Recall that the SLD files are in the :file:`styles` directory.
 
@@ -153,7 +153,7 @@ Once the styles are loaded, they are merely stored in GeoServer, but not associa
    .. figure:: img/styles_viewingnewstyle.png
 
       The cities layer with a different style
- 
+
 #. Repeat steps 2-6 for the ``earth:countries`` and ``earth:ocean`` layers, associating each with the appropriate uploaded style (``countries`` and ``ocean`` respectively). View each result in the Layer Preview.
 
 Bonus

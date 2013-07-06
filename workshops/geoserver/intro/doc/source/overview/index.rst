@@ -11,9 +11,8 @@ This section will discuss the basic concepts related to GeoServer and web mappin
 
 .. toctree::
    :maxdepth: 2
-    
+
    server
    wms
    wfs
    other
-   concepts

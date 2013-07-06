@@ -45,7 +45,7 @@ Outline
 #. What is GeoServer?
 #. Installing GeoServer
 #. GeoServer web interface
-#. Overview
+#. Overview of GeoServer concepts
 #. Working with data
 #. Styling
 
@@ -61,7 +61,7 @@ Presenter notes
 
 --------------------------------------------------
 
-Section 1: GIS Server Software
+1 - GIS Server Software
 =========================================
 
 What's a server?:
@@ -75,6 +75,39 @@ Source: Wikipedia https://en.wikipedia.org/wiki/Server_(computing)
 
 --------------------------------------------------
 
+Web servers
+===========
+
+``http://example.com/some/path/page.html``
+``http://example.com/some/path/image.jpg``
+``http://example.com/some/path/archive.zip``
+``http://example.com/some/path/data.xml``
+
+Presenter notes
+---------------
+
+A web server is a program that serves content (web pages, images, files, data, etc.) using HTTP (Hypertext Transfer Protocol). When you use your browser to connect to a website, you contact a web server. The web server takes the request, interprets it, and returns a response, which the browser renders on the screen.
+
+For example, when you request a web page, your request takes the form of a URL:
+
+http://example.com/some/path/page.html
+
+The web server looks to its file system, and if that request points to a valid file (if page.html exists in some/path), the contents of that file will be returned via HTTP. Usually these calls come from a browser, in which case the result is rendered in the browser.
+
+If is possible to request many different kind of files through HTTP, not just HTML pages:
+
+http://example.com/some/path/image.jpg
+http://example.com/some/path/archive.zip
+http://example.com/some/path/data.xml
+
+If your browser is configured to display the type of file, it will be displayed, otherwise you will usually be asked to download the file to your host system.
+
+The server need not return a static file. Any valid request on the server will return some kind of response. Many times a client will access an endpoint that will return dynamic content.
+
+The most popular web servers used today are Apache HTTP Server and Internet Information Services (IIS).
+
+--------------------------------------------------
+
 GIS Server Software
 ========================
 
@@ -84,6 +117,18 @@ A server that provides a service related with geographical information like:
 - geoprocessing
 - discovering
 - ...
+
+Presenter notes
+---------------
+
+A web mapping server is a specialized subset of web server. Like a web server, requests are sent to the server which are interpreted and responded. But the requests and responses are designed specifically toward the transfer of geographic information.
+
+A web mapping server may use HTTP, but employ specialized protocols, such as Web Map Service (WMS), Web Feature Service (WFS). These protocols are designed for the transferring geographic information to and from the server, whether it be raw feature data, geographic attributes, or map images.
+
+Some popular web mapping servers: GeoServer, MapServer, Mapnik, ArcGIS Server
+
+Other web-based map services such as Google Maps have their own server technology and specialized protocols as well.
+
 
 --------------------------------------------------
 
@@ -135,306 +180,6 @@ GIS Server Software
 - But there are specialized products focused on just one task
 - They usually work besides a web server like Apache HTTPD or Nginx
 - Java servers run inside what is called a *Servlet container* like Apache Tomcat or Jetty.
-
---------------------------------------------------
-
-What is GeoServer?
-==================
-
-.. image:: ../doc/source/geoserver.png
-
-GeoServer is an open source software server written in Java that allows users to share and edit geospatial data
----------------------------------------------------------------------------------------------------------------
-
-Presenter notes
----------------
-
-GeoServer is an open source software server written in Java that allows users to share and edit geospatial data. Designed for interoperability, it publishes data from any major spatial data source using open standards.
-
-Being a community-driven project, GeoServer is developed, tested, and supported by a diverse group of individuals and organizations from around the world.
-
-GeoServer is the reference implementation of the Open Geospatial Consortium (OGC) Web Feature Service (WFS) and Web Coverage Service (WCS) standards, as well as a high performance certified compliant Web Map Service (WMS). GeoServer forms a core component of the Geospatial Web.
-
---------------------------------------------------
-
-Section 3: Installing
-=====================
-
-GeoServer can be downloaded in diferent *flavours*:
-
-- Source Code
-- Mac OS X installer
-- Windows installer
-- Binary zip archive
-- Web ARchive
-
-
-Presenter notes
----------------
-
---------------------------------------------------
-
-Installing GeoServer into OSGeo Live
-==========================================
-
-- Locate the zip file
-- Uncompress it at ``/home/user/bin`` folder
-- Open a terminal
-- Stop ``tomcat6`` service
-- Set ``JAVA_HOME`` environment variable
-- Start GeoServer
-- Access GeoServer web interface
-
-
-Presenter notes
----------------
-
-
---------------------------------------------------
-
-What about OpenGeo Suite?
-==============================
-
-.. image:: ../doc/source/install.opengeosuite/img/stack_all.png
-   :width: 300px
-
-Presenter notes
----------------
-
-The OpenGeo Suite is a complete web-based geospatial software stack. In this package, the applications contained are:
-
-* PostGIS - A spatially enabled object-relational database.
-* GeoServer - A software server for loading and sharing geospatial data.
-* GeoWebCache - A tile cache server that accelerates the serving of maps (built into GeoServer).
-* GeoExplorer - A web application for composing, styling, and publishing maps.
-
-GeoExplorer is based on the GeoExt framework and contains code from OpenLayers.
-
---------------------------------------------------
-
-
-Section 4: GeoServer web interface
-==================================
-
-Manage GeoServer graphically.
-
-Presenter notes
----------------
-
-GeoServer includes a web-based administration interface. Most GeoServer configuration can be done through this interface, without the need to edit configuration files by hand or use an API.
-
-This section will give a brief overview to the web interface. Subsequent sections will use the web interface in greater detail.
-
---------------------------------------------------
-
-Tour of the interface
-=====================
-
-``http://localhost:8082/geoserver/``
-
-.. image:: ../doc/source/webadmin/img/tour_welcome.png
-
-Presenter notes
----------------
-
-The default location of the GeoServer admin interface is http://localhost:8080/geoserver. The initial page is called the Welcome page.
-
-To return to the Welcome page from anywhere, just click the GeoServer logo in the top left corner of the page.
-
---------------------------------------------------
-
-Authentication
-==============
-
-Default credentials: ``admin`` / ``geoserver``
-
-* Robust security system
-* Ability to create custom user accounts and roles
-
-.. image:: ../doc/source/webadmin/img/tour_login.png
-
-Presenter notes
----------------
-
-While the unauthenticated/anonymous Welcome page is not void of features, it really just lets you see things (configured on geoserver) but not touch them (and make configuration changes).
-
-For security reasons, most GeoServer configuration tasks require you to be logged in first. By default, the GeoServer administration credentials are admin and geoserver, although this can and should be changed.
-
-Note: GeoServer has a powerful and robust security system. Access to resources such as layers and configuration can be granularly applied to users and groups as desired. Security is beyond the scope of this workshop, so we will just be using the built-in admin account.
-
---------------------------------------------------
-
-Authentication
-==============
-
-.. image:: ../doc/source/webadmin/img/tour_loggedin.png
-
-Presenter notes
----------------
-
-After logging in, many more options will be displayed.
-
-Use the links on the left side column to manage GeoServer, its services, data, security settings, and more. Also on the main page are direct links to the capabilities documents for each service (WFS, WMS, WCS). We will be using the links on the left under Data—among them Layer Preview, Workspaces, Stores, Layers, Layer Groups, and Styles—very often in this workshop, so it is good to familiarize yourself with their location.
-
---------------------------------------------------
-
-Security initial configuration
-====================================
-
-- Read the ``masterpw.info`` file and remove it
-- Remove the ``users.properties.old`` file
-- Change the admin password (follow the link)
-- Change the user/group service password encoding type to *Digest*
-
-
-Presenter notes
----------------
-
---------------------------------------------------
-
-Layer Preview
-=============
-
-View published layers with minimal clicks
-
-.. image:: ../doc/source/webadmin/img/tour_layerpreviewpage.png
-
-Presenter notes
----------------
-
-You can use the Layer Preview link to easily view layers currently being served by GeoServer. The Layer Preview pages includes quick links to viewing layers via OpenLayers along with other services.
-
-    Click the Layer Preview link, located on the left side under Data.
-
-    Preview a few layers by clicking the OpenLayers link next to each layer.
-
---------------------------------------------------
-
-Layer Preview
-=============
-
-View published layers with minimal clicks
-
-.. image:: ../doc/source/webadmin/img/tour_usastates.png
-
-Presenter notes
----------------
-
-Take a look at the contents of the URL bar when viewing an OpenLayers map. We will discuss this request and its parameters further in the Web Map Service (WMS) section.
-
---------------------------------------------------
-
-Logs
-====
-
-View application logs inside the application itself
-
-.. image:: ../doc/source/webadmin/img/tour_logs.png
-
-Presenter notes
----------------
-
-GeoServer displays the contents of the application logs directly through the web interface. Reading the logs can be very helpful when troubleshooting. To view the logs, click on GeoServer Logs on the left under About & Status.
-
---------------------------------------------------
-
-Bonus exercises
-===============
-
-* What is the filesystem path to the GeoServer data directory?
-* What version of Java is GeoServer using?
-
-Presenter notes
----------------
-
-The following information can all be gleaned through the GeoServer web admin interface.
-
---------------------------------------------------
-
-Loading your first data set
-===============================
-
-.. image:: ../doc/source/webadmin/img/quickload_importerpage.png
-
-Presenter notes
----------------
-
-There are many ways to load data into GeoServer, and even more configuration options applicable to these data once they are loaded. Oftentimes, all that you want to do is to load a simple shapefile and display it - Quickly~ish. In this section we will go from data to map in the fewest possible steps.
-
-GeoServer with the Layer Importer extension (enabled/installed?) allows user to upload ZIP files that contain geospatial information. The extension will perform all the necessary configurations for publishing the data, including generating a unique style (template) for the layer.
-
-The Layer Importer is currently only available as part of the OpenGeo Suite.
-
---------------------------------------------------
-
-Loading your first data set
-==============================
-
-** TO DO **
-
-
---------------------------------------------------
-
-
-Section 4: Overview
-===================
-
-Basic concepts related to GeoServer and web mapping, including OGC protocols and useful terminology.
-
-Presenter notes
----------------
-
-
---------------------------------------------------
-
-Web servers
-===========
-
-``http://example.com/some/path/page.html``
-``http://example.com/some/path/image.jpg``
-``http://example.com/some/path/archive.zip``
-``http://example.com/some/path/data.xml``
-
-Presenter notes
----------------
-
-A web server is a program that serves content (web pages, images, files, data, etc.) using HTTP (Hypertext Transfer Protocol). When you use your browser to connect to a website, you contact a web server. The web server takes the request, interprets it, and returns a response, which the browser renders on the screen.
-
-For example, when you request a web page, your request takes the form of a URL:
-
-http://example.com/some/path/page.html
-
-The web server looks to its file system, and if that request points to a valid file (if page.html exists in some/path), the contents of that file will be returned via HTTP. Usually these calls come from a browser, in which case the result is rendered in the browser.
-
-If is possible to request many different kind of files through HTTP, not just HTML pages:
-
-http://example.com/some/path/image.jpg
-http://example.com/some/path/archive.zip
-http://example.com/some/path/data.xml
-
-If your browser is configured to display the type of file, it will be displayed, otherwise you will usually be asked to download the file to your host system.
-
-The server need not return a static file. Any valid request on the server will return some kind of response. Many times a client will access an endpoint that will return dynamic content.
-
-The most popular web servers used today are Apache HTTP Server and Internet Information Services (IIS).
-
---------------------------------------------------
-
-Web mapping servers
-===================
-
-Like a web server, but designed specifically for conveying geospatial content.
-
-Presenter notes
----------------
-
-A web mapping server is a specialized subset of web server. Like a web server, requests are sent to the server which are interpreted and responded. But the requests and responses are designed specifically toward the transfer of geographic information.
-
-A web mapping server may use HTTP, but employ specialized protocols, such as Web Map Service (WMS), Web Feature Service (WFS). These protocols are designed for the transferring geographic information to and from the server, whether it be raw feature data, geographic attributes, or map images.
-
-Some popular web mapping servers: GeoServer, MapServer, Mapnik, ArcGIS Server
-
-Other web-based map services such as Google Maps have their own server technology and specialized protocols as well.
 
 --------------------------------------------------
 
@@ -654,6 +399,258 @@ WPS is currently available as an extension only in GeoServer, but is a core comp
 
 --------------------------------------------------
 
+2 - What is GeoServer?
+===================================
+
+.. image:: ../doc/source/geoserver.png
+
+GeoServer is an open source software server written in Java that allows users to share and edit geospatial data
+---------------------------------------------------------------------------------------------------------------
+
+Presenter notes
+---------------
+
+GeoServer is an open source software server written in Java that allows users to share and edit geospatial data. Designed for interoperability, it publishes data from any major spatial data source using open standards.
+
+Being a community-driven project, GeoServer is developed, tested, and supported by a diverse group of individuals and organizations from around the world.
+
+GeoServer is the reference implementation of the Open Geospatial Consortium (OGC) Web Feature Service (WFS) and Web Coverage Service (WCS) standards, as well as a high performance certified compliant Web Map Service (WMS). GeoServer forms a core component of the Geospatial Web.
+
+--------------------------------------------------
+
+3 - Installing
+=====================
+
+GeoServer can be downloaded in diferent *flavours*:
+
+- Source Code
+- Mac OS X installer
+- Windows installer
+- Binary zip archive
+- Web ARchive
+
+
+Presenter notes
+---------------
+
+--------------------------------------------------
+
+Installing GeoServer into OSGeo Live
+==========================================
+
+- Locate the zip file
+- Uncompress it at ``/home/user/bin`` folder
+- Open a terminal
+- Stop ``tomcat6`` service
+- Set ``JAVA_HOME`` environment variable
+- Start GeoServer
+- Access GeoServer web interface
+
+
+Presenter notes
+---------------
+
+
+--------------------------------------------------
+
+What about OpenGeo Suite?
+==============================
+
+.. image:: ../doc/source/install.opengeosuite/img/stack_all.png
+   :width: 300px
+
+Presenter notes
+---------------
+
+The OpenGeo Suite is a complete web-based geospatial software stack. In this package, the applications contained are:
+
+* PostGIS - A spatially enabled object-relational database.
+* GeoServer - A software server for loading and sharing geospatial data.
+* GeoWebCache - A tile cache server that accelerates the serving of maps (built into GeoServer).
+* GeoExplorer - A web application for composing, styling, and publishing maps.
+
+GeoExplorer is based on the GeoExt framework and contains code from OpenLayers.
+
+--------------------------------------------------
+
+4 GeoServer web interface
+==================================
+
+Manage GeoServer graphically.
+
+Presenter notes
+---------------
+
+GeoServer includes a web-based administration interface. Most GeoServer configuration can be done through this interface, without the need to edit configuration files by hand or use an API.
+
+This section will give a brief overview to the web interface. Subsequent sections will use the web interface in greater detail.
+
+--------------------------------------------------
+
+Tour of the interface
+=====================
+
+``http://localhost:8080/geoserver/``
+
+.. image:: ../doc/source/webadmin/img/tour_welcome.png
+
+Presenter notes
+---------------
+
+The default location of the GeoServer admin interface is http://localhost:8080/geoserver. The initial page is called the Welcome page.
+
+To return to the Welcome page from anywhere, just click the GeoServer logo in the top left corner of the page.
+
+--------------------------------------------------
+
+Authentication
+==============
+
+Default credentials: ``admin`` / ``geoserver``
+
+* Robust security system
+* Ability to create custom user accounts and roles
+
+.. image:: ../doc/source/webadmin/img/tour_login.png
+
+Presenter notes
+---------------
+
+While the unauthenticated/anonymous Welcome page is not void of features, it really just lets you see things (configured on geoserver) but not touch them (and make configuration changes).
+
+For security reasons, most GeoServer configuration tasks require you to be logged in first. By default, the GeoServer administration credentials are admin and geoserver, although this can and should be changed.
+
+Note: GeoServer has a powerful and robust security system. Access to resources such as layers and configuration can be granularly applied to users and groups as desired. Security is beyond the scope of this workshop, so we will just be using the built-in admin account.
+
+--------------------------------------------------
+
+Authentication
+==============
+
+.. image:: ../doc/source/webadmin/img/tour_loggedin.png
+
+Presenter notes
+---------------
+
+After logging in, many more options will be displayed.
+
+Use the links on the left side column to manage GeoServer, its services, data, security settings, and more. Also on the main page are direct links to the capabilities documents for each service (WFS, WMS, WCS). We will be using the links on the left under Data—among them Layer Preview, Workspaces, Stores, Layers, Layer Groups, and Styles—very often in this workshop, so it is good to familiarize yourself with their location.
+
+--------------------------------------------------
+
+Security initial configuration
+====================================
+
+- Read the ``masterpw.info`` file and remove it
+- Remove the ``users.properties.old`` file
+- Change the admin password (follow the link)
+- Change the user/group service password encoding type to *Digest*
+
+
+Presenter notes
+---------------
+
+--------------------------------------------------
+
+Layer Preview
+=============
+
+View published layers with minimal clicks
+
+.. image:: ../doc/source/webadmin/img/tour_layerpreviewpage.png
+
+Presenter notes
+---------------
+
+You can use the Layer Preview link to easily view layers currently being served by GeoServer. The Layer Preview pages includes quick links to viewing layers via OpenLayers along with other services.
+
+    Click the Layer Preview link, located on the left side under Data.
+
+    Preview a few layers by clicking the OpenLayers link next to each layer.
+
+--------------------------------------------------
+
+Layer Preview
+=============
+
+View published layers with minimal clicks
+
+.. image:: ../doc/source/webadmin/img/tour_usastates.png
+
+Presenter notes
+---------------
+
+Take a look at the contents of the URL bar when viewing an OpenLayers map. We will discuss this request and its parameters further in the Web Map Service (WMS) section.
+
+--------------------------------------------------
+
+Logs
+====
+
+View application logs inside the application itself
+
+.. image:: ../doc/source/webadmin/img/tour_logs.png
+
+Presenter notes
+---------------
+
+GeoServer displays the contents of the application logs directly through the web interface. Reading the logs can be very helpful when troubleshooting. To view the logs, click on GeoServer Logs on the left under About & Status.
+
+--------------------------------------------------
+
+Bonus exercises
+===============
+
+* What is the filesystem path to the GeoServer data directory?
+* What version of Java is GeoServer using?
+
+Presenter notes
+---------------
+
+The following information can all be gleaned through the GeoServer web admin interface.
+
+--------------------------------------------------
+
+Loading your first data set
+==============================
+
+.. image:: ../doc/source/webadmin/img/load_meteorsfolder.png
+
+--------------------------------------------------
+
+Loading your first data set
+==============================
+
+.. image:: ../doc/source/webadmin/img/load_shapefile.png
+
+--------------------------------------------------
+
+Loading your first data set
+==============================
+
+.. image:: ../doc/source/webadmin/img/load_computebbox.png
+
+--------------------------------------------------
+
+Bonus exercise
+==============================
+
+Experiment with the options of the Open Layers preview: filter, info by point,...
+
+.. image:: ../doc/source/webadmin/img/load_olpreview.png
+
+
+--------------------------------------------------
+
+
+5 - GeoServer Concepts
+========================================
+
+Basic concepts related to GeoServer
+
+Presenter notes
+---------------
+
 GeoServer concept: Workspace
 ============================
 
@@ -759,7 +756,7 @@ Every layer must be associated with at least one style. GeoServer recognizes sty
 
 --------------------------------------------------
 
-Section 5: Working with Data
+6 - Working with Data
 ============================
 
 Load and manage data in GeoServer
@@ -1098,7 +1095,7 @@ Even though the Layer Importer generated unique styles for each layer, this laye
 
 --------------------------------------------------
 
-Section 6: Styling
+7 - Styling
 ==================
 
 GeoServer can render geospatial data as images and return them for viewing in a browser. This is the heart of WMS. However, geospatial data has no inherent visualization. Therefore additional information, in the form of a style, needs to be applied to data in order to visualize it.
