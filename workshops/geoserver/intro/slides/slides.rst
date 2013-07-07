@@ -38,6 +38,19 @@ Presenter notes
 
 --------------------------------------------------
 
+Objectives
+================
+
+- Understand how GeoServer is distributed
+- Install GeoServer for any platform
+- Understand GeoServer building blocks
+- Publish shapefiles and images
+- Style vector layers
+- Be ready to learn by yourself
+
+
+--------------------------------------------------
+
 Outline
 =======
 
@@ -1009,6 +1022,15 @@ Your GeoTIFF is now published in GeoServer. You can now view the layer using the
 
 --------------------------------------------------
 
+Bonus: PostGIS
+================
+
+* Look for the PostGIS store at GeoServer documentation (default connection, no JNDI)
+* Try to publish the ``ne_10m_geography_marine_polys`` table from the ``natural_earth2`` database
+
+
+--------------------------------------------------
+
 Bonus: REST
 ===========
 
@@ -1773,6 +1795,66 @@ Atlas Styler
 
 --------------------------------------------------
 
+GeoServer in production
+================================
+
+Configuration:
+
+- Use Linux (really)
+- Configure a servlet container (Tomcat or Jetty)
+- Use the official Oracle JRE and JAI/JAI-IO extensions
+- Tune Servlet Container JRE startup flags
+- Tune logging and service strategy
+
+--------------------------------------------------
+
+GeoServer in production
+================================
+
+Configuration:
+
+- Remove default layers
+- Remove anything you are not going to use (WCS? WFS-T?)
+- Limit request sizes
+- Can you cache your maps? Do it
+
+--------------------------------------------------
+
+GeoServer in production
+================================
+
+Data:
+
+- Use an external GeoServer data_dir
+- Stablish a backup protocol of the data_dir
+- Use a spatial database
+- Optimize your raster files: tiled geotiffs with overviews
+- Big rasters? use the image pyramid plugin
+
+
+
+--------------------------------------------------
+
+Topics not covered
+====================
+
+- Working with Google Earth
+- Security topics: authentication and authorization providers, users, groups and roles
+- Database and SQL layers
+- Image and mosaic plugins
+
+--------------------------------------------------
+
+Topics not covered
+====================
+
+- Working with cascade services
+- Tile caching with GeoWebCache
+- The GeoServer REST API
+- SLD Rendering Transformations
+
+--------------------------------------------------
+
 For more information
 ====================
 
@@ -1798,7 +1880,6 @@ The following is a list of external sites related to GeoServer.
 
 Visit the GeoServer home page at http://geoserver.org.
 
-
 GeoServer has an active users mailing list, which you can subscribe to at https://lists.sourceforge.net/lists/listinfo/geoserver-users. If you're a developer, you can subscribe to the developer list at https://lists.sourceforge.net/lists/listinfo/geoserver-users.
 
 JIRA, the GeoServer bug tracker, is hosted on http://codehaus.org at http://jira.codehaus.org/browse/GEOS.
@@ -1810,26 +1891,23 @@ Join a live discussion at #geoserver, on irc.freenode.net.
 For more information
 ====================
 
-.. image:: ../doc/source/moreinfo/img/opengeo.png
+.. image:: ../doc/source/moreinfo/img/prodevelop-logo.png
 
-http://opengeo.org
---------------------
-
-Presenter notes
----------------
-
-OpenGeo helps to develop GeoServer and funds development through its OpenGeo Suite. Learn more at http://opengeo.org.
+http://prodevelop.es
 
 --------------------------------------------------
 
 For more information
 ====================
 
-.. image:: ../doc/source/moreinfo/img/prodevelop-logo.png
+.. image:: ../doc/source/moreinfo/img/opengeo.png
 
-http://prodevelop.es
-------------------------
+http://opengeo.org
 
+Presenter notes
+---------------
+
+OpenGeo helps to develop GeoServer and funds development through its OpenGeo Suite. Learn more at http://opengeo.org.
 
 
 --------------------------------------------------
