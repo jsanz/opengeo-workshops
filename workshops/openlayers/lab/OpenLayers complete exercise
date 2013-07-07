@@ -4,7 +4,6 @@ BASICS
     Create a full screen map
     Set projection to 900913 and displayProjection to 4326
     Restrict the map extent to []
-    Set transition effect to resize
     Add two raster layers as overlays (mapquest, and other from geoserver)
     Load the geoserver wms layer with singleTile
     Set the opacity of a layer to 50%
