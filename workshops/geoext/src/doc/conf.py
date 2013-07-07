@@ -38,7 +38,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Developing OGC Compliant Web Applications with GeoExt'
-copyright = u'2011, OpenPlans'
+copyright = u'2013, OpenGeo and Prodevelop'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -165,7 +165,7 @@ htmlhelp_basename = 'GeoExtWorkshopdoc'
 # -- Options for LaTeX output --------------------------------------------------
 
 # The paper size ('letter' or 'a4').
-latex_paper_size = 'letter'
+latex_paper_size = 'a4'
 
 # The font size ('10pt', '11pt' or '12pt').
 latex_font_size = '10pt'
@@ -174,7 +174,7 @@ latex_font_size = '10pt'
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'GeoExtWorkshop.tex', u'Developing OGC Compliant Web Applications with GeoExt',
-   u'OpenGeo', 'manual'),
+   u'OpenGeo and Prodevelop', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
