@@ -51,7 +51,7 @@ as new item to our application's main panel.
             }]
         });
 
-#.  Reload `<http://localhost:8082/ol_workshop/map.html>`_ in your browser to see the changes.
+#.  Reload `<http://localhost:8080/ol_workshop/map.html>`_ in your browser to see the changes.
     On the left-hand side of the map, we have a tree now. Add some layers from
     the grid to the map and watch them also appear in the tree. Use the
     checkboxes to turn layers on and off. Drag and drop layers in the

@@ -30,4 +30,4 @@ Test GeoServer and Postgres Setup:
 
 Test Workshop Docs:
 
- #. Load http://localhost:8082/ol_workshop/doc/ in a browser. You should see a the intro page for the workshop docs with links to lead you through the workshop.
+ #. Load http://localhost:8080/ol_workshop/doc/ in a browser. You should see a the intro page for the workshop docs with links to lead you through the workshop.

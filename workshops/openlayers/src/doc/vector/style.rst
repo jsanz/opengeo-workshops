@@ -61,7 +61,7 @@ Styling Vector Layers
             </body>
         </html>
 
-#.  Open this ``map.html`` file in your browser to see orange buildings over  the base layer:  http://localhost:8082/ol_workshop/map.html
+#.  Open this ``map.html`` file in your browser to see orange buildings over  the base layer:  http://localhost:8080/ol_workshop/map.html
 
 #.  With a basic understanding of :ref:`styling in OpenLayers <openlayers.vector.style-intro>`, we can create an ``OpenLayers.StyleMap`` that displays buildings in different colors based on the size of their footprint. In your map initialization code, replace the constructor for the ``buildings`` layer with the following:
 
@@ -104,7 +104,7 @@ Styling Vector Layers
         });
 
 
-#.  Save your changes and open ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
+#.  Save your changes and open ``map.html`` in your browser: http://localhost:8080/ol_workshop/map.html
 
     .. figure:: style1.png
 

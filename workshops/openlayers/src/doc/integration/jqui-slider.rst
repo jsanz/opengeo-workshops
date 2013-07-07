@@ -122,7 +122,7 @@ We'll start with a working example that displays one :abbr:`WMS (OGC Web Map Ser
             }
         });
 
-#.  Save your changes to ``map.html`` and open the page in your browser: http://localhost:8082/ol_workshop/map.html
+#.  Save your changes to ``map.html`` and open the page in your browser: http://localhost:8080/ol_workshop/map.html
 
     .. figure:: jqui-slider1.png
 

@@ -62,7 +62,7 @@ The `OpenStreetMap (OSM) <http://www.openstreetmap.org/>`_ project is an effort 
             }
         </style>
 
-#.  Save your changes, and refresh the page in your browser: http://localhost:8082/ol_workshop/map.html
+#.  Save your changes, and refresh the page in your browser: http://localhost:8080/ol_workshop/map.html
 
 .. figure:: cached1.png
 

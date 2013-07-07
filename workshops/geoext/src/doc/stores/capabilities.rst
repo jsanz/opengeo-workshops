@@ -46,7 +46,7 @@ following code (this is not the final snippet yet):
     :file:`map.html` file, at the end of the application's script block.
 
 #.  Open the page in your browser to confirm things work:
-    `<http://localhost:8082/ol_workshop/map.html>`_. In addition to the map, you should see a grid with
+    `<http://localhost:8080/ol_workshop/map.html>`_. In addition to the map, you should see a grid with
     two columns and a single row of dummy data.
 
 Populating the Grid with Data from a GeoExt.data.WMSCapabilitiesStore
@@ -135,7 +135,7 @@ a column model that knows which field of each record belongs to which column.
         });
 
 #.  Save your changes and reload the application:
-    `<http://localhost:8082/ol_workshop/map.html>`_
+    `<http://localhost:8080/ol_workshop/map.html>`_
 
 Adding an "Add to Map" button
 ------------------------------------
@@ -170,7 +170,7 @@ code so we can add layers from the grid to the map.
             }
         }]
 
-#.  Reload `<http://localhost:8082/ol_workshop/map.html>`_ in your browser again. You should now see an
+#.  Reload `<http://localhost:8080/ol_workshop/map.html>`_ in your browser again. You should now see an
     "Add to Map" button on the bottom of the grid. When you select
     layers in the grid and hit that button, the layers should show up in the
     map.

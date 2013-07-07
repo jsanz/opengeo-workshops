@@ -44,7 +44,7 @@ A full-fledged editing application involves more user interaction (and GUI eleme
         var panel = new EditingPanel(buildings);
         map.addControl(panel);
 
-#.  Now save your changes and load ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
+#.  Now save your changes and load ``map.html`` in your browser: http://localhost:8080/ol_workshop/map.html
 
 
     .. figure:: persist1.png

@@ -100,7 +100,7 @@ selection in the selection model (only one feature can be edited at a time).
 
 
 #.  After saving your changes, point your browser to
-    `<http://localhost:8082/ol_workshop/map.html>`_. You should see the new Delete and Create
+    `<http://localhost:8080/ol_workshop/map.html>`_. You should see the new Delete and Create
     buttons, and when you select a feature you can modify its vertices.
 
 .. figure:: editing.png

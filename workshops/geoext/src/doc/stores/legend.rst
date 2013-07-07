@@ -32,7 +32,7 @@ GetLegendGraphic requests.
             padding: 5
         });
 
-#.  Load or refresh `<http://localhost:8082/ol_workshop/map.html>`_ in your browser to see the new
+#.  Load or refresh `<http://localhost:8080/ol_workshop/map.html>`_ in your browser to see the new
     legend panel on the right-hand side of the map. Add a layer and watch its
     legend image appear in the panel.
 

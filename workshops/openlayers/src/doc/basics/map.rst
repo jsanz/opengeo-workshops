@@ -47,7 +47,7 @@ Let's take a look at a fully working example of an OpenLayers map.
 
 #.  Copy the text above into a new file called :file:`map.html`, and save it in the root of the workshop folder.
 
-#.  Open the working map in your web browser: http://localhost:8082/ol_workshop/map.html
+#.  Open the working map in your web browser: http://localhost:8080/ol_workshop/map.html
 
 .. figure:: map1.png
 

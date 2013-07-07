@@ -69,7 +69,7 @@ In this section, we'll add a control to the map for drawing new polygon features
             </body>
         </html>
 
-#.  Open this ``map.html`` example in your browser to confirm that buildings are displayed over the base layer:  http://localhost:8082/ol_workshop/map.html
+#.  Open this ``map.html`` example in your browser to confirm that buildings are displayed over the base layer:  http://localhost:8080/ol_workshop/map.html
 
 #.  To this example, we'll be adding a control to draw features.  In order that users can also navigate with the mouse, we don't want this control to be active all the time.  We need to add some elements to the page that will allow for control activation and deactivation.  In the ``<body>`` of your document, add the following markup.  (Placing it right after the map viewport element ``<div id="map-id"></div>`` makes sense.):
 
@@ -101,7 +101,7 @@ In this section, we'll add a control to the map for drawing new polygon features
         document.getElementById("toggle-id").onclick = toggle;
         toggle();
 
-#.  Save your changes and reload ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
+#.  Save your changes and reload ``map.html`` in your browser: http://localhost:8080/ol_workshop/map.html
 
 
     .. figure:: draw1.png

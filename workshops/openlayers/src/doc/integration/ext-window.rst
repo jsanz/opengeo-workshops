@@ -161,7 +161,7 @@ Displaying Feature Information in a Window
         });
 
 #.  Save your changes to ``map.html`` and open the page in your browser:
-    http://localhost:8082/ol_workshop/map.html
+    http://localhost:8080/ol_workshop/map.html
 
 
     .. figure:: ext-window1.png

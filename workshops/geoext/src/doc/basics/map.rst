@@ -90,7 +90,7 @@ Let's take a look at a fully working example of a simple GeoExt application:
     it in the root of the workshop folder.
 
 #.  Open the working application in your web browser:
-    `<http://localhost:8082/ol_workshop/map.html>`_
+    `<http://localhost:8080/ol_workshop/map.html>`_
 
 .. figure:: map1.png
 
