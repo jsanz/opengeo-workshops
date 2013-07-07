@@ -30,11 +30,11 @@ The `OpenStreetMap (OSM) <http://www.openstreetmap.org/>`_ project is an effort 
 .. rubric:: Tasks
 
 #.  Open the ``map.html`` file from the :ref:`previous section <openlayers.layers.wms>` in a text editor and change the map initialization code to look like the following:
-    
+
     .. code-block:: html
 
         <script>
-            var center = new OpenLayers.LonLat(-93.27, 44.98).transform(
+            var center = new OpenLayers.LonLat(2.825, 41.985).transform(
                 'EPSG:4326', 'EPSG:3857'
             );
 
@@ -43,13 +43,13 @@ The `OpenStreetMap (OSM) <http://www.openstreetmap.org/>`_ project is an effort 
             var osm = new OpenLayers.Layer.OSM();
             map.addLayer(osm);
 
-            map.setCenter(center, 9);
+            map.setCenter(center, 16);
         </script>
 
 #.  In the ``<head>`` of the same document, add a few style declarations for the layer attribution.
-    
+
     .. code-block:: html
-    
+
         <style>
             #map-id {
                 width: 512px;
@@ -62,10 +62,10 @@ The `OpenStreetMap (OSM) <http://www.openstreetmap.org/>`_ project is an effort 
             }
         </style>
 
-#.  Save your changes, and refresh the page in your browser: @workshop_url@/map.html
+#.  Save your changes, and refresh the page in your browser: http://localhost:8082/ol_workshop/map.html
 
 .. figure:: cached1.png
-   
+
     A map with an OpenStreetMap layer.
 
 
@@ -78,7 +78,7 @@ Review the first 3 lines of the initialization script:
 
 .. code-block:: javascript
 
-    var center = new OpenLayers.LonLat(-93.27, 44.98).transform(
+    var center = new OpenLayers.LonLat(2.825, 41.985).transform(
         'EPSG:4326', 'EPSG:3857'
     );
 
@@ -121,7 +121,7 @@ As before, we create a layer and add it to our map. This time, we accept all the
 .. code-block:: javascript
 
     map.setCenter(center, 9);
-    
+
 Finally, we give our map a center (in Mercator coordinates) and set the zoom level to ``9``.
 
 Style
@@ -139,3 +139,16 @@ A treatment of map controls is also outside the scope of this module, but these 
 
 Having mastered layers with publicly available cached tile sets, let's move on to working with :ref:`proprietary layers <openlayers.layers.proprietary>`.
 
+Bonus exercise
+```````````````````````````````
+
+#. Review the OSM layer API documentation to how to load other OSM layers
+#. Modify your layer initialization accordingly
+
+.. figure:: cached2.png
+
+    A map with an OpenStreetMap based MapQuest layer.
+
+.. hint:: You can go to the official `OSM site <http://osm.org>`_ to view the layers
+          available, change to any of them and use the browser tools to look for the
+          url pattern of those tiles.

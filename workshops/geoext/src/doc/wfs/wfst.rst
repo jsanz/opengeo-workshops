@@ -32,7 +32,7 @@ set properly:
 #.  Open :file:`map.html` in your text editor. Find the "Delete" button's
     handler and change it so it properly sets the DELETE feature state and
     re-adds features to the layer so the server knows we want to delete them:
-    
+
     .. code-block:: javascript
 
         handler: function() {
@@ -51,7 +51,7 @@ set properly:
                 }
             });
         }
-    
+
 Understanding the Code
 ``````````````````````
 By setting the ``featureFilter`` on the store we prevent the feature from being
@@ -81,7 +81,7 @@ the WFS protocol here, we cannot do that. Instead, we can call the protocol's
 #.  Find the definition of the grid toolbar's Delete and Create buttons in your
     :file:`map.html` file and add the "Save" button configuration and handler.
     When done, the whole buttons definition should look like this:
-    
+
     .. code-block:: javascript
 
         bbar.add([{
@@ -121,8 +121,8 @@ the WFS protocol here, we cannot do that. Instead, we can call the protocol's
                 });
             }
         }]);
- 
-#.  Save your file and reload `<@workshop_url@/map.html>`_. Make some
+
+#.  Save your file and reload `<http://localhost:8082/ol_workshop/map.html>`_. Make some
     changes and hit "Save". Reload the page to see that your changes were
     persisted.
 

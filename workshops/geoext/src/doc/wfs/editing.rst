@@ -22,7 +22,7 @@ selection in the selection model (only one feature can be edited at a time).
 #.  Open :file:`map.html` in your text editor. Create controls for modifying
     and drawing features, by appending the following to the application's
     script block:
-    
+
     .. code-block:: javascript
 
         var modifyControl = new OpenLayers.Control.ModifyFeature(
@@ -38,9 +38,9 @@ selection in the selection model (only one feature can be edited at a time).
 #.  Append code to bind the FeatureSelectionModel to the SelectFeature control
     that is auto-created with the ModifyFeature control, and to make sure that
     only one grid row is selected at a time:
-    
+
     .. code-block:: javascript
-    
+
         Ext.onReady(function() {
             var sm = app.featureGrid.getSelectionModel();
             sm.unbind();
@@ -68,20 +68,20 @@ selection in the selection model (only one feature can be edited at a time).
                 text: "Create",
                 enableToggle: true
             })]);
-            bbar.doLayout();            
+            bbar.doLayout();
         });
 
 #.  Find the featureGrid definition and change its xtype from "grid" to
     "editorgrid":
-    
+
     .. code-block:: javascript
-    
+
         xtype: "editorgrid",
         ref: "featureGrid",
 
 #.  Find the columns definition for the featureGrid, and add appropriate
     editors. The final columns definition should look like this:
-    
+
     .. code-block:: javascript
 
         columns: [
@@ -100,7 +100,7 @@ selection in the selection model (only one feature can be edited at a time).
 
 
 #.  After saving your changes, point your browser to
-    `<@workshop_url@/map.html>`_. You should see the new Delete and Create
+    `<http://localhost:8082/ol_workshop/map.html>`_. You should see the new Delete and Create
     buttons, and when you select a feature you can modify its vertices.
 
 .. figure:: editing.png
@@ -200,7 +200,7 @@ sure that the buttons are rendered properly:
 
 .. code-block:: javascript
 
-    bbar.doLayout();            
+    bbar.doLayout();
 
 .. rubric:: Bonus Task
 
@@ -213,7 +213,7 @@ sure that the buttons are rendered properly:
     also need to set the correct sketch handler for the DrawFeature control,
     depending on the ``geometryType`` of the layer we are editing. This is how
     the whole function should look with the changes applied:
-    
+
     .. code-block:: javascript
 
         function reconfigure(store, url) {
@@ -280,7 +280,7 @@ sure that the buttons are rendered properly:
             }), new Ext.grid.ColumnModel(columns));
             app.featureGrid.store.bind(vectorLayer);
             app.featureGrid.getSelectionModel().bind(vectorLayer);
-            
+
             // Set the correct sketch handler according to the geometryType
             drawControl.handler = new OpenLayers.Handler[geometryType](
                 drawControl, drawControl.callbacks, drawControl.handlerOptions

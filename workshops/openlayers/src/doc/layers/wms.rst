@@ -62,7 +62,7 @@ Let's take a look at the following code:
     root of your workshop directory.
 
 #.  Open the page in your browser to confirm things work:
-    @workshop_url@/map.html
+    http://localhost:8082/ol_workshop/map.html
 
 The OpenLayers.Layer.WMS Constructor
 ------------------------------------
@@ -95,16 +95,26 @@ requesting images rendered from a single layer identified by the name
 
 .. rubric:: Tasks
 
-#.  This same WMS offers a layer named ``"openstreetmap"``. Change the value of 
-    the ``layers`` param from ``"bluemarble"`` to ``"openstreetmap"``. 
+#.  This same WMS offers a layer named ``"openstreetmap"``. Change the value of
+    the ``layers`` param from ``"bluemarble"`` to ``"openstreetmap"``.
+
+#.  If you just change the name of the layer and refresh your map you will meet
+    a friend of any OpenLayers developer: our *loved* pink tiles. With Chrome,
+    you can right click on any of them and go to :guilabel:`Open Image in New Tab`
+    to get an idea of the problem.
+
+    .. figure:: wms2.png
+       :width: 500px
+
+       When things go weird, we see the pink tiles.
 
 #.  In addition to the ``layers`` parameter, a request for WMS imagery allows
     for you to specify the image format.  The default for this layer is
     ``"image/jpeg"``.  Try adding a second property in the params object named
     ``format``.  Set the value to another image type (e.g. ``"image/png"``).
-    
+
     Your revised OpenLayers.Layer.WMS Constructor should look like:
-    
+
     .. code-block:: javascript
 
         var imagery = new OpenLayers.Layer.WMS(
@@ -114,10 +124,10 @@ requesting images rendered from a single layer identified by the name
         );
 
 #.  Save your changes and reload the map:
-    @workshop_url@/map.html
+    http://localhost:8082/ol_workshop/map.html
 
 .. figure:: wms1.png
-   
+
     A map displaying the ``"openstreetmap"`` layer as ``"image/png"``.
 
 Having worked with dynamically rendered data from a Web Map Service, let's move

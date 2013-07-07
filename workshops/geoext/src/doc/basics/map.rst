@@ -41,17 +41,17 @@ Let's take a look at a fully working example of a simple GeoExt application:
             <script type="text/javascript" src="geoext/lib/GeoExt.js"></script>
 
             <script type="text/javascript">
-        
+
             Ext.BLANK_IMAGE_URL = "ext/resources/images/default/s.gif";
             var app, items = [], controls = [];
-        
+
             Ext.onReady(function() {
                 app = new Ext.Viewport({
                     layout: "border",
                     items: items
                 });
             });
-        
+
             items.push({
                 xtype: "gx_mappanel",
                 ref: "mapPanel",
@@ -90,10 +90,10 @@ Let's take a look at a fully working example of a simple GeoExt application:
     it in the root of the workshop folder.
 
 #.  Open the working application in your web browser:
-    `<@workshop_url@/map.html>`_
+    `<http://localhost:8082/ol_workshop/map.html>`_
 
 .. figure:: map1.png
-   
+
     A working map displaying the town of Medford.
 
 Having successfully created our first GeoExt application, we'll continue by

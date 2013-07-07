@@ -10,11 +10,11 @@ In this section, we'll add a control to the map for drawing new polygon features
 .. rubric:: Tasks
 
 #.  We'll start with a working example that displays building footprints in a vector layer over a base layer.  Open your text editor and save the following as ``map.html`` in the root of your workshop directory:
-    
+
     .. _openlayers.vector.draw.example:
-    
+
     .. code-block:: html
-    
+
         <!DOCTYPE html>
         <html>
             <head>
@@ -69,26 +69,26 @@ In this section, we'll add a control to the map for drawing new polygon features
             </body>
         </html>
 
-#.  Open this ``map.html`` example in your browser to confirm that buildings are displayed over the base layer:  @workshop_url@/map.html
+#.  Open this ``map.html`` example in your browser to confirm that buildings are displayed over the base layer:  http://localhost:8082/ol_workshop/map.html
 
 #.  To this example, we'll be adding a control to draw features.  In order that users can also navigate with the mouse, we don't want this control to be active all the time.  We need to add some elements to the page that will allow for control activation and deactivation.  In the ``<body>`` of your document, add the following markup.  (Placing it right after the map viewport element ``<div id="map-id"></div>`` makes sense.):
 
     .. code-block:: html
-    
+
         <input id="toggle-id" type="checkbox">
-        <label for="toggle-id">draw</label>        
+        <label for="toggle-id">draw</label>
 
 #.  Now we'll create an ``OpenLayers.Control.DrawFeature`` control to add features to the buildings layer.  We construct this layer with an ``OpenLayers.Handler.Polygon`` to allow drawing of polygons.  In your map initialization code, add the following somewhere after the creation of the ``buildings`` layer:
-    
+
     .. code-block:: javascript
-    
+
         var draw = new OpenLayers.Control.DrawFeature(
             buildings, OpenLayers.Handler.Polygon
         );
         map.addControl(draw);
 
 #.  Finally, we'll add behavior to the ``<input>`` element in order to activate and deactivate the draw control when the user clicks the checkbox.  We'll also call the ``toggle`` function when the page loads to synchronize the checkbox and control states.  Add the following to your map initialization code:
-    
+
     .. code-block:: javascript
 
         function toggle() {
@@ -99,9 +99,9 @@ In this section, we'll add a control to the map for drawing new polygon features
             }
         }
         document.getElementById("toggle-id").onclick = toggle;
-        toggle();            
+        toggle();
 
-#.  Save your changes and reload ``map.html`` in your browser: @workshop_url@/map.html
+#.  Save your changes and reload ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
 
 
     .. figure:: draw1.png

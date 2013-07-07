@@ -39,30 +39,30 @@ Feature Service)`.
 
 #.  Next we need to pull in the Ext resources that our widget will require.
     Add the following markup to the ``<head>`` of your ``map.html`` document:
-    
+
     .. code-block:: html
 
         <link rel="stylesheet" href="ext/resources/css/ext-all.css" type="text/css">
-        <script src="ext/adapter/ext/ext-base.js"></script>	
+        <script src="ext/adapter/ext/ext-base.js"></script>
         <script src="ext/ext-all.js"></script>
 
 
 #.  Now we'll create some markup that will create a container for the slider
     widget. In the ``<body>`` of your ``map.html`` file, just after the map
     viewport, insert the following:
-    
-    .. code-block:: html
-    
-        <div id="slider-id"></div>    
 
-#.  One bit of preparation before finalizing the code is to style the slider container. 
+    .. code-block:: html
+
+        <div id="slider-id"></div>
+
+#.  One bit of preparation before finalizing the code is to style the slider container.
     In this case, we'll make it as
     wide as the map and give it some margin. Insert the following style
     declarations into the ``<style>`` element within the ``<head>`` of your
     document:
-    
+
     .. code-block:: html
-    
+
         #slider-id {
             width: 492px;
             margin: 10px;
@@ -71,9 +71,9 @@ Feature Service)`.
 #.  Somewhere in your map initialization code, add the following to create a
     slider in the container element and set up the slider listener to change
     layer opacity:
-    
+
     .. code-block:: javascript
-    
+
         var slider = new Ext.Slider({
             renderTo: "slider-id",
             value: 100,
@@ -85,10 +85,10 @@ Feature Service)`.
         });
 
 #.  Save your changes to ``map.html`` and open the page in your browser:
-    @workshop_url@/map.html
+    http://localhost:8082/ol_workshop/map.html
 
     .. figure:: ext-slider1.png
-   
+
       A map with a slider widget to control layer opacity.
 
 .. rubric:: Bonus Task

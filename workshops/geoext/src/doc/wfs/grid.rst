@@ -53,7 +53,7 @@ grid:
     populate the grid with features from the medford:parks layer. To do so, we
     change the store and the columns in the above grid definition, and make it
     look like this:
-    
+
     .. code-block:: javascript
 
         items.push({
@@ -101,7 +101,7 @@ grid:
 #.  To make this complete, let's also display the geometries on the map, by
     adding a vector layer. Just append the following snippet at the bottom of
     the application code:
-    
+
     .. code-block:: javascript
 
         var vectorLayer = new OpenLayers.Layer.Vector("Editable features");
@@ -110,9 +110,9 @@ grid:
             app.featureGrid.store.bind(vectorLayer);
             app.featureGrid.getSelectionModel().bind(vectorLayer);
         });
-    
+
 #.  After saving your changes, point your browser to
-    `<@workshop_url@/map.html>`_. You should see a new grid in the application,
+    `<http://localhost:8082/ol_workshop/map.html>`_. You should see a new grid in the application,
     and geometries rendered on the map in orange. When clicking a row in the
     grid, its geometry gets highlighted on the map. And when clicking a feature
     on a map, its attributes will be highlighted in the grid.
@@ -160,7 +160,7 @@ access to it yet, so we bind it later.
 
     Dragons ahead! Understanding the code from this exercise will be hard for
     readers without solid programming background. Please skip this task unless
-    
+
     * you are really, really willing to learn and spend an hour on this,
     * not understanding code that you paste does not make you unhappy.
 
@@ -195,7 +195,7 @@ grid.
     intercept the read method to obtain all of the DescribeFeatureType
     response's raw data. Let's add the following at the end of our script
     block:
-    
+
     .. code-block:: javascript
 
         var rawAttributeData;
@@ -208,7 +208,7 @@ grid.
 #.  The FeatureStore and the grid need to be reconfigured when we select a
     different layer in the tree. Append the following function to the
     application code:
-    
+
     .. code-block:: javascript
 
         function reconfigure(store, url) {
@@ -268,7 +268,7 @@ grid.
             app.featureGrid.store.bind(vectorLayer);
             app.featureGrid.getSelectionModel().bind(vectorLayer);
         }
-    
+
     Note that the way we build the ``fields`` and ``columns`` arrays results in
     exactly the same configuration for the medford:parks layer that we manually
     wrote in the previous exercise.
@@ -276,9 +276,9 @@ grid.
 #.  When a layer is selected in the tree by clicking on its name, we want to
     issue a DescribeFeatureType request. This is done by appending the
     following code:
-    
+
     .. code-block:: javascript
-    
+
         function setLayer(model, node) {
             if(!node || node.layer instanceof OpenLayers.Layer.Vector) {
                 return;
@@ -314,7 +314,7 @@ grid.
                 "selectionchange", setLayer
             );
         });
-    
+
     Note that this code calls the ``reconfigure`` function in the store's load
     handler. So when the user selects a layer in the tree, ``setLayer`` is
     called as ``selectionchange`` handler on the tree's selection model, and
@@ -322,7 +322,7 @@ grid.
     response is available, ``reconfigure`` is called.
 
 #.  After saving your changes, point your browser to
-    `<@workshop_url@/map.html>`_. When you have added a layer to the map that
+    `<http://localhost:8082/ol_workshop/map.html>`_. When you have added a layer to the map that
     is available as WFS also and select it in the tree, the grid will be
     populated with the layer's feature attributes, and the features will be
     rendered on the map.

@@ -4,9 +4,9 @@ Styling Vector Layers
 =====================
 
 #.  We'll start with a working example that displays building footprints in a vector layer over a base layer.  Open your text editor and save the following as ``map.html`` in the root of your workshop directory:
-    
+
     .. code-block:: html
-    
+
         <!DOCTYPE html>
         <html>
             <head>
@@ -61,12 +61,12 @@ Styling Vector Layers
             </body>
         </html>
 
-#.  Open this ``map.html`` file in your browser to see orange buildings over  the base layer:  @workshop_url@/map.html
+#.  Open this ``map.html`` file in your browser to see orange buildings over  the base layer:  http://localhost:8082/ol_workshop/map.html
 
 #.  With a basic understanding of :ref:`styling in OpenLayers <openlayers.vector.style-intro>`, we can create an ``OpenLayers.StyleMap`` that displays buildings in different colors based on the size of their footprint. In your map initialization code, replace the constructor for the ``buildings`` layer with the following:
-    
+
     .. code-block:: javascript
-    
+
         var buildings = new OpenLayers.Layer.Vector("Buildings", {
             strategies: [new OpenLayers.Strategy.BBOX()],
             protocol: new OpenLayers.Protocol.WFS({
@@ -104,7 +104,7 @@ Styling Vector Layers
         });
 
 
-#.  Save your changes and open ``map.html`` in your browser: @workshop_url@/map.html
+#.  Save your changes and open ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
 
     .. figure:: style1.png
 

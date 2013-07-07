@@ -22,9 +22,9 @@ Displaying Feature Information in a Dialog
 .. rubric:: Tasks
 
 #.  At the end of the :ref:`previous section <openlayers.integration.jqui-slider>`, you should have something like the code below in your ``map.html`` file. Open this file in your text editor and confirm the contents are similar to the following:
-    
+
     .. code-block:: html
-    
+
         <!DOCTYPE html>
         <html>
             <head>
@@ -87,7 +87,7 @@ Displaying Feature Information in a Dialog
                         slide: function(e, ui) {
                             base.setOpacity(ui.value / 100);
                         }
-                    }); 
+                    });
 
                 </script>
             </body>
@@ -95,15 +95,15 @@ Displaying Feature Information in a Dialog
 
 
 #.  To this example, we'll be adding an ``OpenLayers.Control.SelectFeature`` control so that the user can select a feature. In your map initialization code, add the following `after` the creation of your ``buildings`` layer:
-    
+
     .. code-block:: javascript
-    
+
         var select = new OpenLayers.Control.SelectFeature([buildings]);
         map.addControl(select);
-        select.activate();  
+        select.activate();
 
 #.  Next we need to create a listener for the ``featureselected`` event on our ``buildings`` layer.  We'll create a dialog that populates with feature information, when the user selects a feature by clicking on it with the mouse.  In addition, we want to remove the dialog when a feature is unselected.  We can do this by listening for the ``featureunselected`` event.  Insert the following in your map initialization code somewhere `after` the creation of the ``buildings`` layer:
-    
+
     .. code-block:: javascript
 
         var dialog;
@@ -120,17 +120,17 @@ Displaying Feature Information in a Dialog
             }
         });
 
-#.  Save your changes to ``map.html`` and open the page in your browser: @workshop_url@/map.html
+#.  Save your changes to ``map.html`` and open the page in your browser: http://localhost:8082/ol_workshop/map.html
 
 
     .. figure:: jqui-dialog1.png
-   
+
         A map that displays feature information in a dialog.
 
 
 .. rubric:: Bonus Tasks
 
 #.  Find the appropriate documentation to determine how to make the feature dialog with modal behavior.  Create a modal dialog for displaying feature information so a user will need to close it before interacting with anything else in the application.
-    
+
 #.  Experiment with editing the style declarations in the head of the page in order to change the look of the displayed information. You can use the jQuery ``addClass`` function to add a class name to an element before calling ``dialog()``.
 

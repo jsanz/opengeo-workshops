@@ -25,7 +25,7 @@ as new item to our application's main panel.
 #.  If you don't have it open already, open :file:`map.html` from the previous
     example in a text editor. Add the following tree definition at the end of
     our application's script block:
-    
+
     .. _geoext.stores.tree.treepanel:
 
     .. code-block:: javascript
@@ -50,8 +50,8 @@ as new item to our application's main panel.
                 }
             }]
         });
- 
-#.  Reload `<@workshop_url@/map.html>`_ in your browser to see the changes.
+
+#.  Reload `<http://localhost:8082/ol_workshop/map.html>`_ in your browser to see the changes.
     On the left-hand side of the map, we have a tree now. Add some layers from
     the grid to the map and watch them also appear in the tree. Use the
     checkboxes to turn layers on and off. Drag and drop layers in the
@@ -69,7 +69,7 @@ First, let's have a look at the :ref:`tree configuration
 
 As we already saw, we can drag and drop tree nodes. This is enabled by
 setting ``enableDD: true``. More interesting is the ``root`` property.
-    
+
 .. code-block:: javascript
 
     root: new GeoExt.tree.LayerContainer({

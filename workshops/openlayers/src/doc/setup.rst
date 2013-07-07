@@ -15,9 +15,9 @@ Extract the ol_workshop.zip archive to the :file`webapps` directory in your Suit
  * Windows: :file:`C:\\Program Files\\OpenGeo\\OpenGeo Suite\\webapps`
  * Mac OS X: :file:`/opt/opengeo/suite/webapps`
  * Linux: :file:`/var/lib/tomcat6/webapps/`
- 
+
 .. note:: Move the extracted :file:`ol_workshop` directory into your :file:`webapps` directory **before** starting the Suite.
- 
+
 Test the Setup
 --------------
 
@@ -25,9 +25,9 @@ Test GeoServer and Postgres Setup:
 
  #. Start the OpenGeo Suite.
  #. Load @geoserver_url@/ in a browser. You should see GeoServer's welcome screen.
- #. Navigate to the layers preview page. You should be able to see the medford layers listed in the table. 
+ #. Navigate to the layers preview page. You should be able to see the medford layers listed in the table.
  #. Click on the OpenLayers preview link for the ``medford`` layer. You should see some elevation data with infrastructure data over it.
 
 Test Workshop Docs:
 
- #. Load @workshop_url@/doc/ in a browser. You should see a the intro page for the workshop docs with links to lead you through the workshop.
+ #. Load http://localhost:8082/ol_workshop/doc/ in a browser. You should see a the intro page for the workshop docs with links to lead you through the workshop.

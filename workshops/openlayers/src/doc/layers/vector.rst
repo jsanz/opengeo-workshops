@@ -16,13 +16,13 @@ Let's go back to the :ref:`WMS example <openlayers.layers.wms.example>` to get a
 
 .. rubric:: Tasks
 
-#.  Open ``map.html`` in your text editor and copy in the contents of the initial :ref:`WMS example <openlayers.layers.wms.example>`. Save your changes and confirm that things look good in your browser: @workshop_url@/map.html
+#.  Open ``map.html`` in your text editor and copy in the contents of the initial :ref:`WMS example <openlayers.layers.wms.example>`. Save your changes and confirm that things look good in your browser: http://localhost:8082/ol_workshop/map.html
 
 
 #.  In your map initialization code (anywhere after the ``map`` construction), paste the following. This adds a new vector layer to your map that requests a set of features stored in GeoRSS:
-    
+
     .. code-block:: javascript
-    
+
         var earthquakes = new OpenLayers.Layer.Vector("Earthquakes", {
             strategies: [new OpenLayers.Strategy.Fixed()],
             protocol: new OpenLayers.Protocol.HTTP({
@@ -32,11 +32,11 @@ Let's go back to the :ref:`WMS example <openlayers.layers.wms.example>` to get a
         });
         map.addLayer(earthquakes);
 
-        
+
 .. figure:: vector1.png
-   
+
     World map with orange circles representing earthquake locations.
-    
+
 A Closer Look
 `````````````
 
@@ -62,8 +62,40 @@ In this case, we're using a fixed strategy. The fixed strategy triggers a single
 
 .. rubric:: Bonus Tasks
 
-#.  The orange circles on the map represent ``OpenLayers.Feature.Vector`` objects on your ``OpenLayers.Layer.Vector`` layer. Each of these features has attribute data with ``title``, ``description``, and ``link`` properties. Add an ``OpenLayers.Control.SelectFeature`` control to your map, listen for the ``featureselected`` event on the vector layer, and display earthquake information below the map viewport.
-
-#.  Continuing on with the above task, use one of the ``OpenLayers.Popup``  classes to display feature information in a popup on the map.  The popup should open on feature selection and close when a feature is unselected.
 
 #.  The data for the vector layer comes from an earthquake feed published by the USGS (http://earthquake.usgs.gov/earthquakes/catalogs/).  See if you can find additional data with spatial information in GeoRSS or another OpenLayers supported format.  If you save another feed (or other document) representing spatial data in your ``data`` directory, you should be able to view it in a vector layer on your map.
+
+#.  The orange circles on the map represent ``OpenLayers.Feature.Vector`` objects on your ``OpenLayers.Layer.Vector`` layer. Each of these features has attribute data with ``title``, ``description``, and ``link`` properties.
+
+    *   Create a ``report`` function that will receive the event with the selected feature. The minimal code for your function could just use the browser console to print some data.
+
+        .. code-block:: javascript
+
+            // Report function
+            var report = function(e){
+                console.log(e.feature.id + ": " + e.feature.data.title)
+            }
+
+    *   Add an ``OpenLayers.Control.SelectFeature`` control to your map, listen for the ``featurehighlighted`` event on the vector layer. We will see OpenLayers controls on the next section, so for now just paste this code at the end of your ``init`` function:
+
+        .. code-block:: javascript
+
+            // Create a select control on the earthquakes layer and assign
+            // the function to the feature highlighted event
+            var control = new OpenLayers.Control.SelectFeature(earthquakes,
+                { eventListeners: { featurehighlighted: report} });
+
+            // Add the control to the map and activate it
+            map.addControl(control);
+            control.activate();
+
+    *   Create some mark-up below the map, use identifiers and try to use the DOM function ``document.getElementById`` to retrieve the DOM tree element and ``someElement.innerHTML=something`` setter to change the HTML inside of ``someElement``. You should get something like the image below:
+
+        .. figure:: vector2.png
+
+            Adding a selection controls we can see additional vector information
+
+    *   This exercise is quite similar to the `OpenLayers select and highlight feature example <http://openlayers.org/dev/examples/highlight-feature.html>`_.
+
+.. #.  Continuing on with the above task, use one of the ``OpenLayers.Popup``  classes to display feature information in a popup on the map.  The popup should open on feature selection and close when a feature is unselected.
+

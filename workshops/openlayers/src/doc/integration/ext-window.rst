@@ -37,9 +37,9 @@ Displaying Feature Information in a Window
     <openlayers.integration.ext-slider>`, you should have something like the
     code below in your ``map.html`` file. Open this file in your text editor and
     confirm the contents are similar to the following:
-    
+
     .. code-block:: html
-    
+
         <!DOCTYPE html>
         <html>
             <head>
@@ -116,12 +116,12 @@ Displaying Feature Information in a Window
 #.  To this example, we'll be adding an ``OpenLayers.Control.SelectFeature``
     control so that the user can select a feature. In your map initialization code,
     add the following `after` the creation of your ``buildings`` layer:
-    
+
     .. code-block:: javascript
-    
+
         var select = new OpenLayers.Control.SelectFeature([buildings]);
         map.addControl(select);
-        select.activate();  
+        select.activate();
 
 #.  Next we need to create a listener for the ``featureselected`` event on our
     ``buildings`` layer.  We'll create a window populated with feature
@@ -130,7 +130,7 @@ Displaying Feature Information in a Window
     unselected.  We can do this by listening for the ``featureunselected``
     event.  Insert the following in your map initialization code somehere
     `after` the creation of the ``buildings`` layer:
-    
+
     .. code-block:: javascript
 
         var dialog;
@@ -161,11 +161,11 @@ Displaying Feature Information in a Window
         });
 
 #.  Save your changes to ``map.html`` and open the page in your browser:
-    @workshop_url@/map.html
+    http://localhost:8082/ol_workshop/map.html
 
 
     .. figure:: ext-window1.png
-   
+
         A map that displays feature information in a window.
 
 

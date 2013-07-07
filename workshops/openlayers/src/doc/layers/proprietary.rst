@@ -27,25 +27,25 @@ Let's add a Bing layer.
         map.addLayer(bing);
 
     .. note:: The Bing tiles API requires that you register for an API key to use with your mapping application.  The example here uses an API key that you should not use in production.  To use the Bing layer in production, register for an API key at https://www.bingmapsportal.com/.
-    
+
 #.  Now that we have more than one layer in our map, it is time to add a layer switcher that controls layer visibility. Somewhere in your map initialization code (below the part where we create the ``map``), include the following to create a layer switcher and add it to the map:
 
     .. code-block:: javascript
 
         map.addControl(new OpenLayers.Control.LayerSwitcher());
 
-#.  Save your changes and reload ``map.html`` in your browser: @workshop_url@/map.html
-    
-#.  Open the Layer Switcher at the upper right-hand corner of the map view, and select "Bing Roads". 
-    
+#.  Save your changes and reload ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
+
+#.  Open the Layer Switcher at the upper right-hand corner of the map view, and select "Bing Roads".
+
 .. figure:: proprietary1.png
-   
+
     A map with a bing layer and OpenStreetMap tiles.
 
 Complete Working Example
 ````````````````````````
 
-Your revised ``map.html`` file should look something like this:
+Your revised ``map.html`` (without the bonus exercise from the previous section) file should look something like this:
 
 .. code-block:: html
 
@@ -87,7 +87,7 @@ Your revised ``map.html`` file should look something like this:
                 map.addLayer(bing);
 
                 map.addControl(new OpenLayers.Control.LayerSwitcher());
-            
+
                 map.setCenter(center, 9);
             </script>
         </body>

@@ -21,9 +21,9 @@ GetLegendGraphic requests.
 
 #.  Open :file:`map.html` in your text editor again. Add the following legend
     panel definition at the bottom of the application's script block:
-    
+
     .. code-block:: javascript
-    
+
         items.push({
             xtype: "gx_legendpanel",
             region: "east",
@@ -32,7 +32,7 @@ GetLegendGraphic requests.
             padding: 5
         });
 
-#.  Load or refresh `<@workshop_url@/map.html>`_ in your browser to see the new
+#.  Load or refresh `<http://localhost:8082/ol_workshop/map.html>`_ in your browser to see the new
     legend panel on the right-hand side of the map. Add a layer and watch its
     legend image appear in the panel.
 
@@ -56,5 +56,5 @@ thanks to Ext JS.
 
 In the last part of this exercise, we will see another way of adding components
 to an application -- by using an OpenLayers.Control that creates Ext JS output
-in a listener function. Let's try this with a 
+in a listener function. Let's try this with a
 :ref:`GetFeatureInfo popup <geoext.stores.getfeatureinfo>`.

@@ -46,7 +46,7 @@ following code (this is not the final snippet yet):
     :file:`map.html` file, at the end of the application's script block.
 
 #.  Open the page in your browser to confirm things work:
-    `<@workshop_url@/map.html>`_. In addition to the map, you should see a grid with
+    `<http://localhost:8082/ol_workshop/map.html>`_. In addition to the map, you should see a grid with
     two columns and a single row of dummy data.
 
 Populating the Grid with Data from a GeoExt.data.WMSCapabilitiesStore
@@ -109,9 +109,9 @@ a column model that knows which field of each record belongs to which column.
 #.  Replace the dummy column definition with the :ref:`correct definition
     <geoext.stores.capabilities.columns>` of name, title and abstract for each
     layer.
-    
+
     Your grid configuration object should now look like this:
-    
+
     .. _geoext.stores.capabilities.grid:
 
     .. code-block:: javascript
@@ -133,9 +133,9 @@ a column model that knows which field of each record belongs to which column.
                 {header: "Abstract", dataIndex: "abstract"}
             ]
         });
-    
+
 #.  Save your changes and reload the application:
-    `<@workshop_url@/map.html>`_
+    `<http://localhost:8082/ol_workshop/map.html>`_
 
 Adding an "Add to Map" button
 ------------------------------------
@@ -150,9 +150,9 @@ code so we can add layers from the grid to the map.
 #.  Add a bottom toolbar (``bbar``) definition to the :ref:`grid config object
     <geoext.stores.capabilities.grid>`, below the columns array (don't forget
     to add a comma at the end of the columns array!):
- 
+
     .. code-block:: javascript
-    
+
         bbar: [{
             text: "Add to Map",
             handler: function() {
@@ -170,7 +170,7 @@ code so we can add layers from the grid to the map.
             }
         }]
 
-#.  Reload `<@workshop_url@/map.html>`_ in your browser again. You should now see an
+#.  Reload `<http://localhost:8082/ol_workshop/map.html>`_ in your browser again. You should now see an
     "Add to Map" button on the bottom of the grid. When you select
     layers in the grid and hit that button, the layers should show up in the
     map.
