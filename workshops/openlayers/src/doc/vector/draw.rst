@@ -25,51 +25,60 @@ In this section, we'll add a control to the map for drawing new polygon features
                         width: 512px;
                         height: 256px;
                     }
-                    </style>
+                    #scaleline-id {
+                        margin: 10px;
+                        font-size: xx-small;
+                    }
+                    #output-id {
+                        margin: 10px 220px;
+                    }
+                </style>
                 <script src="openlayers/lib/OpenLayers.js"></script>
             </head>
             <body>
                 <h1>My Map</h1>
                 <div id="map-id"></div>
+
                 <script>
-                    var medford = new OpenLayers.Bounds(
-                        4284890, 253985,
-                        4288865, 257980
+                    var nyc = new OpenLayers.Bounds(
+                        -74.032, 40.685,
+                        -73.902, 40.876
                     );
                     var map = new OpenLayers.Map("map-id", {
-                        projection: new OpenLayers.Projection("EPSG:2270"),
-                        units: "ft",
-                        maxExtent: medford,
-                        restrictedExtent: medford,
-                        maxResolution: 2.5,
+                        projection: new OpenLayers.Projection("EPSG:4326"),
+                        maxExtent: nyc,
+                        restrictedExtent: nyc,
+                        maxResolution: 0.0005,
                         numZoomLevels: 5
                     });
 
                     var base = new OpenLayers.Layer.WMS(
-                        "Medford Streets & Buildings",
+                        "New York City",
                         "/geoserver/wms",
-                        {layers: "medford"}
+                        {layers: "tiger-ny"}
                     );
                     map.addLayer(base);
 
-                    var buildings = new OpenLayers.Layer.Vector("Buildings", {
+                    var center = new OpenLayers.LonLat( -73.987, 40.737);
+                    map.setCenter(center,3);
+
+                    var landmarks = new OpenLayers.Layer.Vector("NY Landmarks", {
                         strategies: [new OpenLayers.Strategy.BBOX()],
                         protocol: new OpenLayers.Protocol.WFS({
                             version: "1.1.0",
                             url: "/geoserver/wfs",
-                            featureType: "buildings",
-                            featureNS: "http://medford.opengeo.org",
-                            srsName: "EPSG:2270"
+                            featureType: "poly_landmarks",
+                            featureNS: "http://www.census.gov",
+                            srsName: "EPSG:4326"
                         })
                     });
-                    map.addLayer(buildings);
+                    map.addLayer(landmarks);
 
-                    map.zoomToMaxExtent();
                 </script>
             </body>
         </html>
 
-#.  Open this ``map.html`` example in your browser to confirm that buildings are displayed over the base layer:  http://localhost:8080/ol_workshop/map.html
+#.  Open this ``map.html`` example in your browser to confirm that landmarks are displayed over the base layer:  http://localhost:8080/ol_workshop/map.html
 
 #.  To this example, we'll be adding a control to draw features.  In order that users can also navigate with the mouse, we don't want this control to be active all the time.  We need to add some elements to the page that will allow for control activation and deactivation.  In the ``<body>`` of your document, add the following markup.  (Placing it right after the map viewport element ``<div id="map-id"></div>`` makes sense.):
 
@@ -78,12 +87,12 @@ In this section, we'll add a control to the map for drawing new polygon features
         <input id="toggle-id" type="checkbox">
         <label for="toggle-id">draw</label>
 
-#.  Now we'll create an ``OpenLayers.Control.DrawFeature`` control to add features to the buildings layer.  We construct this layer with an ``OpenLayers.Handler.Polygon`` to allow drawing of polygons.  In your map initialization code, add the following somewhere after the creation of the ``buildings`` layer:
+#.  Now we'll create an ``OpenLayers.Control.DrawFeature`` control to add features to the landmarks layer.  We construct this layer with an ``OpenLayers.Handler.Polygon`` to allow drawing of polygons.  In your map initialization code, add the following somewhere after the creation of the ``landmarks`` layer:
 
     .. code-block:: javascript
 
         var draw = new OpenLayers.Control.DrawFeature(
-            buildings, OpenLayers.Handler.Polygon
+            landmarks, OpenLayers.Handler.Polygon
         );
         map.addControl(draw);
 

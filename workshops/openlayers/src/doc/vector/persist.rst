@@ -11,7 +11,7 @@ A full-fledged editing application involves more user interaction (and GUI eleme
 
 #.  Open your text editor and paste in the text from the start of the  :ref:`previous section <openlayers.vector.draw.example>`.  Save this as ``map.html``.
 
-#.  OpenLayers doesn't provide controls for deleting or saving features.  The ``extras`` folder in this workshop includes code for those controls bundled together in a control panel. These controls are specific to editing a vector layer with multipolygon geometries, so they will work with our buildings example. In the ``<head>`` of your ``map.html`` document, **after** the OpenLayers script tag, insert the following to pull in the required code and stylesheet for the controls:
+#.  OpenLayers doesn't provide controls for deleting or saving features.  The ``extras`` folder in this workshop includes code for those controls bundled together in a control panel. These controls are specific to editing a vector layer with multipolygon geometries, so they will work with our landmarks example. In the ``<head>`` of your ``map.html`` document, **after** the OpenLayers script tag, insert the following to pull in the required code and stylesheet for the controls:
 
     .. code-block:: html
 
@@ -19,33 +19,32 @@ A full-fledged editing application involves more user interaction (and GUI eleme
         <script src="extras/DeleteFeature.js"></script>
         <script src="extras/EditingPanel.js"></script>
 
-#.  Now we'll give the ``buildings`` layer an ``OpenLayers.Strategy.Save``.  This strategy is designed to trigger commits on the protocol and deal with the results.  The ``buildings`` layer currently has a single strategy.  Modify the layer creation code to include another:
+#.  Now we'll give the ``landmarks`` layer an ``OpenLayers.Strategy.Save``.  This strategy is designed to trigger commits on the protocol and deal with the results.  The ``landmarks`` layer currently has a single strategy.  Modify the layer creation code to include another:
 
     .. code-block:: javascript
 
-        var buildings = new OpenLayers.Layer.Vector("Buildings", {
-            strategies: [
-                new OpenLayers.Strategy.BBOX(),
-                new OpenLayers.Strategy.Save()
-            ],
-            protocol: new OpenLayers.Protocol.WFS({
-                version: "1.1.0",
-                url: "/geoserver/wfs",
-                featureType: "buildings",
-                featureNS: "http://medford.opengeo.org",
-                srsName: "EPSG:2270"
-            })
-        });
+            var landmarks = new OpenLayers.Layer.Vector("NY Landmarks", {
+                strategies: [
+                    new OpenLayers.Strategy.BBOX(),
+                    new OpenLayers.Strategy.Save()
+                    ],
+                protocol: new OpenLayers.Protocol.WFS({
+                    version: "1.1.0",
+                    url: "/geoserver/wfs",
+                    featureType: "poly_landmarks",
+                    featureNS: "http://www.census.gov",
+                    srsName: "EPSG:4326"
+                })
+            });
 
-#.  Finally, we'll create the editing panel and add it to the map.  Somewhere in your map initialization code after creating the ``buildings`` layer, insert the following:
+#.  Finally, we'll create the editing panel and add it to the map.  Somewhere in your map initialization code after creating the ``landmarks`` layer, insert the following:
 
     .. code-block:: javascript
 
-        var panel = new EditingPanel(buildings);
+        var panel = new EditingPanel(landmarks);
         map.addControl(panel);
 
 #.  Now save your changes and load ``map.html`` in your browser: http://localhost:8080/ol_workshop/map.html
-
 
     .. figure:: persist1.png
 
