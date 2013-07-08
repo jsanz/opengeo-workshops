@@ -29,8 +29,6 @@ iteratively build up the reader's knowledge base.
 
 The following modules will be covered in this workshop:
 
-.. rubric:: Fundamentals
-
 :ref:`openlayers.basics`
   Learn how to add a map to a webpage with OpenLayers.
 
@@ -40,14 +38,11 @@ The following modules will be covered in this workshop:
 :ref:`openlayers.controls`
   Learn about using map controls.
 
-
-.. rubric:: Advanced Topics
-
 :ref:`openlayers.vector`
   Explore vector layers in depth.
 
-:ref:`openlayers.integration`
-  Learn how to use OpenLayers with other JavaScript libraries.
+.. :ref:`openlayers.integration`
+..   Learn how to use OpenLayers with other JavaScript libraries.
 
 
 .. toctree::
@@ -58,5 +53,5 @@ The following modules will be covered in this workshop:
     layers/index
     controls/index
     vector/index
-    integration/index
+..    integration/index
 
