@@ -7,7 +7,7 @@ exercises assume that you have set up a local GeoServer with the workshop
 data as described in the :doc:`setup` page.
 
 
-The workshop has been adapted from the official `Boundless OpenLayers workshop <http://workshops.boundlessgeo.com/openlayers-intro//>`_ for the `Open Source Opportunities in GIS Summer School <http://www.sigte.udg.edu/summerschool2014/>`_. This course is coordinated by the `GIS and Remote Sensing Centre <http://www.sigte.udg.edu/sigte_en/>`_ of the University of Girona in collaboration with the `Nottingham Geospatial Institute <http://www.nottingham.ac.uk/ngi/index.aspx>`_ and `Prodevelop <http://www.prodevelop.es>`_.
+The workshop has been adapted from the official `Boundless OpenLayers workshop <http://workshops.boundlessgeo.com/openlayers-intro//>`_ for the `Open Source Opportunities in GIS Summer School <http://www.sigte.udg.edu/summerschool2014/>`_. This course is coordinated by the `GIS and Remote Sensing Centre <http://www.sigte.udg.edu/sigte_en/>`_ of the University of Girona in collaboration with the `Nottingham Geospatial Institute <http://www.nottingham.ac.uk/ngi/index.aspx>`_ and `Prodevelop`_.
 
 The instructors of the OpenLayers workshop are:
 
@@ -59,3 +59,23 @@ The following modules will be covered in this workshop:
     integration/index
     moreinfo/index
 
+About Boundless
+---------------------
+
+Boundless provides `commercial open source software <http://boundlessgeo.com/solutions/>`_ for internet mapping and geospatial application development. We are a `social enterprise <http://boundlessgeo.com/about/>`_ dedicated to the growth and support of open source software.
+
+
+About Prodevelop
+----------------
+
+`Prodevelop`_ offers `advanced solutions <http://www.prodevelop.es/en/products>`_ in information and communication technologies to our clients and collaborators, with the aim of facilitating their business processes, bringing a distinguishing character to their value chain, in an atmosphere of joint collaboration where we become their constant and reliable technological partners.
+
+License
+--------
+This work is licensed under a `Creative Non Commercial-Commons Attribution-Share Alike 3.0 United States License <http://creativecommons.org/licenses/by-nc-sa/3.0>`_.  Feel free to use this material, but we ask that you please retain the Boundless branding, logos and style.
+
+.. image:: cc.png
+   :alt: Creative Commons License
+
+
+.. _Prodevelop: http://www.prodevelop.es/en
