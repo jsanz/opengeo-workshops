@@ -38,7 +38,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'OpenLayers Workshop'
-copyright = u'2013, OpenGeo and Prodevelop'
+copyright = u'2014, Boundless and Prodevelop'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -175,7 +175,7 @@ latex_font_size = '10pt'
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'OpenLayersWorkshop.tex', u'OpenLayers Workshop Documentation',
-   u'OpenGeo and Prodevelop', 'manual'),
+   u'Boundless and Prodevelop', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

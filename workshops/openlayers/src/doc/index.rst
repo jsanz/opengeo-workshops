@@ -1,4 +1,4 @@
-2013 OpenLayers 2 Workshop
+2014 OpenLayers 2 Workshop
 ==========================
 
 Welcome to the **OpenLayers Workshop**. This workshop is designed to
@@ -7,7 +7,7 @@ exercises assume that you have set up a local GeoServer with the workshop
 data as described in the :doc:`setup` page.
 
 
-The workshop has been adapted from the official `Open Geo OpenLayers workshop <http://workshops.opengeo.org/openlayers-intro/>`_ for the `Open Source Opportunities in GIS Summer School <http://www.sigte.udg.edu/summerschool2013/>`_. This course is coordinated by the `GIS and Remote Sensing Centre <http://www.sigte.udg.edu/sigte_en/>`_ of the University of Girona in collaboration with the `Nottingham Geospatial Institute <http://www.nottingham.ac.uk/ngi/index.aspx>`_ and `Prodevelop <http://www.prodevelop.es>`_.
+The workshop has been adapted from the official `Boundless OpenLayers workshop <http://workshops.boundlessgeo.com/openlayers-intro//>`_ for the `Open Source Opportunities in GIS Summer School <http://www.sigte.udg.edu/summerschool2014/>`_. This course is coordinated by the `GIS and Remote Sensing Centre <http://www.sigte.udg.edu/sigte_en/>`_ of the University of Girona in collaboration with the `Nottingham Geospatial Institute <http://www.nottingham.ac.uk/ngi/index.aspx>`_ and `Prodevelop <http://www.prodevelop.es>`_.
 
 The instructors of the OpenLayers workshop are:
 
