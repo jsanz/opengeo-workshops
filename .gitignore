@@ -1,4 +1,5 @@
-.DS_Store
-
+workshops/geoserver/intro/build/
+workshops/geoserver/adv/build/
 libpeerconnection.log
 workshops/geoserver/slides/GeoServer-Intro-Slides.html
+
