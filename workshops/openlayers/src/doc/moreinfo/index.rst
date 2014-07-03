@@ -6,13 +6,13 @@ For more information
 The following is a list of external sites related to OpenLayers.
 
 OpenLayers Home
---------------
+---------------
 
 Visit the OpenLayers home page at `<http://openlayers.org>`_.
 
 
 OpenLayers Documentation
------------------------
+------------------------
 
 Full documentation for OpenLayers is available at `<http://docs.openlayers.org>`_, a great list of examples are available at `<http://openlayers.org/dev/examples/>`_ and the API documentation is at `<http://dev.openlayers.org/apidocs/>`_.
 
@@ -34,10 +34,10 @@ IRC
 Join a live discussion at #openlayers, on irc.freenode.net.
 
 
-OpenGeo
--------
+Boundless
+-----------
 
-OpenGeo helps to develop OpenLayers and funds development through its OpenGeo Suite.  Learn more at `<http://opengeo.org>`_.
+Boundless helps to develop OpenLayers and funds development through its OpenGeo Suite.  Learn more at `<http://boundless.com>`_.
 
 Prodevelop
 -------------

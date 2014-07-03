@@ -41,6 +41,9 @@ The following modules will be covered in this workshop:
 :ref:`openlayers.vector`
   Explore vector layers in depth.
 
+:ref:`openlayers.integration`
+  Explore vector layers in depth.
+
 :ref:`openlayers.moreinfo`
   More information about Open Layers project and resources
 
@@ -48,9 +51,11 @@ The following modules will be covered in this workshop:
     :hidden:
     :numbered:
 
+    setup
     basics/index
     layers/index
     controls/index
     vector/index
+    integration/index
     moreinfo/index
 

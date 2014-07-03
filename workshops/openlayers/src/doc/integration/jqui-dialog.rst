@@ -5,7 +5,7 @@ The jQuery UI Dialog
 
 If you are adding a map to a larger website, and you are already using jQuery UI for interface components, it makes good sense to create "popups" for your map that will be integrated with the style of the rest of your site. The jQuery UI ``dialog`` function provides a flexible way to produce themeable dialogs that serve a variety of purposes.
 
-The :ref:`previous example <openlayers.integration.jqui-slider.example` started with existing markup and used the ``jQuery`` function to select and modify DOM elements. The ``jQuery`` function can also be used to create elements given a string of HTML.
+The :ref:`previous example <openlayers.integration.jqui-slider.example>` started with existing markup and used the ``jQuery`` function to select and modify DOM elements. The ``jQuery`` function can also be used to create elements given a string of HTML.
 
 The code below creates a ``<div>`` element and turns it into a modeless dialog:
 
