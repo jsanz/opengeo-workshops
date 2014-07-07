@@ -64,6 +64,11 @@ Let's take a look at the following code:
 #.  Open the page in your browser to confirm things work:
     http://localhost:8080/ol_workshop/map.html
 
+
+.. important:: If you want to keep track of your advances, we invite you to create
+               different files for every exercise, you can call this one for example
+               :file:`map-wms.html`.
+
 The OpenLayers.Layer.WMS Constructor
 ------------------------------------
 

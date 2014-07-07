@@ -152,3 +152,16 @@ Bonus exercise
 .. hint:: You can go to the official `OSM site <http://osm.org>`_ to view the layers
           available, change to any of them and use the browser tools to look for the
           url pattern of those tiles.
+
+Here you have some different renderings of OSM, extract the template URL and try to create your own custom OSM map:
+
+- OSM Bicycle map: http://b.tile.thunderforest.com/cycle/16/32319/25546.png
+- OSM Transport map: http://c.tile.thunderforest.com/transport/16/32318/25545.png
+- `Stamen`_ watercolor map: http://d.tile.stamen.com/watercolor/15/16159/12773.jpg
+- `Stamen`_ toner map: http://d.tile.stamen.com/toner/14/8079/6386.png
+- Mapbox_ Saman Bemel random map: https://a.tiles.mapbox.com/v3/saman.h6ek9086/14/8080/6386.png
+
+.. warning:: Those tiles are used here for educational purposes, check owner conditions before using them on your projects!!
+
+.. _Stamen: http://www.stamen.com
+.. _Mapbox: http://www.mapbox.com
