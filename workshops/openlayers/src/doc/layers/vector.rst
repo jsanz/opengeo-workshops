@@ -16,7 +16,7 @@ Let's go back to the :ref:`WMS example <openlayers.layers.wms.example>` to get a
 
 .. rubric:: Tasks
 
-#.  Open ``map.html`` in your text editor and copy in the contents of the initial :ref:`WMS example <openlayers.layers.wms.example>`. Save your changes and confirm that things look good in your browser: http://localhost:8080/ol_workshop/map.html
+#.  Open ``map.html`` in your text editor and copy in the contents of the initial :ref:`WMS example <openlayers.layers.wms.example>`. Save your changes and confirm that things look good in your browser: http://localhost:8082/ol_workshop/map.html
 
 
 #.  In your map initialization code (anywhere after the ``map`` construction), paste the following. This adds a new vector layer to your map that requests a set of features stored in GeoRSS:

@@ -123,7 +123,7 @@ Create a Vector Layer and a SelectFeature Control
         map.addControl(select);
         select.activate();
 
-#.  Save your changes to ``map.html`` and open the page in your browser:  http://localhost:8080/ol_workshop/map.html. To see feature selection in action, use the mouse-click to select a building:
+#.  Save your changes to ``map.html`` and open the page in your browser:  http://localhost:8082/ol_workshop/map.html. To see feature selection in action, use the mouse-click to select a building:
 
     .. figure:: select1.png
 
@@ -172,7 +172,7 @@ We can use layer events to respond to feature selection. This is useful for disp
     .. note:: See how we get the area from the ``geometry`` object. As we are dealing with geographic coordinates, OpenLayers provide a ``getGeodesicArea``. When we work with projected coordinates we should use instead the ``getArea`` method.
 
 
-#.  Save your changes and refresh the ``map.html`` page in your browser: http://localhost:8080/ol_workshop/map.html
+#.  Save your changes and refresh the ``map.html`` page in your browser: http://localhost:8082/ol_workshop/map.html
 
 
     .. figure:: select2.png

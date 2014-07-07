@@ -120,7 +120,7 @@ Displaying Feature Information in a Dialog
             }
         });
 
-#.  Save your changes to ``map.html`` and open the page in your browser: http://localhost:8080/ol_workshop/map.html
+#.  Save your changes to ``map.html`` and open the page in your browser: http://localhost:8082/ol_workshop/map.html
 
 
     .. figure:: jqui-dialog1.png

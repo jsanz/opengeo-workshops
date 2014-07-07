@@ -62,7 +62,7 @@ Let's take a look at the following code:
     root of your workshop directory.
 
 #.  Open the page in your browser to confirm things work:
-    http://localhost:8080/ol_workshop/map.html
+    http://localhost:8082/ol_workshop/map.html
 
 
 .. important:: If you want to keep track of your advances, we invite you to create
@@ -129,7 +129,7 @@ requesting images rendered from a single layer identified by the name
         );
 
 #.  Save your changes and reload the map:
-    http://localhost:8080/ol_workshop/map.html
+    http://localhost:8082/ol_workshop/map.html
 
 .. figure:: wms1.png
 

@@ -34,7 +34,7 @@ Let's add a Bing layer.
 
         map.addControl(new OpenLayers.Control.LayerSwitcher());
 
-#.  Save your changes and reload ``map.html`` in your browser: http://localhost:8080/ol_workshop/map.html
+#.  Save your changes and reload ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
 
 #.  Open the Layer Switcher at the upper right-hand corner of the map view, and select "Bing Roads".
 

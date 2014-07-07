@@ -65,7 +65,7 @@ Styling Vector Layers
             </body>
         </html>
 
-#.  Open this ``map.html`` file in your browser to see orange landmarks over  the base layer:  http://localhost:8080/ol_workshop/map.html. You can use the layer switcher control we added to change the visibility of the vector layer.
+#.  Open this ``map.html`` file in your browser to see orange landmarks over  the base layer:  http://localhost:8082/ol_workshop/map.html. You can use the layer switcher control we added to change the visibility of the vector layer.
 
 #.  With a basic understanding of :ref:`styling in OpenLayers <openlayers.vector.style-intro>`, we can create an ``OpenLayers.StyleMap`` that displays landmarks in different colors based on the ``CFCC`` code. In your map initialization code, replace the constructor for the ``landmarks`` layer with the following:
 
@@ -127,7 +127,7 @@ Styling Vector Layers
 
 #. See how an ``OpenLayers.Filter.Logical.OR`` filter groups several filters to allow a rule to match different conditions. That is, style all the features where the field ``CFCC` has the values ``D80`` to ``D85``.
 
-#.  Save your changes and open ``map.html`` in your browser: http://localhost:8080/ol_workshop/map.html
+#.  Save your changes and open ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
 
     .. figure:: style1.png
 

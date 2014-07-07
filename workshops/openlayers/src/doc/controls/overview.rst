@@ -57,7 +57,7 @@ Let's create a map with a single layer and then add an overview map control.
             </body>
         </html>
 
-#.  Open the working map in your web browser to confirm things look good: http://localhost:8080/ol_workshop/map.html.
+#.  Open the working map in your web browser to confirm things look good: http://localhost:8082/ol_workshop/map.html.
 
 #.  We are now going to add an overview map with default options to confirm things are properly working. Somewhere in your map initialization code (after the creation of the ``map`` object), insert the following:
 
@@ -75,7 +75,7 @@ Let's create a map with a single layer and then add an overview map control.
 
 
 
-#.  Save your changes and refresh ``map.html`` in your browser: http://localhost:8080/ol_workshop/map.html
+#.  Save your changes and refresh ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
 
 #.  To see the overview map in action, open the :guilabel:`plus sign` at right of the map viewport.
 

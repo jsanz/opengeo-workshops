@@ -19,7 +19,7 @@ Creating a ScaleLine Control
         var scaleline = new OpenLayers.Control.ScaleLine();
         map.addControl(scaleline);
 
-#.  Save your changes and open ``map.html`` in your browser: http://localhost:8080/ol_workshop/map.html
+#.  Save your changes and open ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
 
     .. figure:: scaleline1.png
 
@@ -68,7 +68,7 @@ However, for the sake of this exercise, let's say you think the map viewport is 
             div: document.getElementById("scaleline-id")
         });
 
-#.  Save your changes and open ``map.html`` in your browser: http://localhost:8080/ol_workshop/map.html
+#.  Save your changes and open ``map.html`` in your browser: http://localhost:8082/ol_workshop/map.html
 
 #.  You may decide that you want to add a bit of style to the widget. To do this, we can use the ``#scaleline-id`` selector in our CSS. Make the font smaller and give the widget some margin, by adding the following style declarations:
 
@@ -79,7 +79,7 @@ However, for the sake of this exercise, let's say you think the map viewport is 
             font-size: xx-small;
         }
 
-#.  Now save your changes and view ``map.html`` again in your browser: http://localhost:8080/ol_workshop/map.html
+#.  Now save your changes and view ``map.html`` again in your browser: http://localhost:8082/ol_workshop/map.html
 
     .. figure:: scaleline2.png
 
