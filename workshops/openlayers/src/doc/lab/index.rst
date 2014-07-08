@@ -79,9 +79,6 @@ Advanced: Styling
 
 - Register to the ``featureselected`` event of the states layer and 
   show an alert with the ``ID`` of the feature
-- Context styling. Add a context object in the cities layer ``styleMap``, so the
-  ``pointRadius`` is proportional to the population of each city
-
 - Create a function to add unique values styles to a layer given its name 
   and a feature attribute name. Apply it to the gml layer, with the 
   property ``UN``

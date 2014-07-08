@@ -76,6 +76,8 @@
     <target name="resources" depends="init" description="shuffle resources">
         <echo>Copying resources.</echo>
         <copy todir="${dest}" file="README.txt"/>
+        <copy todir="${dest}" file="${src}/lab.html"/>
+        <copy todir="${dest}" file="${src}/ol-lab.js"/>
         <copy todir="${dest}/data">
             <fileset dir="${src}/data"></fileset>
         </copy>

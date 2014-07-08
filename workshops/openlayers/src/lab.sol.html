@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OpenLayers Complete Exercise</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="OpenLayers-2.13/theme/default/style.css" type="text/css">
+
+        <script src="OpenLayers-2.13/OpenLayers.debug.js"></script>
+        <script src="extras/DynamicMeasure.js"></script>
+        <script src="extras/AnimatedCluster.js"></script>
+        <script src="extras/FeaturePopups.js"></script>
+        <script src="sol.js"></script>
+        <style>
+            html, body {
+                margin  : 0;
+                padding : 0;
+                height  : 100%;
+                width   : 100%;
+            }
+            @media only screen and (max-width: 600px) {
+                html, body {
+                    height  : 117%;
+                }
+            }
+            #map {
+                width    : 100%;
+                position : relative;
+                height   : 100%;
+            }
+            .olControlAttribution {
+                position      : absolute;
+                font-size     : 10px;
+                bottom        : 0 !important;
+                left         : 0 !important;
+                background    : rgba(0,0,0,0.1);
+                font-family   : Arial;
+                padding       : 2px 4px;
+                border-radius : 5px 0 0 0;
+            }
+            div.olControlMousePosition {
+                bottom: 20px;
+            }
+            .olControlLayerSwitcher {
+                top: 100px;
+            }
+
+            .olControlDistanceItemActive { 
+                background:url(http://robert.szczepanek.pl/icon/0.1/line.png) no-repeat;
+                border:2px solid #ffffff;
+                float:left;
+                height:24px;
+                margin-left:50px;
+                width:24px;
+            }
+
+            .olControlDistanceItemInactive { 
+                background:url(http://robert.szczepanek.pl/icon/0.1/line.png) no-repeat;
+                border:2px solid #232323;
+                float:left;
+                height:24px;
+                margin-left:50px;
+                width:24px;
+            }
+
+            .olControlAreaItemActive { 
+                background:url(http://robert.szczepanek.pl/icon/0.1/polygon.png) no-repeat;
+                border:2px solid #ffffff;
+                float:left;
+                height:24px;
+                margin-left:5px;
+                width:24px;
+            }
+
+            .olControlAreaItemInactive { 
+                background:url(http://robert.szczepanek.pl/icon/0.1/polygon.png) no-repeat;
+                border:2px solid #232323;
+                float:left;
+                height:24px;
+                margin-left:5px;
+                width:24px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script>
+            init();
+        </script>
+    </body>
+</html>
