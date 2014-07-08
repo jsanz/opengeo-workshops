@@ -53,4 +53,14 @@ Let's take a look at a fully working example of an OpenLayers map.
 
     A working map of displaying imagery of the world.
 
+
+.. note:: You can use *medit* (:menuselection:`Applications --> Accesories --> medit`) as your HTML editor for this workshop, it's easy to use and has several nice features like syntax highlighting, line numbers, file explorer panel, etc.
+   
+
+   .. image:: medit.png
+      :align: center
+      :alt: medit editor
+      :width: 300px
+
+
 Having successfully created our first map, we'll continue by looking more closely at :ref:`the parts <openlayers.basics.dissect>`.

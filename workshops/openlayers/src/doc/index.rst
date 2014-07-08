@@ -47,6 +47,9 @@ The following modules will be covered in this workshop:
 :ref:`openlayers.moreinfo`
   More information about Open Layers project and resources
 
+:ref:`openlayers.lab`
+  Complete exercise proposal
+
 .. toctree::
     :hidden:
     :numbered:
@@ -58,6 +61,7 @@ The following modules will be covered in this workshop:
     vector/index
     integration/index
     moreinfo/index
+    lab/index
 
 About Boundless
 ---------------------

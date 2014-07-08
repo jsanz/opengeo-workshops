@@ -40,49 +40,45 @@ We'll start with a working example that displays one :abbr:`WMS (OGC Web Map Ser
                 <title>My Map</title>
                 <link rel="stylesheet" href="openlayers/theme/default/style.css" type="text/css">
                 <style>
-                    #map-id {
-                        width: 512px;
-                        height: 256px;
-                    }
+                #map-id {
+                    width: 512px;
+                    height: 256px;
+                }
                 </style>
                 <script src="openlayers/lib/OpenLayers.js"></script>
             </head>
             <body>
                 <h1>My Map</h1>
                 <div id="map-id"></div>
-                <script>
-                    var medford = new OpenLayers.Bounds(
-                        4284890, 253985,
-                        4288865, 257980
-                    );
-                    var map = new OpenLayers.Map("map-id", {
-                        projection: new OpenLayers.Projection("EPSG:2270"),
-                        units: "ft",
-                        maxExtent: medford,
-                        restrictedExtent: medford,
-                        maxResolution: 2.5,
-                        numZoomLevels: 5
+                <div id="slider-id"><div class="ui-slider-handle"></div>
+                <script>    
+                    var italy = new OpenLayers.Bounds(
+                        7.7, 39.5,
+                        18.5, 46
+                    );      
+                    var map = new OpenLayers.Map("map-id",{
+                        maxExtent: italy,
+                        restrictedExtent: italy,
                     });
-
                     var base = new OpenLayers.Layer.WMS(
-                        "Medford Streets & Buildings",
+                        "Mosaic",
                         "/geoserver/wms",
-                        {layers: "medford"}
+                        {layers: "nurc:mosaic"}
                     );
                     map.addLayer(base);
 
-                    var buildings = new OpenLayers.Layer.Vector("Buildings", {
+                    var capitals = new OpenLayers.Layer.Vector("Capitals", {
                         strategies: [new OpenLayers.Strategy.BBOX()],
                         protocol: new OpenLayers.Protocol.WFS({
                             version: "1.1.0",
                             url: "/geoserver/wfs",
-                            featureType: "buildings",
-                            featureNS: "http://medford.opengeo.org",
-                            srsName: "EPSG:2270"
+                            featureType: "capitals",
+                            featureNS: "http://cartaro",
+                            srsName: "EPSG:4326"
                         })
                     });
-                    map.addLayer(buildings);
-
+                    map.addLayer(capitals);
+                
                     map.zoomToMaxExtent();
                 </script>
             </body>
@@ -131,6 +127,8 @@ We'll start with a working example that displays one :abbr:`WMS (OGC Web Map Ser
 
 .. rubric:: Bonus Task
 
-#.  In the jQuery documentation, find the options for the slider function that allow you to specify a number of incremental steps within the slider range. Experiment with adding discrete intervals to the slider range. Modify the end values of the range to restrict opacity settings.
+#.  In the `slider jQuery documentation`_, find the options for the slider function that allow you to specify a number of incremental steps within the slider range. Experiment with adding discrete intervals to the slider range. Modify the end values of the range to restrict opacity settings.
 
 Having mastered the jQuery UI slider, you're ready to start working with :ref:`dialogs <openlayers.integration.jqui-dialog>`.
+
+.. _slider jQuery documentation: https://jqueryui.com/slider/

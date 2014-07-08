@@ -118,7 +118,7 @@ html_theme_options = {
 
     # Global TOC depth for "site" navbar tab. (Default: 1)
     # Switching to -1 shows all levels.
-    'globaltoc_depth': 2,
+    'globaltoc_depth': -1,
 
     # Include hidden TOCs in Site navbar?
     #
@@ -135,7 +135,7 @@ html_theme_options = {
 
     # Fix navigation bar to top of page?
     # Values: "true" (default) or "false"
-    'navbar_fixed_top': "false",
+    'navbar_fixed_top': "true",
 
     # Location of link to source.
     # Options are "nav" (default), "footer" or anything else to exclude.
