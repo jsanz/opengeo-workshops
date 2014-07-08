@@ -84,3 +84,10 @@ Advanced: Styling
   property ``UN``
 - Use a ``AnimatedClusterStrategy`` in the points layer
 - Rules
+
+
+.. figure:: result.png
+   :alt: result of the exercise
+   :align: center
+
+   Result of the laboratory
